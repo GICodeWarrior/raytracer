@@ -9,7 +9,6 @@ class Model
 public:
 	Model();
 	virtual ~Model();
-	
 	virtual Intersection intersect(Ray& ray) = 0;
 };
 

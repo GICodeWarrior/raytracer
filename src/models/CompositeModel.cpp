@@ -7,6 +7,10 @@ CompositeModel::CompositeModel()
 
 CompositeModel::~CompositeModel()
 {
+	for(unsigned int c = 0; c < models.size(); ++c)
+	{
+		delete models[c];
+	}
 }
 
 void CompositeModel::add(Model* model)
