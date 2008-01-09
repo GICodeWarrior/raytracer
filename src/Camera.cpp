@@ -30,7 +30,7 @@ Pixel* Camera::getImage()
 	
 	Point cameraOrigin(0.0, 3.0, -6.0);
 	
-	Point viewOrigin(-viewWidth / 2, -viewHeight / 2);
+	Point viewOrigin(-viewWidth / 2, viewHeight / 2);
 	Vector viewOffset(0.0, 0.0);
 	
 	Point viewIntersection;
@@ -38,7 +38,7 @@ Pixel* Camera::getImage()
 	
 	for (int y = 0; y < imageHeight; ++y)
 	{
-		viewOffset.y = viewHeight / imageHeight * y;
+		viewOffset.y = -viewHeight / imageHeight * y;
 		
 		for (int x = 0; x < imageWidth; ++x)
 		{
@@ -47,8 +47,6 @@ Pixel* Camera::getImage()
 			castDirection.x = viewIntersection.x;
 			castDirection.y = viewIntersection.y;
 			castDirection.z = viewDistance;
-			
-			cout << "x: " << viewIntersection.x << " y: " << viewIntersection.y << endl;
 			
 			Ray casting(cameraOrigin, castDirection);
 			Intersection i = scene->intersect(casting);

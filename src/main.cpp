@@ -10,8 +10,10 @@
 int main()
 {
 	CompositeModel scene;
-	Sphere *sphere = new Sphere(Point(0,3,-2), 1, Color(255, 0, 0));
-	scene.add(sphere);
+	Sphere *sphere1 = new Sphere(Point(0,3,-2), 1, Color(255, 0, 0));
+	Sphere *sphere2 = new Sphere(Point(2,2,2), 1, Color(0, 0, 255));
+	scene.add(sphere1);
+	scene.add(sphere2);
 	
 	cout << "Constructed scene" << endl;
 	
