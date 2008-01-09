@@ -3,6 +3,11 @@
 #include "../Intersection.h"
 #include "../Ray.h"
 
+Plane::Plane(Color c)
+: PrimitiveModel(c)
+{
+}
+
 Plane::Plane(Vector n, double d, Color c)
 : PrimitiveModel(c), normal(n), distance(d)
 {
@@ -10,6 +15,12 @@ Plane::Plane(Vector n, double d, Color c)
 
 Plane::~Plane()
 {
+}
+
+void Plane::setDimensions(Vector n, double d)
+{
+	normal = n;
+	distance = d;
 }
 
 Intersection Plane::intersect(Ray &ray)
