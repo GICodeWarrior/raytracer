@@ -14,7 +14,7 @@ Sphere::~Sphere()
 }
 
 Intersection Sphere::intersect(Ray& ray)
-{
+{	
 	Intersection none;
 	Vector deltap;
 	double a, b, c;

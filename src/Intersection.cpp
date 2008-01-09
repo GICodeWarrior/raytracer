@@ -4,6 +4,7 @@
 #include "models/PrimitiveModel.h"
 
 Intersection::Intersection()
+: model(NULL)
 {
 }
 
@@ -18,6 +19,8 @@ Intersection::~Intersection()
 
 int Intersection::compare(Ray &ray, Intersection &i)
 {
+	if (!model) return -1;
+	if (!i.model) return 1;
 	Point start = ray.getPoint();
 	double d1 = point.d2(start);
 	double d2 = i.point.d2(start);
@@ -29,5 +32,10 @@ int Intersection::compare(Ray &ray, Intersection &i)
 
 Color Intersection::getColor()
 {
-	return model->colorAt(point);
+	if (model)
+	{
+		return model->colorAt(point);
+	}
+	
+	return Color(0,0,0);
 }

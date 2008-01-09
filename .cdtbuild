@@ -8,8 +8,12 @@
 <tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.1801225379" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug"/>
 <tool id="cdt.managedbuild.tool.gnu.c.compiler.exe.debug.713272356" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.exe.debug"/>
 <tool id="cdt.managedbuild.tool.gnu.c.linker.exe.debug.381443876" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.exe.debug"/>
-<tool id="cdt.managedbuild.tool.gnu.cpp.linker.exe.debug.1088202671" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.exe.debug"/>
+<tool id="cdt.managedbuild.tool.gnu.cpp.linker.exe.debug.1088202671" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.exe.debug">
+<option id="gnu.cpp.link.option.libs.679446038" superClass="gnu.cpp.link.option.libs" valueType="libs"/>
+<option id="gnu.cpp.link.option.flags.991230321" superClass="gnu.cpp.link.option.flags" value="-I/usr/include -pthread -L/usr/lib -L/usr/lib/X11 -L/usr/lib -lMagick++ -lWand -lMagick -llcms -ltiff -lfreetype -ljasper -ljpeg -lpng -lXext -lXt -lSM -lICE -lX11 -lbz2 -lxml2 -lz -lpthread -lm -lpthread" valueType="string"/>
+</tool>
 <tool id="cdt.managedbuild.tool.gnu.assembler.exe.debug.496444624" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.exe.debug"/>
+<macros/>
 </toolChain>
 </configuration>
 <configuration artifactName="cg2raytracer" cleanCommand="rm -rf" description="" errorParsers="org.eclipse.cdt.core.MakeErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser" id="cdt.managedbuild.config.gnu.exe.release.1658771281" name="Release" parent="cdt.managedbuild.config.gnu.exe.release">
