@@ -8,7 +8,7 @@ Intersection::Intersection()
 }
 
 Intersection::Intersection(PrimitiveModel *m, Point p)
-: point(p)
+: model(m), point(p)
 {
 }
 
@@ -25,4 +25,9 @@ int Intersection::compare(Ray &ray, Intersection &i)
 	if (d1 < d2) return 1;
 	if (d1 > d2) return -1;
 	return 0;
+}
+
+Color Intersection::getColor()
+{
+	return model->colorAt(point);
 }

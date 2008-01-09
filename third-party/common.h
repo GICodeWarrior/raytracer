@@ -25,7 +25,7 @@ enum Error {
 
 // utility macros
 #define	abs(x)		((x) >= 0 ? x : -(x));
-#define	min(x,y)	((x) < (y) ? (x) : (y));
-#define	max(x,y)	((x) > (y) ? (x) : (y));
+//#define	min(x,y)	((x) < (y) ? (x) : (y));
+//#define	max(x,y)	((x) > (y) ? (x) : (y));
 
 #endif // SS_Common_H

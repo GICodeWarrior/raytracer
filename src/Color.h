@@ -1,14 +1,21 @@
 #ifndef COLOR_H_
 #define COLOR_H_
 
+struct Pixel {
+	char red;
+	char green;
+	char blue;
+};
+
 class Color
 {
 public:
 	Color();
-	Color(int r, int g, int b);
+	Color(char r, char g, char b);
 	virtual ~Color();
+	Pixel asPixel();
 private:
-	int red, green, blue;
+	char red, green, blue;
 };
 
 #endif /*COLOR_H_*/

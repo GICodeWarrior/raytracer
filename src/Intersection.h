@@ -2,9 +2,10 @@
 #define INTERSECTION_H_
 
 #include "../third-party/point.h"
+#include "models/PrimitiveModel.h"
 
 class Ray;
-class PrimitiveModel;
+class Color;
 
 class Intersection
 {
@@ -13,7 +14,9 @@ public:
 	Intersection(PrimitiveModel *m, Point p);
 	virtual ~Intersection();
 	int compare(Ray &ray, Intersection &i);
+	Color getColor();
 private:
+	PrimitiveModel *model;
 	Point point;
 };
 
