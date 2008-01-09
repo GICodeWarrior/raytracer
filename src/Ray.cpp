@@ -10,7 +10,7 @@ Ray::~Ray()
 {
 }
 
-Point Ray::getPoint()
+Point Ray::getOrigin()
 {
 	return point;
 }

@@ -1,5 +1,6 @@
 
 #include "models/Sphere.h"
+#include "models/Plane.h"
 #include "models/CompositeModel.h"
 
 #include "Camera.h"
@@ -14,6 +15,9 @@ int main()
 	Sphere *sphere2 = new Sphere(Point(2,2,2), 1, Color(0, 0, 255));
 	scene.add(sphere1);
 	scene.add(sphere2);
+	
+	Plane *plane = new Plane(Vector(0,1,0), 0, Color(0, 255, 0));
+	scene.add(plane);
 	
 	cout << "Constructed scene" << endl;
 	

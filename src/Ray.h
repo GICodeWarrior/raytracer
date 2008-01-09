@@ -11,7 +11,7 @@ class Ray
 public:
 	Ray(Point p, Vector v);
 	virtual ~Ray();
-	Point getPoint();
+	Point getOrigin();
 	Vector getVector();
 private:
 	Point point;

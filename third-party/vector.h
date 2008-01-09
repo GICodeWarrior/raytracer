@@ -11,6 +11,7 @@
 #define SS_Vector_H
 
 #include "common.h"
+#include "point.h"
 #include <math.h>
 
 //==================================================================

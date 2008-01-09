@@ -21,7 +21,7 @@ int Intersection::compare(Ray &ray, Intersection &i)
 {
 	if (!model) return -1;
 	if (!i.model) return 1;
-	Point start = ray.getPoint();
+	Point start = ray.getOrigin();
 	double d1 = point.d2(start);
 	double d2 = i.point.d2(start);
 	
