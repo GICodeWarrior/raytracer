@@ -28,15 +28,56 @@ Intersection Polygon::intersect(Ray &ray)
 	if (plane.compare(ray, none) < 0) return none;
 	
 	Point origin = plane.getPoint();
-	Point cross1 = (verticies[0] + verticies[verticies.size() - 1]) / 2;
-	Vector Vc = cross1 - origin;
 	Vector Vt = origin - Point(0,0,0);
-	int crosses = 1;
 	
-	for (unsigned int p1 = 0, p2 = 1; p2 < verticies.size(); p1++, p2++)
+	int p1 = verticies.size() - 1;
+	int ignore;
+	
+	double x = abs(getNormal().x);
+	double y = abs(getNormal().y);
+	double z = abs(getNormal().z);
+	
+	if ((x > y) && (x > z)) ignore = 1;
+	else if ((y > x) && (y > z)) ignore = 2;
+	else ignore = 3;
+	
+	int crosses = 0;
+	
+	for (unsigned int p2 = 0; p2 < verticies.size(); p2++)
 	{
+		Point P1 = verticies[p1] - Vt;
+		Point P2 = verticies[p2] - Vt;
 		
+		p1 = p2;
+		
+		double u1 = P1.x;
+		double u2 = P2.x;
+		double v1 = P1.y;
+		double v2 = P2.y;
+		
+		switch (ignore)
+		{
+			case 1: u1 = P1.z; u2 = P2.z; break;
+			case 2: v1 = P1.z; v2 = P2.z; break;
+		}
+		
+		if ((u1 <= 0) && (u2 <= 0)) continue;
+		if ((v1 < 0) && (v2 < 0)) continue;
+		if ((v1 >= 0) && (v2 >= 0)) continue;
+		
+		if ((u1 > 0) && (u2 > 0))
+		{
+			++crosses;
+			continue;
+		}
+		
+		if ((u1 - u2) * v2 / (v2 - v1) + u2 > 0)
+		{
+			++crosses;	
+		}
 	}
+	
+	if (crosses % 2 == 1) return plane;
 	
 	return none;
 }

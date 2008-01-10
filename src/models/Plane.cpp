@@ -38,3 +38,8 @@ Intersection Plane::intersect(Ray &ray)
 	Intersection i(this, ray.getVector() * distance + ray.getOrigin());
 	return i;
 }
+
+Vector Plane::getNormal()
+{
+	return normal;
+}

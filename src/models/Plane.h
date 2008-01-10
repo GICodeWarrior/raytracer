@@ -10,6 +10,7 @@ public:
 	Plane(Vector n, double d, Color c);
 	virtual ~Plane();
 	Intersection intersect(Ray &ray);
+	Vector getNormal();
 protected:
 	Plane(Color c);
 	void setDimensions(Vector n, double d);
