@@ -1,6 +1,6 @@
 
 #include "models/Sphere.h"
-#include "models/Plane.h"
+#include "models/Polygon.h"
 #include "models/CompositeModel.h"
 
 #include "Camera.h"
@@ -16,8 +16,13 @@ int main()
 	scene.add(sphere1);
 	scene.add(sphere2);
 	
-	Plane *plane = new Plane(Vector(0,1,0), 0, Color(0, 255, 0));
-	scene.add(plane);
+	vector<Point> points;
+	points.push_back(Point(-4, 0, -2));
+	points.push_back(Point(-4, 0, 50));
+	points.push_back(Point(12, 0, 50));
+	points.push_back(Point(12, 0, -2));
+	Polygon *floor = new Polygon(points, Color(0, 255, 0));
+	scene.add(floor);
 	
 	cout << "Constructed scene" << endl;
 	

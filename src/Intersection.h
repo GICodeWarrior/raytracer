@@ -15,6 +15,7 @@ public:
 	virtual ~Intersection();
 	int compare(Ray &ray, Intersection &i);
 	Color getColor();
+	Point getPoint();
 private:
 	PrimitiveModel *model;
 	Point point;

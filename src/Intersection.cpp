@@ -39,3 +39,8 @@ Color Intersection::getColor()
 	
 	return Color(0,0,0);
 }
+
+Point Intersection::getPoint()
+{
+	return point;
+}
