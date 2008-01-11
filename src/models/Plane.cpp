@@ -11,6 +11,7 @@ Plane::Plane(Color c)
 Plane::Plane(Vector n, double d, Color c)
 : PrimitiveModel(c), normal(n), distance(d)
 {
+	normal.normalize();
 }
 
 Plane::~Plane()
@@ -20,6 +21,8 @@ Plane::~Plane()
 void Plane::setDimensions(Vector n, double d)
 {
 	normal = n;
+	normal.normalize();
+	
 	distance = d;
 }
 
@@ -31,11 +34,11 @@ Intersection Plane::intersect(Ray &ray)
 	
 	Point o = ray.getOrigin();
 	Vector RO = Vector(o.x, o.y, o.z);
-	double VO = -(normal * RO + distance);
-	double distance = VO/Vd;
-	if (distance < 0) return none;  // Intersection behind origin
+	double VO = -(normal * RO - distance);
+	double t = VO/Vd;
+	if (t < 0) return none;  // Intersection behind origin
 	
-	Intersection i(this, ray.getVector() * distance + ray.getOrigin());
+	Intersection i(this, ray.getVector() * t + ray.getOrigin());
 	return i;
 }
 

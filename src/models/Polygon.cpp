@@ -9,6 +9,7 @@ Polygon::Polygon(vector<Point> v, Color c)
 	Vector V1 = verticies[1] - verticies[0];
 	Vector V2 = verticies[2] - verticies[1];
 	Vector Vn = V1 ^ V2;
+	Vn.normalize();
 	
 	Vector vertex(verticies[0].x, verticies[0].y, verticies[0].z);
 	
