@@ -1,8 +1,8 @@
 
 #include "models/Sphere.h"
 #include "models/Polygon.h"
-#include "models/CompositeModel.h"
 
+#include "World.h"
 #include "Camera.h"
 
 #include <iostream>
@@ -10,7 +10,7 @@
 
 int main()
 {
-	CompositeModel scene;
+	World scene;
 	Sphere *sphere1 = new Sphere(Point(0,3,-2), 1, Color(255, 0, 0));
 	Sphere *sphere2 = new Sphere(Point(2,2,2), 1, Color(0, 0, 255));
 	scene.add(sphere1);
@@ -23,7 +23,7 @@ int main()
 	points.push_back(Point(12, 0, -2));
 	Polygon *floor = new Polygon(points, Color(0, 255, 0));
 	scene.add(floor);
-	
+	/*
 	points.clear();
 	points.push_back(Point(-4.03571, 5.790754, 5.0));
 	points.push_back(Point(-3.42891, 5.543348, 5.0));
@@ -37,6 +37,10 @@ int main()
 	points.push_back(Point(-3.94528, 5.141731, 5.0));
 	Polygon *star = new Polygon(points, Color(255, 255, 0));
 	scene.add(star);
+	*/
+	
+	Light light(Point(1, 45, 0), Color(255,255,255));
+	scene.addLight(light);
 	
 	cout << "Constructed scene" << endl;
 	

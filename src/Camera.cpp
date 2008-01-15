@@ -7,7 +7,7 @@
 #include "Color.h"
 #include "Ray.h"
 
-Camera::Camera(Model *s)
+Camera::Camera(World *s)
 : scene(s)
 {
 }
