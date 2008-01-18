@@ -39,7 +39,7 @@ int main()
 	scene.add(star);
 	*/
 	
-	Light light(Point(1, 45, 0), Color(255,255,255));
+	Light light(Point(1, 45, 0), Color(255,255,255), &scene);
 	scene.addLight(light);
 	
 	cout << "Constructed scene" << endl;

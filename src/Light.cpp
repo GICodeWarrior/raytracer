@@ -1,10 +1,17 @@
 #include "Light.h"
 
-Light::Light(Point p, Color c)
-: origin(p), tint(c)
+#include "World.h"
+
+Light::Light(Point p, Color c, World *w)
+: origin(p), tint(c), world(w)
 {
 }
 
 Light::~Light()
 {
+}
+
+bool Light::intersects(Point &p) const
+{
+	return true;
 }
