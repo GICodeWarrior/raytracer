@@ -1,4 +1,5 @@
 
+#include "materials/Checker.h"
 #include "materials/Phong.h"
 
 #include "models/Sphere.h"
@@ -27,7 +28,8 @@ int main()
 	points.push_back(Point(12, 0, 50));
 	points.push_back(Point(12, 0, -2));
 	Polygon *floor = new Polygon(points, Color(0, 255, 0));
-	material = new Phong(floor, &scene);
+	material = new Checker(floor);
+	material = new Phong(material, &scene);
 	scene.add(material);
 	
 	/*
