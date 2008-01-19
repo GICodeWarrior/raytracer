@@ -42,7 +42,7 @@ Intersection Plane::intersect(const Ray &ray) const
 	return i;
 }
 
-Vector Plane::getNormal() const
+Vector Plane::normalAt(const Point &p) const
 {
 	return normal;
 }

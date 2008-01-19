@@ -8,8 +8,11 @@ class Material : public PrimitiveModel
 public:
 	Material(PrimitiveModel *s);
 	virtual ~Material();
-	virtual Color colorAt(const Point &p) const;
 	virtual Intersection intersect(const Ray& ray) const;
+	virtual Color colorAt(const Point &p) const;
+	virtual Vector normalAt(const Point &p) const;
+protected:
+	PrimitiveModel* getModel() const;
 private:
 	PrimitiveModel *subModel;
 };

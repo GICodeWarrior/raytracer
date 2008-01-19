@@ -17,9 +17,9 @@ Color Shadow::colorAt(const Point &p) const
 	
 	bool visible = false;
 	
-	for (unsigned int c = 0; c < lights->size(); ++c)
+	for (unsigned int i = 0; i < lights->size(); ++i)
 	{
-		visible |= lights->at(c).intersects(p);
+		visible |= lights->at(i).intersects(p);
 	}
 	
 	return visible ? c : Color(0,0,0);

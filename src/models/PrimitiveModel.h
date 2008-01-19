@@ -13,6 +13,7 @@ public:
 	PrimitiveModel(Color c);
 	virtual ~PrimitiveModel();
 	virtual Color colorAt(const Point &p) const;
+	virtual Vector normalAt(const Point &p) const = 0;
 private:
 	Color color;
 };

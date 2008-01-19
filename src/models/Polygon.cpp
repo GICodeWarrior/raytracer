@@ -34,9 +34,9 @@ Intersection Polygon::intersect(const Ray &ray) const
 	int p1 = verticies.size() - 1;
 	int ignore;
 	
-	double x = abs(getNormal().x);
-	double y = abs(getNormal().y);
-	double z = abs(getNormal().z);
+	double x = abs(normalAt(Point()).x);
+	double y = abs(normalAt(Point()).y);
+	double z = abs(normalAt(Point()).z);
 	
 	if ((x > y) && (x > z)) ignore = 1;
 	else if ((y > x) && (y > z)) ignore = 2;

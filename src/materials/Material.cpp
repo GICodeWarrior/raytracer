@@ -1,5 +1,6 @@
 #include "Material.h"
 
+#include "../../third-party/vector.h"
 #include "../Intersection.h"
 
 Material::Material(PrimitiveModel *s)
@@ -12,11 +13,6 @@ Material::~Material()
 	delete subModel;
 }
 
-Color Material::colorAt(const Point &p) const
-{
-	return subModel->colorAt(p);
-}
-
 Intersection Material::intersect(const Ray& ray) const
 {
 	Intersection i = subModel->intersect(ray);
@@ -25,4 +21,19 @@ Intersection Material::intersect(const Ray& ray) const
 		i = Intersection(this, i.getPoint());
 	}
 	return i;
+}
+
+Color Material::colorAt(const Point &p) const
+{
+	return subModel->colorAt(p);
+}
+
+Vector Material::normalAt(const Point &p) const
+{
+	return subModel->normalAt(p);
+}
+
+PrimitiveModel* Material::getModel() const
+{
+	return subModel;	
 }

@@ -9,7 +9,8 @@ class Sphere : public PrimitiveModel
 public:
 	Sphere(Point o, double r, Color c);
 	virtual ~Sphere();
-	Intersection intersect(const Ray& ray) const;
+	virtual Intersection intersect(const Ray& ray) const;
+	virtual Vector normalAt(const Point &p) const;
 private:
 	Point origin;
 	double radius;

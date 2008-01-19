@@ -1,5 +1,5 @@
 
-#include "materials/Shadow.h"
+#include "materials/Phong.h"
 
 #include "models/Sphere.h"
 #include "models/Polygon.h"
@@ -16,9 +16,9 @@ int main()
 	Material *material;
 	Sphere *sphere1 = new Sphere(Point(0,3,-2), 1, Color(255, 0, 0));
 	Sphere *sphere2 = new Sphere(Point(2,2,2), 1, Color(0, 0, 255));
-	material = new Shadow(sphere1, &scene);
+	material = new Phong(sphere1, &scene);
 	scene.add(material);
-	material = new Shadow(sphere2, &scene);
+	material = new Phong(sphere2, &scene);
 	scene.add(material);
 	
 	vector<Point> points;
@@ -27,7 +27,7 @@ int main()
 	points.push_back(Point(12, 0, 50));
 	points.push_back(Point(12, 0, -2));
 	Polygon *floor = new Polygon(points, Color(0, 255, 0));
-	material = new Shadow(floor, &scene);
+	material = new Phong(floor, &scene);
 	scene.add(material);
 	
 	/*

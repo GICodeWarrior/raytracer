@@ -19,3 +19,13 @@ bool Light::intersects(const Point &p) const
 	Intersection i = world->intersect(r);
 	return i.getPoint().near(p);
 }
+
+Point Light::getOrigin() const
+{
+	return origin;
+}
+
+Color Light::getTint() const
+{
+	return tint;
+}

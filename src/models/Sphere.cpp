@@ -53,3 +53,10 @@ Intersection Sphere::intersect(const Ray& ray) const
 	Intersection i(this, ray.getVector() * distance + ray.getOrigin());
 	return i;
 }
+
+Vector Sphere::normalAt(const Point &p) const
+{
+	Vector normal = p - origin;
+	normal.normalize();
+	return normal;
+}
