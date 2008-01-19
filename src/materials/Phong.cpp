@@ -30,7 +30,10 @@ Color Phong::colorAt(const Point &p) const
 		light = &lights->at(i);
 		if (light->intersects(p))
 		{
-			Vector color = c.asVector();
+			Vector mc = c.asVector();
+			Vector lc = light->getTint().asVector();
+			Vector color(mc.x * lc.x, mc.y * lc.y, mc.z * lc.z);
+			//Vector color = mc ^ lc;
 			
 			Vector source = light->getOrigin() - p;
 			source.normalize();
@@ -38,14 +41,27 @@ Color Phong::colorAt(const Point &p) const
 			Vector normal = getModel()->normalAt(p);
 			normal.normalize();
 			
-			Vector reflection = p - light->getOrigin() + 2 * normal;
+			Vector incoming = p - light->getOrigin();
+			incoming.normalize();
+			
+			Vector reflection = incoming - 2 * normal * (incoming * normal);
 			reflection.normalize();
+			
+			//if (mc.z > 0)
+			//cout << "incoming: " << incoming << " reflection: " << reflection << " normal: " << normal << endl;
 			
 			Vector view = Point(0.0, 3.0, -6.0) - p;
 			view.normalize();
 			
 			diffuse += color * (source * normal);
-			specular += color * pow(min(reflection * view, 0.0), 1.0/40.0);
+			specular += color * pow(max(reflection * view, 0.0), 40.0);
+			
+			if (specular.y != 0)
+			{
+				//cout << "color: " << color << " reflection: " << reflection;
+				//cout << " view: " << view << " specular: " << specular;
+				//cout << " reflection * view: " << reflection * view << endl;
+			}
 			
 			//cout << "i: " << i << " diffuse: " << diffuse << " specular: " << specular;
 			//cout << " color: " << color << " source: " << source << " normal: " << normal;
@@ -53,8 +69,6 @@ Color Phong::colorAt(const Point &p) const
 		}
 	}
 	
-	if (!isfinite(specular.x) || !isfinite(specular.y) || !isfinite(specular.z))
-		specular = Vector(0,0,0);
-	
-	return(0.1 * c.asVector() + 0.6 * diffuse + 0.4 * specular);
+	//return(specular);
+	return(0.1 * c.asVector() + 0.6 * diffuse + 1 * specular);
 }

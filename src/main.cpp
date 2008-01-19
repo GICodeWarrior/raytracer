@@ -30,8 +30,9 @@ int main()
 	material = new Phong(floor, &scene);
 	scene.add(material);
 	
-	/*
+	
 	points.clear();
+	points.push_back(Point(-3.94528, 5.141731, 5.0));
 	points.push_back(Point(-4.03571, 5.790754, 5.0));
 	points.push_back(Point(-3.42891, 5.543348, 5.0));
 	points.push_back(Point(-2.8396, 5.82991, 5.0));
@@ -41,10 +42,10 @@ int main()
 	points.push_back(Point(-3.3774, 3.969714, 5.0));
 	points.push_back(Point(-3.72288, 4.526534, 5.0));
 	points.push_back(Point(-4.36808, 4.64109, 5.0));
-	points.push_back(Point(-3.94528, 5.141731, 5.0));
 	Polygon *star = new Polygon(points, Color(255, 255, 0));
-	scene.add(star);
-	*/
+	material = new Phong(star, &scene);
+	scene.add(material);
+	
 	
 	Light light(Point(1, 45, 0), Color(255,255,255), &scene);
 	scene.addLight(light);

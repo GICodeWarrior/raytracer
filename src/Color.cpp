@@ -19,9 +19,9 @@ Color::Color(unsigned char r, unsigned char g, unsigned char b)
 
 Color::Color(Vector v)
 {
-	red = (unsigned char)(v.x * 255);
-	green = (unsigned char)(v.y * 255);
-	blue = (unsigned char)(v.z * 255);
+	red = (unsigned char)min(v.x * 255, 255.0);
+	green = (unsigned char)min(v.y * 255, 255.0);
+	blue = (unsigned char)min(v.z * 255, 255.0);
 }
 
 Color::~Color()
