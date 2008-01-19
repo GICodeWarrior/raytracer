@@ -10,12 +10,12 @@ Ray::~Ray()
 {
 }
 
-Point Ray::getOrigin()
+Point Ray::getOrigin() const
 {
 	return point;
 }
 
-Vector Ray::getVector()
+Vector Ray::getVector() const
 {
 	return vector;
 }

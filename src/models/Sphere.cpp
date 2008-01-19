@@ -13,7 +13,7 @@ Sphere::~Sphere()
 {
 }
 
-Intersection Sphere::intersect(Ray& ray)
+Intersection Sphere::intersect(const Ray& ray) const
 {	
 	Intersection none;
 	Vector deltap;

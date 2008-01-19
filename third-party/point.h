@@ -57,19 +57,19 @@ public:
 
 	//----------------------------------------------------------
 	// Assignment "=": use the default to copy all members
-	int dim() { return dimn; }      // get dimension
+	int dim() const { return dimn; }      // get dimension
 	int setdim( int);               // set new dimension
 
 	//----------------------------------------------------------
 	// Comparison (dimension must match, or not)
-	int operator==( Point);
-	int operator!=( Point);
+	int operator==( Point) const;
+	int operator!=( Point) const;
 
 	//----------------------------------------------------------
 	// Point and Vector Operations (always valid) 
-	Vector operator-( Point);       // Vector difference
-	Point  operator+( Vector);      // +translate
-	Point  operator-( Vector);      // -translate
+	Vector operator-( Point) const;       // Vector difference
+	Point  operator+( Vector) const;      // +translate
+	Point  operator-( Vector) const;      // -translate
 	Point& operator+=( Vector);     // inc translate
 	Point& operator-=( Vector);     // dec translate
 
@@ -105,18 +105,18 @@ public:
 
 	//----------------------------------------------------------
 	// Point Relations
-	double d( Point);         // Distance
-	double d2( Point);        // Distance^2
+	double d( Point) const;         // Distance
+	double d2( Point) const;        // Distance^2
 	double isLeft( Point, Point);           // 2D only
-	double Area( Point, Point); 		// any dim for triangle PPP
+	double Area( Point, Point) const; 		// any dim for triangle PPP
 
 	// Collinearity Conditions (any dim n)
-	boolean isOnLine( Point, Point, char);  // is On line (char= flag)
-	boolean isOnLine( Point, Point);        // is On line (flag= all)
-	boolean isBefore( Point, Point);        // is On line (flag= before)
-	boolean isBetween( Point, Point);       // is On line (flag= between)
-	boolean isAfter( Point, Point);         // is On line (flag= after)
-	boolean isOnRay( Point, Point);         // is On line (flag= between|after)
+	boolean isOnLine( Point, Point, char) const;  // is On line (char= flag)
+	boolean isOnLine( Point, Point) const;        // is On line (flag= all)
+	boolean isBefore( Point, Point) const;        // is On line (flag= before)
+	boolean isBetween( Point, Point) const;       // is On line (flag= between)
+	boolean isAfter( Point, Point) const;         // is On line (flag= after)
+	boolean isOnRay( Point, Point) const;         // is On line (flag= between|after)
 
 	//----------------------------------------------------------
 	// Error Handling

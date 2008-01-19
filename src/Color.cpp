@@ -13,7 +13,7 @@ Color::~Color()
 {
 }
 
-Pixel Color::asPixel()
+Pixel Color::asPixel() const
 {
 	Pixel p;
 	p.red = red;

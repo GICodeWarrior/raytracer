@@ -13,7 +13,7 @@ public:
 	Color();
 	Color(char r, char g, char b);
 	virtual ~Color();
-	Pixel asPixel();
+	Pixel asPixel() const;
 private:
 	char red, green, blue;
 };

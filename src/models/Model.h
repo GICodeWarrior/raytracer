@@ -9,7 +9,7 @@ class Model
 public:
 	Model();
 	virtual ~Model();
-	virtual Intersection intersect(Ray& ray) = 0;
+	virtual Intersection intersect(const Ray& ray) const = 0;
 };
 
 #endif /*MODEL_H_*/

@@ -9,8 +9,8 @@ class Plane : public PrimitiveModel
 public:
 	Plane(Vector n, double d, Color c);
 	virtual ~Plane();
-	Intersection intersect(Ray &ray);
-	Vector getNormal();
+	Intersection intersect(const Ray &ray) const;
+	Vector getNormal() const;
 protected:
 	Plane(Color c);
 	void setDimensions(Vector n, double d);

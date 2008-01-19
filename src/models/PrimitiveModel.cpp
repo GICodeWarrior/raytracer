@@ -14,7 +14,7 @@ PrimitiveModel::~PrimitiveModel()
 {
 }
 
-Color PrimitiveModel::colorAt(Point &p)
+Color PrimitiveModel::colorAt(const Point &p) const
 {
 	return color;
 }

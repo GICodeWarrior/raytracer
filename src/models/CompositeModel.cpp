@@ -18,7 +18,7 @@ void CompositeModel::add(Model* model)
 	models.push_back(model);
 }
 
-Intersection CompositeModel::intersect(Ray& ray)
+Intersection CompositeModel::intersect(const Ray& ray) const
 {
 	Intersection nearest;
 	

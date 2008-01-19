@@ -8,7 +8,7 @@ Intersection::Intersection()
 {
 }
 
-Intersection::Intersection(PrimitiveModel *m, Point p)
+Intersection::Intersection(const PrimitiveModel *m, Point p)
 : model(m), point(p)
 {
 }
@@ -17,7 +17,7 @@ Intersection::~Intersection()
 {
 }
 
-int Intersection::compare(Ray &ray, Intersection &i)
+int Intersection::compare(const Ray &ray, const Intersection &i) const
 {
 	if (!model) return -1;
 	if (!i.model) return 1;
@@ -30,7 +30,7 @@ int Intersection::compare(Ray &ray, Intersection &i)
 	return 0;
 }
 
-Color Intersection::getColor()
+Color Intersection::getColor() const
 {
 	if (model)
 	{
@@ -40,7 +40,7 @@ Color Intersection::getColor()
 	return Color(0,0,0);
 }
 
-Point Intersection::getPoint()
+Point Intersection::getPoint() const
 {
 	return point;
 }

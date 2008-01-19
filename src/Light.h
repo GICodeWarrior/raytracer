@@ -11,7 +11,7 @@ class Light
 public:
 	Light(Point p, Color c, World *w);
 	virtual ~Light();
-	bool intersects(Point &p) const;
+	bool intersects(const Point &p) const;
 private:
 	Point origin;
 	Color tint;

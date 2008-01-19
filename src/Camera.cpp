@@ -7,7 +7,7 @@
 #include "Color.h"
 #include "Ray.h"
 
-Camera::Camera(World *s)
+Camera::Camera(const World *s)
 : scene(s)
 {
 }
@@ -16,7 +16,7 @@ Camera::~Camera()
 {
 }
 
-Pixel* Camera::getImage()
+Pixel* Camera::getImage() const
 {
 	int imageWidth = 640;
 	int imageHeight = 480;

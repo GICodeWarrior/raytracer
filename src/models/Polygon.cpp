@@ -22,7 +22,7 @@ Polygon::~Polygon()
 {
 }
 
-Intersection Polygon::intersect(Ray &ray)
+Intersection Polygon::intersect(const Ray &ray) const
 {
 	Intersection none;
 	Intersection plane = Plane::intersect(ray);

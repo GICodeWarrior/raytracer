@@ -19,7 +19,7 @@
 //------------------------------------------------------------------
 
 // Unary minus
-Vector Vector::operator-() {
+Vector Vector::operator-() const {
 	Vector v;
 	v.x = -x; v.y = -y; v.z = -z;
 	v.dimn = dimn;
@@ -99,7 +99,7 @@ Vector operator/( Vector w, double c ) {
 //  Arithmetic Ops
 //------------------------------------------------------------------
 
-Vector Vector::operator+( Vector w ) {
+Vector Vector::operator+( Vector w ) const {
 	Vector v;
 	v.x = x + w.x;
 	v.y = y + w.y;
@@ -108,7 +108,7 @@ Vector Vector::operator+( Vector w ) {
 	return v;
 }
 
-Vector Vector::operator-( Vector w ) {
+Vector Vector::operator-( Vector w ) const {
 	Vector v;
 	v.x = x - w.x;
 	v.y = y - w.y;
@@ -122,7 +122,7 @@ Vector Vector::operator-( Vector w ) {
 //------------------------------------------------------------------
 
 // Inner Dot Product
-double Vector::operator*( Vector w ) {
+double Vector::operator*( Vector w ) const {
 	return (x * w.x + y * w.y + z * w.z);
 }
 
@@ -133,7 +133,7 @@ double Vector::operator|( Vector w ) {
 }
 
 // 3D Exterior Cross Product
-Vector Vector::operator^( Vector w ) {
+Vector Vector::operator^( Vector w ) const {
 	Vector v;
 	v.x = y * w.z - z * w.y;
 	v.y = z * w.x - x * w.z;

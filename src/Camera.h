@@ -8,11 +8,11 @@ struct Pixel;
 class Camera
 {
 public:
-	Camera(World *s);
+	Camera(const World *s);
 	virtual ~Camera();
-	Pixel* getImage();
+	Pixel* getImage() const;
 private:
-	World *scene;
+	const World *scene;
 };
 
 #endif /*CAMERA_H_*/

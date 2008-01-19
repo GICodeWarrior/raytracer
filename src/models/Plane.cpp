@@ -26,7 +26,7 @@ void Plane::setDimensions(Vector n, double d)
 	distance = d;
 }
 
-Intersection Plane::intersect(Ray &ray)
+Intersection Plane::intersect(const Ray &ray) const
 {	
 	Intersection none;
 	double Vd = normal * ray.getVector();
@@ -42,7 +42,7 @@ Intersection Plane::intersect(Ray &ray)
 	return i;
 }
 
-Vector Plane::getNormal()
+Vector Plane::getNormal() const
 {
 	return normal;
 }

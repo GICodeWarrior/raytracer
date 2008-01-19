@@ -11,7 +11,7 @@ Light::~Light()
 {
 }
 
-bool Light::intersects(Point &p) const
+bool Light::intersects(const Point &p) const
 {
 	return true;
 }

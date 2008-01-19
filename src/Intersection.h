@@ -11,13 +11,13 @@ class Intersection
 {
 public:
 	Intersection();
-	Intersection(PrimitiveModel *m, Point p);
+	Intersection(const PrimitiveModel *m, Point p);
 	virtual ~Intersection();
-	int compare(Ray &ray, Intersection &i);
-	Color getColor();
-	Point getPoint();
+	int compare(const Ray &ray, const Intersection &i) const;
+	Color getColor() const;
+	Point getPoint() const;
 private:
-	PrimitiveModel *model;
+	const PrimitiveModel *model;
 	Point point;
 };
 

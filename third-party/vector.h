@@ -37,7 +37,7 @@ public:
 
 	//----------------------------------------------------------
 	// Vector Unary Operations
-	Vector operator-();                // unary minus
+	Vector operator-() const;                // unary minus
 	Vector operator~();                // unary 2D perp operator
 
 	//----------------------------------------------------------
@@ -52,11 +52,11 @@ public:
 
 	//----------------------------------------------------------
 	// Vector Arithmetic Operations
-	Vector operator+( Vector);        // vector add
-	Vector operator-( Vector);        // vector subtract
-	double operator*( Vector);        // inner dot product
+	Vector operator+( Vector) const;        // vector add
+	Vector operator-( Vector) const;        // vector subtract
+	double operator*( Vector) const;        // inner dot product
 	double operator|( Vector);        // 2D exterior perp product
-	Vector operator^( Vector);        // 3D exterior cross product
+	Vector operator^( Vector) const;        // 3D exterior cross product
 
 	Vector& operator*=( double);      // vector scalar mult
 	Vector& operator/=( double);      // vector scalar div
@@ -66,10 +66,10 @@ public:
 
 	//----------------------------------------------------------
 	// Vector Properties
-	double len() {                    // vector length
+	double len() const {                    // vector length
 		return sqrt(x*x + y*y + z*z);
 	}
-	double len2() {                   // vector length squared (faster)
+	double len2() const {                   // vector length squared (faster)
 		return (x*x + y*y + z*z);
 	}
 
