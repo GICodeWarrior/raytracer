@@ -20,6 +20,8 @@ int main()
 	material = new Phong(sphere1, &scene);
 	scene.add(material);
 	material = new Phong(sphere2, &scene);
+	//material = new Checker(sphere2);
+	//material = new Phong(material, &scene);
 	scene.add(material);
 	
 	vector<Point> points;
