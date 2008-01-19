@@ -30,7 +30,7 @@ int main()
 	material = new Phong(floor, &scene);
 	scene.add(material);
 	
-	
+	/*
 	points.clear();
 	points.push_back(Point(-3.94528, 5.141731, 5.0));
 	points.push_back(Point(-4.03571, 5.790754, 5.0));
@@ -45,10 +45,19 @@ int main()
 	Polygon *star = new Polygon(points, Color(255, 255, 0));
 	material = new Phong(star, &scene);
 	scene.add(material);
+	*/
 	
+	Light light1(Point(1, 45, 0), Color(255,255,255), &scene);
+	scene.addLight(light1);
 	
-	Light light(Point(1, 45, 0), Color(255,255,255), &scene);
-	scene.addLight(light);
+	//Light light2(Point(-2, 10, -6), Color(255,64,64), &scene);
+	//scene.addLight(light2);
+	
+	//Light light3(Point(5, 5, 0), Color(64,255,64), &scene);
+	//scene.addLight(light3);
+	
+	//Light light4(Point(-5, 2, 5), Color(64,64,255), &scene);
+	//scene.addLight(light4);
 	
 	cout << "Constructed scene" << endl;
 	

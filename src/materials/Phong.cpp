@@ -31,9 +31,10 @@ Color Phong::colorAt(const Point &p) const
 		if (light->intersects(p))
 		{
 			Vector mc = c.asVector();
+			Vector sc = Color::WHITE.asVector();
 			Vector lc = light->getTint().asVector();
-			Vector color(mc.x * lc.x, mc.y * lc.y, mc.z * lc.z);
-			//Vector color = mc ^ lc;
+			Vector diffuseColor(mc.x * lc.x, mc.y * lc.y, mc.z * lc.z);
+			Vector specularColor(sc.x * lc.x, sc.y * lc.y, sc.z * lc.z);
 			
 			Vector source = light->getOrigin() - p;
 			source.normalize();
@@ -47,28 +48,13 @@ Color Phong::colorAt(const Point &p) const
 			Vector reflection = incoming - 2 * normal * (incoming * normal);
 			reflection.normalize();
 			
-			//if (mc.z > 0)
-			//cout << "incoming: " << incoming << " reflection: " << reflection << " normal: " << normal << endl;
-			
 			Vector view = Point(0.0, 3.0, -6.0) - p;
 			view.normalize();
 			
-			diffuse += color * (source * normal);
-			specular += color * pow(max(reflection * view, 0.0), 40.0);
-			
-			if (specular.y != 0)
-			{
-				//cout << "color: " << color << " reflection: " << reflection;
-				//cout << " view: " << view << " specular: " << specular;
-				//cout << " reflection * view: " << reflection * view << endl;
-			}
-			
-			//cout << "i: " << i << " diffuse: " << diffuse << " specular: " << specular;
-			//cout << " color: " << color << " source: " << source << " normal: " << normal;
-			//cout << " reflection: " << reflection << " view: " << view << endl;
+			diffuse += diffuseColor * (source * normal);
+			specular += specularColor * pow(max(reflection * view, 0.0), 40.0);
 		}
 	}
 	
-	//return(specular);
 	return(0.1 * c.asVector() + 0.6 * diffuse + 1 * specular);
 }
