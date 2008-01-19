@@ -9,16 +9,18 @@ Shadow::~Shadow()
 {
 }
 
-Color Shadow::colorAt(Point &p)
-{
+Color Shadow::colorAt(const Point &p) const
+{	
 	Color c = Material::colorAt(p);
 	
 	const vector<Light> *lights = world->getLights();
 	
+	bool visible = false;
+	
 	for (unsigned int c = 0; c < lights->size(); ++c)
 	{
-		lights->at(c).intersects(p);
+		visible |= lights->at(c).intersects(p);
 	}
 	
-	return c;
+	return visible ? c : Color(0,0,0);
 }

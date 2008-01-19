@@ -16,6 +16,7 @@ public:
 	int compare(const Ray &ray, const Intersection &i) const;
 	Color getColor() const;
 	Point getPoint() const;
+	const PrimitiveModel* getModel() const;
 private:
 	const PrimitiveModel *model;
 	Point point;

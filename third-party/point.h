@@ -64,6 +64,7 @@ public:
 	// Comparison (dimension must match, or not)
 	int operator==( Point) const;
 	int operator!=( Point) const;
+	int near(Point Q, double diff = 1e-10) const;
 
 	//----------------------------------------------------------
 	// Point and Vector Operations (always valid) 

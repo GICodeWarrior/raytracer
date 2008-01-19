@@ -44,3 +44,8 @@ Point Intersection::getPoint() const
 {
 	return point;
 }
+
+const PrimitiveModel* Intersection::getModel() const
+{
+	return model;
+}

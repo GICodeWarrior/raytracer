@@ -1,4 +1,6 @@
 
+#include "materials/Shadow.h"
+
 #include "models/Sphere.h"
 #include "models/Polygon.h"
 
@@ -11,10 +13,13 @@
 int main()
 {
 	World scene;
+	Material *material;
 	Sphere *sphere1 = new Sphere(Point(0,3,-2), 1, Color(255, 0, 0));
 	Sphere *sphere2 = new Sphere(Point(2,2,2), 1, Color(0, 0, 255));
-	scene.add(sphere1);
-	scene.add(sphere2);
+	material = new Shadow(sphere1, &scene);
+	scene.add(material);
+	material = new Shadow(sphere2, &scene);
+	scene.add(material);
 	
 	vector<Point> points;
 	points.push_back(Point(-4, 0, -2));
@@ -22,7 +27,9 @@ int main()
 	points.push_back(Point(12, 0, 50));
 	points.push_back(Point(12, 0, -2));
 	Polygon *floor = new Polygon(points, Color(0, 255, 0));
-	scene.add(floor);
+	material = new Shadow(floor, &scene);
+	scene.add(material);
+	
 	/*
 	points.clear();
 	points.push_back(Point(-4.03571, 5.790754, 5.0));

@@ -139,6 +139,25 @@ int Point::operator!=( Point Q) const
 	}
 }
 
+int Point::near(Point Q, double diff) const
+{
+	if (dimn != Q.dim()) return FALSE;
+	
+	double diffX = abs(x - Q.x);
+	double diffY = abs(y - Q.y);
+	double diffZ = abs(z - Q.z);
+	
+	switch (dimn) {
+	case 1:
+		return diffX < diff;
+	case 2:
+		return (diffX < diff &&	diffY < diff);
+	case 3:
+	default:
+		return (diffX < diff &&	diffY < diff &&	diffZ < diff);
+	}
+}
+
 //------------------------------------------------------------------
 // Point Vector Operations
 //------------------------------------------------------------------
