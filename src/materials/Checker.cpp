@@ -10,7 +10,7 @@ Checker::Checker(PrimitiveModel *s)
 }
 
 Checker::Checker(PrimitiveModel *s, double x, double y, double z)
-: Material(s), x(1), y(1), z(1)
+: Material(s), x(x), y(y), z(z)
 {
 }
 

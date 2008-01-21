@@ -1,6 +1,8 @@
 
 #include "materials/Checker.h"
+#include "materials/Onion.h"
 #include "materials/Phong.h"
+#include "materials/Quilt.h"
 
 #include "models/Sphere.h"
 #include "models/Polygon.h"
@@ -18,10 +20,14 @@ int main()
 	Sphere *sphere1 = new Sphere(Point(0,3,-2), 1, Color(255, 0, 0));
 	Sphere *sphere2 = new Sphere(Point(2,2,2), 1, Color(0, 0, 255));
 	material = new Phong(sphere1, &scene);
-	scene.add(material);
-	material = new Phong(sphere2, &scene);
-	//material = new Checker(sphere2);
+	//material = new Onion(sphere1);
+	//material = new Quilt(sphere1);
 	//material = new Phong(material, &scene);
+	scene.add(material);
+	//material = new Phong(sphere2, &scene);
+	material = new Checker(sphere2);
+	//material = new Quilt(material);
+	material = new Phong(material, &scene);
 	scene.add(material);
 	
 	vector<Point> points;
@@ -31,10 +37,10 @@ int main()
 	points.push_back(Point(12, 0, -2));
 	Polygon *floor = new Polygon(points, Color(0, 255, 0));
 	material = new Checker(floor);
+	material = new Quilt(material);
 	material = new Phong(material, &scene);
 	scene.add(material);
 	
-	/*
 	points.clear();
 	points.push_back(Point(-3.94528, 5.141731, 5.0));
 	points.push_back(Point(-4.03571, 5.790754, 5.0));
@@ -49,19 +55,18 @@ int main()
 	Polygon *star = new Polygon(points, Color(255, 255, 0));
 	material = new Phong(star, &scene);
 	scene.add(material);
-	*/
 	
-	Light light1(Point(1, 45, 0), Color(255,255,255), &scene);
-	scene.addLight(light1);
+	//Light light1(Point(1, 45, 0), Color(255,255,255), &scene);
+	//scene.addLight(light1);
 	
-	//Light light2(Point(-2, 10, -6), Color(255,64,64), &scene);
-	//scene.addLight(light2);
+	Light light2(Point(-2, 10, -6), Color(255,64,64), &scene);
+	scene.addLight(light2);
 	
-	//Light light3(Point(5, 5, 0), Color(64,255,64), &scene);
-	//scene.addLight(light3);
+	Light light3(Point(5, 5, 0), Color(64,255,64), &scene);
+	scene.addLight(light3);
 	
-	//Light light4(Point(-5, 2, 5), Color(64,64,255), &scene);
-	//scene.addLight(light4);
+	Light light4(Point(-5, 2, 5), Color(64,64,255), &scene);
+	scene.addLight(light4);
 	
 	cout << "Constructed scene" << endl;
 	
