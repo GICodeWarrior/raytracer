@@ -5,7 +5,12 @@
 #include "../../third-party/point.h"
 
 Checker::Checker(PrimitiveModel *s)
-: Material(s)
+: Material(s), x(1), y(1), z(1)
+{
+}
+
+Checker::Checker(PrimitiveModel *s, double x, double y, double z)
+: Material(s), x(1), y(1), z(1)
 {
 }
 
@@ -16,16 +21,11 @@ Checker::~Checker()
 Color Checker::colorAt(const Point &p) const
 {
 	double diff = 1e-10;
-	int x = (int)floor(p.x + diff) % 2;
-	//if (p.x < 0) x -= 1;
+	int Px = (int)floor(p.x / x + diff);
+	int Py = (int)floor(p.y / y + diff);
+	int Pz = (int)floor(p.z / z + diff);
 	
-	int y = (int)floor(p.y + diff) % 2;
-	//if (p.y < 0) y -= 1;
-	
-	int z = (int)floor(p.z + diff) % 2;
-	//if (p.z < 0) z -= 1;
-	
-	int color = (x + y + z) % 2;
+	int color = (Px + Py + Pz) % 2;
 	
 	return color ? Color(255,255,0) : Color::RED;
 }

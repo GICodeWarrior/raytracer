@@ -6,7 +6,13 @@
 #include "../World.h"
 
 Phong::Phong(PrimitiveModel *s, World *w)
-: Material(s), world(w)
+: Material(s), world(w), ka(0.1), kd(0.6), ks(1.0), ke(40)
+{
+}
+
+Phong::Phong(PrimitiveModel *s, World *w, double ambient,
+			 double diffuse, double specular, double exponent)
+: Material(s), world(w), ka(ambient), kd(diffuse), ks(specular), ke(exponent)
 {
 }
 
@@ -17,7 +23,6 @@ Phong::~Phong()
 Color Phong::colorAt(const Point &p) const
 {	
 	Color c = Material::colorAt(p);
-	if (c == Color::BLACK) return c;
 	
 	Vector diffuse(0,0,0);
 	Vector specular(0,0,0);
@@ -52,9 +57,9 @@ Color Phong::colorAt(const Point &p) const
 			view.normalize();
 			
 			diffuse += diffuseColor * (source * normal);
-			specular += specularColor * pow(max(reflection * view, 0.0), 40.0);
+			specular += specularColor * pow(max(reflection * view, 0.0), ke);
 		}
 	}
 	
-	return(0.1 * c.asVector() + 0.6 * diffuse + 1 * specular);
+	return(ka * c.asVector() + kd * diffuse + ks * specular);
 }

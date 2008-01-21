@@ -9,10 +9,13 @@ class Phong : public Material
 {
 public:
 	Phong(PrimitiveModel *s, World *w);
+	Phong(PrimitiveModel *s, World *w, double ambient,
+		  double diffuse, double specular, double exponent);
 	virtual ~Phong();
 	virtual Color colorAt(const Point &p) const;
 private:
 	World *world;
+	double ka, kd, ks, ke;
 };
 
 #endif /*PHONG_H_*/
