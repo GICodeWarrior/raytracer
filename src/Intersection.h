@@ -3,6 +3,7 @@
 
 #include "../third-party/point.h"
 #include "models/PrimitiveModel.h"
+#include "Ray.h"
 
 class Ray;
 class Color;
@@ -11,7 +12,7 @@ class Intersection
 {
 public:
 	Intersection();
-	Intersection(const PrimitiveModel *m, Point p);
+	Intersection(const PrimitiveModel *m, Ray r, Point p);
 	virtual ~Intersection();
 	int compare(const Ray &ray, const Intersection &i) const;
 	Color getColor() const;
@@ -19,6 +20,7 @@ public:
 	const PrimitiveModel* getModel() const;
 private:
 	const PrimitiveModel *model;
+	Ray ray;
 	Point point;
 };
 

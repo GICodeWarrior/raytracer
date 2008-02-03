@@ -4,12 +4,12 @@
 #include "models/PrimitiveModel.h"
 
 Intersection::Intersection()
-: model(NULL)
+: model(NULL), ray(Point(), Vector())
 {
 }
 
-Intersection::Intersection(const PrimitiveModel *m, Point p)
-: model(m), point(p)
+Intersection::Intersection(const PrimitiveModel *m, Ray r, Point p)
+: model(m), ray(r), point(p)
 {
 }
 
@@ -34,7 +34,7 @@ Color Intersection::getColor() const
 {
 	if (model)
 	{
-		return model->colorAt(point);
+		return model->colorAt(ray, point);
 	}
 	
 	return Color(0,0,0);

@@ -20,9 +20,9 @@ Phong::~Phong()
 {
 }
 
-Color Phong::colorAt(const Point &p) const
+Color Phong::colorAt(const Ray &r, const Point &p) const
 {	
-	Color c = Material::colorAt(p);
+	Color c = Material::colorAt(r, p);
 	
 	Vector diffuse(0,0,0);
 	Vector specular(0,0,0);

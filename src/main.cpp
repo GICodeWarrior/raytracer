@@ -3,6 +3,7 @@
 #include "materials/Onion.h"
 #include "materials/Phong.h"
 #include "materials/Quilt.h"
+#include "materials/Reflection.h"
 
 #include "models/Sphere.h"
 #include "models/Polygon.h"
@@ -19,14 +20,16 @@ int main()
 	Material *material;
 	Sphere *sphere1 = new Sphere(Point(0,3,-2), 1, Color(255, 0, 0));
 	Sphere *sphere2 = new Sphere(Point(2,2,2), 1, Color(0, 0, 255));
-	material = new Phong(sphere1, &scene);
+	//material = new Phong(sphere1, &scene);
 	//material = new Onion(sphere1);
 	//material = new Quilt(sphere1);
-	//material = new Phong(material, &scene);
+	material = new Reflection(sphere1, &scene, 1.0);
+	material = new Phong(material, &scene);
 	scene.add(material);
 	//material = new Phong(sphere2, &scene);
-	material = new Checker(sphere2);
+	//material = new Checker(sphere2);
 	//material = new Quilt(material);
+	material = new Reflection(sphere2, &scene, 1.0);
 	material = new Phong(material, &scene);
 	scene.add(material);
 	
@@ -39,6 +42,7 @@ int main()
 	material = new Checker(floor);
 	material = new Quilt(material);
 	material = new Phong(material, &scene);
+	material = new Reflection(material, &scene, 1.0);
 	scene.add(material);
 	
 	points.clear();
@@ -53,7 +57,9 @@ int main()
 	points.push_back(Point(-3.72288, 4.526534, 5.0));
 	points.push_back(Point(-4.36808, 4.64109, 5.0));
 	Polygon *star = new Polygon(points, Color(255, 255, 0));
-	material = new Phong(star, &scene);
+	material = new Reflection(star, &scene, 1.0);
+	material = new Phong(material, &scene);
+	//material = new Phong(star, &scene);
 	scene.add(material);
 	
 	//Light light1(Point(1, 45, 0), Color(255,255,255), &scene);

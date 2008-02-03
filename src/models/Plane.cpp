@@ -38,7 +38,7 @@ Intersection Plane::intersect(const Ray &ray) const
 	double t = VO/Vd;
 	if (t < 0) return none;  // Intersection behind origin
 	
-	Intersection i(this, ray.getVector() * t + ray.getOrigin());
+	Intersection i(this, ray, ray.getVector() * t + ray.getOrigin());
 	return i;
 }
 

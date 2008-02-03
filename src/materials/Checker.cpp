@@ -18,7 +18,7 @@ Checker::~Checker()
 {
 }
 
-Color Checker::colorAt(const Point &p) const
+Color Checker::colorAt(const Ray &r, const Point &p) const
 {
 	double diff = 1e-10;
 	int Px = (int)floor(p.x / x + diff);

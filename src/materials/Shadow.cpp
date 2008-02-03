@@ -9,9 +9,9 @@ Shadow::~Shadow()
 {
 }
 
-Color Shadow::colorAt(const Point &p) const
+Color Shadow::colorAt(const Ray &r, const Point &p) const
 {	
-	Color c = Material::colorAt(p);
+	Color c = Material::colorAt(r, p);
 	
 	const vector<Light> *lights = world->getLights();
 	

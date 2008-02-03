@@ -8,7 +8,7 @@ class Onion : public Material
 public:
 	Onion(PrimitiveModel *s);
 	virtual ~Onion();
-	virtual Color colorAt(const Point &p) const;
+	virtual Color colorAt(const Ray &r, const Point &p) const;
 };
 
 #endif /*ONION_H_*/
