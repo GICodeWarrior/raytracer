@@ -48,10 +48,6 @@ Vector Quilt::normalAt(const Point &p) const
 	u1 = tan(pi * u1 + halfpi) * c0;
 	v1 = tan(pi * v1 + halfpi) * c0;
 	
-	//double cutoff = 1.0e10;
-	//u1 = max(min(u1, cutoff), -cutoff);
-	//v1 = max(min(v1, cutoff), -cutoff);
-	
 	switch (ignore)
 	{
 		case 1: normal.z += u1; normal.y += v1; break;

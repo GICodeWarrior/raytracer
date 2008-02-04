@@ -28,18 +28,15 @@ void Plane::setDimensions(Vector n, double d)
 
 Intersection Plane::intersect(const Ray &ray) const
 {	
-	Intersection none;
 	double Vd = normal * ray.getVector();
-	if (Vd == 0) return none;  // Parallel to plane, no intersection
+	if (Vd == 0) return Intersection();  // Parallel to plane, no intersection
 	
 	Point o = ray.getOrigin();
-	Vector RO = Vector(o.x, o.y, o.z);
-	double VO = -(normal * RO - distance);
+	double VO = distance - normal * Vector(o.x, o.y, o.z);
 	double t = VO/Vd;
-	if (t < 0) return none;  // Intersection behind origin
+	if (t < 0) return Intersection();  // Intersection behind origin
 	
-	Intersection i(this, ray, ray.getVector() * t + ray.getOrigin());
-	return i;
+	return Intersection (this, ray, ray.getVector() * t + ray.getOrigin());
 }
 
 Vector Plane::normalAt(const Point &p) const
