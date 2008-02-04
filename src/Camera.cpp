@@ -7,31 +7,40 @@
 #include "Color.h"
 #include "Ray.h"
 
-Camera::Camera(const World *s)
-: scene(s)
+Camera::Camera(const World *s, Point o, Vector lookAt)
+: scene(s), origin(o)
 {
+	double width = 1.33;
+	double height = 1.0;
+	double distance = 1.0;
+	
+	lookAt.normalize();
+	lookAt *= distance;
+	direction = lookAt;
+	
+	right = Vector(0.0, 1.0, 0.0) ^ lookAt;
+	right.normalize();
+	right *= width;
+	
+	up = right ^ lookAt;
+	up.normalize();
+	up *= height;
 }
 
 Camera::~Camera()
 {
 }
 
-Pixel* Camera::getImage() const
-{
-	int imageWidth = 640;
-	int imageHeight = 480;
-	
-	Pixel* image = new Pixel[imageWidth * imageHeight];
-	
+Pixel* Camera::getImage(int imageWidth, int imageHeight, Pixel *image) const
+{	
 	double viewWidth = 1.33;
 	double viewHeight = 1.0;
 	
 	double viewDistance = 1.0;
 	
-	Point cameraOrigin(0.0, 3.0, -6.0);
-	
+	//Point viewOrigin = origin + direction - (right / 2) + (up / 2);
 	Point viewOrigin(-viewWidth / 2, viewHeight / 2);
-	Vector viewOffset(0.0, 0.0);
+	Vector viewOffset(0.0, 0.0, 0.0);
 	
 	Point viewIntersection;
 	Vector castDirection;
@@ -48,7 +57,7 @@ Pixel* Camera::getImage() const
 			castDirection.y = viewIntersection.y;
 			castDirection.z = viewDistance;
 			
-			Ray casting(cameraOrigin, castDirection);
+			Ray casting(origin, castDirection);
 			Intersection i = scene->intersect(casting);
 			image[y * imageWidth + x] = i.getColor().asPixel();
 		}
