@@ -10,9 +10,9 @@ struct Pixel;
 class Camera
 {
 public:
-	Camera(const World *s, Point o, Vector lookAt);
+	Camera(const World *s, Point o, Point lookAt);
 	virtual ~Camera();
-	Pixel* getImage(int width, int height, Pixel *image) const;
+	void getImage(int width, int height, Pixel *image) const;
 private:
 	const World *scene;
 	

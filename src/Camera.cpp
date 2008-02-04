@@ -7,61 +7,48 @@
 #include "Color.h"
 #include "Ray.h"
 
-Camera::Camera(const World *s, Point o, Vector lookAt)
+Camera::Camera(const World *s, Point o, Point lookAt)
 : scene(s), origin(o)
 {
 	double width = 1.33;
 	double height = 1.0;
 	double distance = 1.0;
 	
-	lookAt.normalize();
-	lookAt *= distance;
-	direction = lookAt;
+	direction = lookAt - origin;
+	direction.normalize();
+	direction *= distance;
 	
-	right = Vector(0.0, 1.0, 0.0) ^ lookAt;
+	right = Vector(0.0, 1.0, 0.0) ^ direction;
 	right.normalize();
 	right *= width;
 	
-	up = right ^ lookAt;
+	up = right ^ direction;
 	up.normalize();
-	up *= height;
+	up *= -height;
 }
 
 Camera::~Camera()
 {
 }
 
-Pixel* Camera::getImage(int imageWidth, int imageHeight, Pixel *image) const
+void Camera::getImage(int imageWidth, int imageHeight, Pixel *image) const
 {	
-	double viewWidth = 1.33;
-	double viewHeight = 1.0;
-	
-	double viewDistance = 1.0;
-	
-	//Point viewOrigin = origin + direction - (right / 2) + (up / 2);
-	Point viewOrigin(-viewWidth / 2, viewHeight / 2);
-	Vector viewOffset(0.0, 0.0, 0.0);
-	
-	Point viewIntersection;
-	Vector castDirection;
+	Point viewOrigin(origin + direction - (right / 2) + (up / 2));
 	
 	for (int y = 0; y < imageHeight; ++y)
 	{
-		viewOffset.y = -viewHeight / imageHeight * y;
+		Vector verticalOffset(up * (y / (double)imageHeight));
 		
 		for (int x = 0; x < imageWidth; ++x)
 		{
-			viewOffset.x = viewWidth / imageWidth * x;
-			viewIntersection = viewOrigin + viewOffset;
-			castDirection.x = viewIntersection.x;
-			castDirection.y = viewIntersection.y;
-			castDirection.z = viewDistance;
+			Vector horizontalOffset(right * (x / (double)imageWidth));
+			Point intersection(viewOrigin + horizontalOffset - verticalOffset);
 			
-			Ray casting(origin, castDirection);
-			Intersection i = scene->intersect(casting);
+			Vector castDirection(intersection - origin);
+			castDirection.normalize();
+			
+			Intersection i = scene->intersect(Ray(origin, castDirection));
 			image[y * imageWidth + x] = i.getColor().asPixel();
 		}
 	}
-	
-	return image;
 }

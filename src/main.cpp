@@ -78,7 +78,7 @@ int main()
 	cout << "Constructed scene" << endl;
 	
 	Point origin(0.0, 3.0, -6.0);
-	Vector lookAt(0.0, 3.0, 5.0);
+	Point lookAt(0.0, 3.0, 5.0);
 	Camera camera(&scene, origin, lookAt);
 	
 	cout << "Created camera" << endl;
