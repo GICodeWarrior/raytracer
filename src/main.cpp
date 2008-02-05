@@ -9,28 +9,32 @@
 #include "models/Polygon.h"
 
 #include "World.h"
-#include "Camera.h"
+#include "BasicCamera.h"
+#include "SuperSampleCamera.h"
 
 #include <iostream>
 #include <Magick++.h>
 
 int main()
 {
+	cout << "Constructing scene...";
+	flush(cout);
+	
 	World scene;
 	Material *material;
 	Sphere *sphere1 = new Sphere(Point(0,3,-2), 1, Color(255, 0, 0));
-	//Sphere *sphere2 = new Sphere(Point(2,2,2), 1, Color(0, 0, 255));
-	Sphere *sphere2 = new Sphere(Point(2,2,2), 1, Color::WHITE);
+	Sphere *sphere2 = new Sphere(Point(2,2,2), 1, Color(0, 0, 255));
+	//Sphere *sphere2 = new Sphere(Point(2,2,2), 1, Color::WHITE);
 	material = new Phong(sphere1, &scene);
 	//material = new Onion(sphere1);
 	//material = new Quilt(sphere1);
 	//material = new Reflection(sphere1, &scene, 1.0);
 	//material = new Phong(material, &scene);
 	scene.add(material);
-	material = new Phong(sphere2, &scene);
-	//material = new Checker(sphere2);
+	//material = new Phong(sphere2, &scene);
+	material = new Checker(sphere2);
 	//material = new Quilt(material);
-	//material = new Phong(material, &scene);
+	material = new Phong(material, &scene);
 	material = new Reflection(material, &scene, 0.1);
 	scene.add(material);
 	
@@ -41,9 +45,9 @@ int main()
 	points.push_back(Point(12, 0, -2));
 	Polygon *floor = new Polygon(points, Color(0, 255, 0));
 	material = new Checker(floor);
-	//material = new Quilt(material);
+	material = new Quilt(material);
 	material = new Phong(material, &scene);
-	//material = new Reflection(material, &scene, 0.5);
+	material = new Reflection(material, &scene, 0.5);
 	scene.add(material);
 	
 	points.clear();
@@ -61,40 +65,52 @@ int main()
 	//material = new Reflection(star, &scene, 1.0);
 	//material = new Phong(material, &scene);
 	material = new Phong(star, &scene);
-	//scene.add(material);
+	scene.add(material);
 	
 	Light light1(Point(1, 45, 0), Color(255,255,255), &scene);
-	scene.addLight(light1);
+	//scene.addLight(light1);
 	
 	Light light2(Point(-2, 10, -6), Color(255,64,64), &scene);
-	//scene.addLight(light2);
+	scene.addLight(light2);
 	
 	Light light3(Point(5, 5, 0), Color(64,255,64), &scene);
-	//scene.addLight(light3);
+	scene.addLight(light3);
 	
 	Light light4(Point(-5, 2, 5), Color(64,64,255), &scene);
-	//scene.addLight(light4);
+	scene.addLight(light4);
 	
-	cout << "Constructed scene" << endl;
+	cout << "Complete" << endl;
+	cout << "Creating camera...";
+	flush(cout);
 	
 	Point origin(0.0, 3.0, -6.0);
 	Point lookAt(0.0, 3.0, 5.0);
-	Camera camera(&scene, origin, lookAt);
+	SuperSampleCamera camera(&scene, origin, lookAt, 4);
+	//BasicCamera camera(&scene, origin, lookAt);
 	
-	cout << "Created camera" << endl;
+	cout << "Complete" << endl;
+	cout << "Rendering image...";
+	flush(cout);
 
 	int width = 640;
 	int height = 480;
 	Pixel* buffer = new Pixel[width * height];
 	
 	camera.getImage(width, height, buffer);
+	
+	cout << "Complete" << endl;
+	cout << "Created Magick++ image...";
+	flush(cout);
+	
 	Magick::Image image(width, height, "RGB", MagickLib::CharPixel, buffer);
 	
-	cout << "Created Magick++ image" << endl;
+	cout << "Complete" << endl;
+	cout << "Writing output...";
+	flush(cout);
 	
 	image.write("image.png");
 	
-	cout << "Success!!!" << endl;
+	cout << "Complete!!!" << endl;
 	
 	return 0;	
 }

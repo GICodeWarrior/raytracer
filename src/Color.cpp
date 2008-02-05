@@ -24,6 +24,13 @@ Color::Color(Vector v)
 	blue = (unsigned char)min(v.z * 255, 255.0);
 }
 
+Color::Color(Pixel &p)
+{
+	red = p.red;
+	green = p.green;
+	blue = p.blue;
+}
+
 Color::~Color()
 {
 }
