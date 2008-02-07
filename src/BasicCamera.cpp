@@ -27,6 +27,11 @@ BasicCamera::BasicCamera(const World *s, Point o, Point lookAt)
 	up *= -height;
 }
 
+BasicCamera::BasicCamera(const World *s, Point o, Vector u, Vector r, Vector d)
+: scene(s), origin(o), up(u), right(r), direction(d)
+{
+}
+
 BasicCamera::~BasicCamera()
 {
 }
@@ -34,6 +39,8 @@ BasicCamera::~BasicCamera()
 void BasicCamera::getImage(int imageWidth, int imageHeight, Pixel *image) const
 {	
 	Point viewOrigin(origin + direction - (right / 2) + (up / 2));
+	
+	int progress = 0;
 	
 	for (int y = 0; y < imageHeight; ++y)
 	{
@@ -49,6 +56,13 @@ void BasicCamera::getImage(int imageWidth, int imageHeight, Pixel *image) const
 			
 			Intersection i = scene->intersect(Ray(origin, castDirection));
 			image[y * imageWidth + x] = i.getColor().asPixel();
+		}
+		
+		if (y * 100.0 / imageHeight >= progress * 10)
+		{
+			cout << progress;
+			flush(cout);
+			++progress;
 		}
 	}
 }

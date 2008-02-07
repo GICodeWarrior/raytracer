@@ -7,6 +7,11 @@ SuperSampleCamera::SuperSampleCamera(const World *s, Point o, Point lookAt, unsi
 {
 }
 
+SuperSampleCamera::SuperSampleCamera(const World *s, Point o, Vector u, Vector r, Vector d, unsigned int samples)
+: BasicCamera(s, o, u, r, d), samples(samples)
+{
+}
+
 SuperSampleCamera::~SuperSampleCamera()
 {
 }
