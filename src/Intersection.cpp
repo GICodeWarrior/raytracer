@@ -30,14 +30,15 @@ int Intersection::compare(const Ray &ray, const Intersection &i) const
 	return 0;
 }
 
-Color Intersection::getColor() const
+Color Intersection::getColor(int depth) const
 {
 	if (model)
 	{
-		return model->colorAt(ray, point);
+		return model->colorAt(ray, point, depth - 1);
 	}
 	
-	return Color(0,0,0);
+	return Color(Vector(0.25, 0.6, 0.95));
+	//return Color::BLACK;
 }
 
 Point Intersection::getPoint() const

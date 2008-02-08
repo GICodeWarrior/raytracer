@@ -9,7 +9,7 @@ class Shadow : public Material
 public:
 	Shadow(PrimitiveModel *s, World *w);
 	virtual ~Shadow();
-	virtual Color colorAt(const Ray &r, const Point &p) const;
+	virtual Color colorAt(const Ray &r, const Point &p, int depth) const;
 private:
 	World *world;
 };

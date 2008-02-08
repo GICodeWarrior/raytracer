@@ -55,7 +55,7 @@ void BasicCamera::getImage(int imageWidth, int imageHeight, Pixel *image) const
 			castDirection.normalize();
 			
 			Intersection i = scene->intersect(Ray(origin, castDirection));
-			image[y * imageWidth + x] = i.getColor().asPixel();
+			image[y * imageWidth + x] = i.getColor(20).asPixel();
 		}
 		
 		if (y * 100.0 / imageHeight >= progress * 10)

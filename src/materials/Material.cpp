@@ -23,9 +23,9 @@ Intersection Material::intersect(const Ray& ray) const
 	return i;
 }
 
-Color Material::colorAt(const Ray &r, const Point &p) const
+Color Material::colorAt(const Ray &r, const Point &p, int depth) const
 {
-	return subModel->colorAt(r, p);
+	return subModel->colorAt(r, p, depth);
 }
 
 Vector Material::normalAt(const Point &p) const

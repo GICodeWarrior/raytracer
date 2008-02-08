@@ -4,6 +4,7 @@
 #include "materials/Phong.h"
 #include "materials/Quilt.h"
 #include "materials/Reflection.h"
+#include "materials/Transmission.h"
 
 #include "models/Sphere.h"
 #include "models/Polygon.h"
@@ -22,19 +23,21 @@ int main()
 	
 	World scene;
 	Material *material;
-	Sphere *sphere1 = new Sphere(Point(0,3,-2), 1, Color(255, 0, 0));
-	Sphere *sphere2 = new Sphere(Point(2,2,2), 1, Color(0, 0, 255));
-	//Sphere *sphere2 = new Sphere(Point(2,2,2), 1, Color::WHITE);
-	//material = new Phong(sphere1, &scene);
+	//Sphere *sphere1 = new Sphere(Point(0,3,-2), 1, Color(255, 0, 0));
+	Sphere *sphere1 = new Sphere(Point(0,3,-2), 1, Color::BLACK);
+	//Sphere *sphere2 = new Sphere(Point(2,2,2), 1, Color(0, 0, 255));
+	Sphere *sphere2 = new Sphere(Point(2,2,2), 1, Color::WHITE);
+	material = new Phong(sphere1, &scene);
 	//material = new Onion(sphere1);
 	//material = new Quilt(sphere1);
-	material = new Reflection(sphere1, &scene, 1.0);
-	material = new Phong(material, &scene);
+	//material = new Reflection(sphere1, &scene, 1.0);
+	material = new Transmission(material, &scene, 1.0, 1.01);
+	//material = new Phong(material, &scene);
 	scene.add(material);
-	//material = new Phong(sphere2, &scene);
-	material = new Checker(sphere2);
+	material = new Phong(sphere2, &scene);
+	//material = new Checker(sphere2);
 	//material = new Quilt(material);
-	material = new Phong(material, &scene);
+	//material = new Phong(material, &scene);
 	material = new Reflection(material, &scene, 0.1);
 	scene.add(material);
 	
@@ -47,7 +50,7 @@ int main()
 	material = new Checker(floor);
 	material = new Quilt(material);
 	material = new Phong(material, &scene);
-	material = new Reflection(material, &scene, 0.5);
+	//material = new Reflection(material, &scene, 0.5);
 	scene.add(material);
 	
 	points.clear();
@@ -65,7 +68,7 @@ int main()
 	//material = new Reflection(star, &scene, 1.0);
 	//material = new Phong(material, &scene);
 	material = new Phong(star, &scene);
-	scene.add(material);
+	//scene.add(material);
 	
 	Light light1(Point(1, 45, 0), Color(255,255,255), &scene);
 	//scene.addLight(light1);
@@ -85,8 +88,7 @@ int main()
 	
 	Point origin(0.0, 3.0, -6.0);
 	Point lookAt(0.0, 3.0, 5.0);
-	//SuperSampleCamera camera(&scene, origin, Vector(0,1,0), Vector(1.6,0.0,0.0), Vector(0,0,1), 4);
-	SuperSampleCamera camera(&scene, origin, lookAt, 4);
+	SuperSampleCamera camera(&scene, origin, lookAt, 2);
 	//BasicCamera camera(&scene, origin, lookAt);
 	
 	cout << "Complete" << endl;
@@ -95,12 +97,8 @@ int main()
 
 	int width = 640;
 	int height = 480;
-	width = 8000;
-	height = 6000;
-	//width = 1920;
-	//height = 1200;
-	//width = 192;
-	//height = 120;
+	//width = 1024;
+	//height = 768;
 	Pixel* buffer = new Pixel[width * height];
 	
 	camera.getImage(width, height, buffer);

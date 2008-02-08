@@ -10,7 +10,7 @@ class Reflection : public Material
 public:
 	Reflection(PrimitiveModel *s, World *w, double reflectivity);
 	virtual ~Reflection();
-	virtual Color colorAt(const Ray &r, const Point &p) const;
+	virtual Color colorAt(const Ray &r, const Point &p, int depth) const;
 private:
 	World *world;
 	double reflectivity;

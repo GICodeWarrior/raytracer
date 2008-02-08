@@ -9,7 +9,7 @@ public:
 	Material(PrimitiveModel *s);
 	virtual ~Material();
 	virtual Intersection intersect(const Ray& ray) const;
-	virtual Color colorAt(const Ray &r, const Point &p) const;
+	virtual Color colorAt(const Ray &r, const Point &p, int depth) const;
 	virtual Vector normalAt(const Point &p) const;
 protected:
 	PrimitiveModel* getModel() const;

@@ -6,7 +6,7 @@
 #include "../World.h"
 
 Phong::Phong(PrimitiveModel *s, World *w)
-: Material(s), world(w), ka(0.1), kd(0.6), ks(1.0), ke(40)
+: Material(s), world(w), ka(0.2), kd(0.6), ks(1.0), ke(40)
 {
 }
 
@@ -20,9 +20,9 @@ Phong::~Phong()
 {
 }
 
-Color Phong::colorAt(const Ray &r, const Point &p) const
+Color Phong::colorAt(const Ray &r, const Point &p, int depth) const
 {	
-	Color c = Material::colorAt(r, p);
+	Color c = Material::colorAt(r, p, depth);
 	
 	Vector diffuse(0,0,0);
 	Vector specular(0,0,0);
