@@ -16,7 +16,7 @@ public:
 	virtual ~Intersection();
 	int compare(const Ray &ray, const Intersection &i) const;
 	Color getColor(int depth) const;
-	Point getPoint() const;
+	const Point& getPoint() const;
 	const PrimitiveModel* getModel() const;
 private:
 	const PrimitiveModel *model;

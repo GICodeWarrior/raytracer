@@ -31,8 +31,8 @@ int main()
 	//material = new Onion(sphere1);
 	//material = new Quilt(sphere1);
 	//material = new Reflection(sphere1, &scene, 1.0);
-	material = new Transmission(material, &scene, 1.0, 1.01);
 	//material = new Phong(material, &scene);
+	material = new Transmission(material, &scene, 1.0, 1.01);
 	scene.add(material);
 	material = new Phong(sphere2, &scene);
 	//material = new Checker(sphere2);
@@ -50,7 +50,7 @@ int main()
 	material = new Checker(floor);
 	material = new Quilt(material);
 	material = new Phong(material, &scene);
-	//material = new Reflection(material, &scene, 0.5);
+	material = new Reflection(material, &scene, 0.5);
 	scene.add(material);
 	
 	points.clear();
@@ -68,7 +68,7 @@ int main()
 	//material = new Reflection(star, &scene, 1.0);
 	//material = new Phong(material, &scene);
 	material = new Phong(star, &scene);
-	//scene.add(material);
+	scene.add(material);
 	
 	Light light1(Point(1, 45, 0), Color(255,255,255), &scene);
 	//scene.addLight(light1);
@@ -99,6 +99,8 @@ int main()
 	int height = 480;
 	//width = 1024;
 	//height = 768;
+	width = 320;
+	height = 240;
 	Pixel* buffer = new Pixel[width * height];
 	
 	camera.getImage(width, height, buffer);
@@ -114,6 +116,8 @@ int main()
 	flush(cout);
 	
 	image.write("image.png");
+	
+	delete[] buffer;
 	
 	cout << "Complete!!!" << endl;
 	

@@ -40,6 +40,7 @@ void BasicCamera::getImage(int imageWidth, int imageHeight, Pixel *image) const
 {	
 	Point viewOrigin(origin + direction - (right / 2) + (up / 2));
 	
+	int MAX_DEPTH = 20;
 	int progress = 0;
 	
 	for (int y = 0; y < imageHeight; ++y)
@@ -55,10 +56,10 @@ void BasicCamera::getImage(int imageWidth, int imageHeight, Pixel *image) const
 			castDirection.normalize();
 			
 			Intersection i = scene->intersect(Ray(origin, castDirection));
-			image[y * imageWidth + x] = i.getColor(20).asPixel();
+			image[y * imageWidth + x] = i.getColor(MAX_DEPTH).asPixel();
 		}
 		
-		if (y * 100.0 / imageHeight >= progress * 10)
+		if (y * 10.0 / imageHeight >= progress)
 		{
 			cout << progress;
 			flush(cout);

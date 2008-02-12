@@ -31,8 +31,8 @@ Intersection Plane::intersect(const Ray &ray) const
 	double Vd = normal * ray.getVector();
 	if (Vd == 0) return Intersection();  // Parallel to plane, no intersection
 	
-	Point o = ray.getOrigin();
-	double VO = distance - normal * Vector(o.x, o.y, o.z);
+	double VO = distance - normal *
+				Vector(ray.getOrigin().x, ray.getOrigin().y, ray.getOrigin().z);
 	double t = VO/Vd;
 	if (t < 0) return Intersection();  // Intersection behind origin
 	

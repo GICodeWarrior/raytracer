@@ -25,12 +25,12 @@ bool Light::intersects(const Point &p) const
 	return i.getPoint().near(p);
 }
 
-Point Light::getOrigin() const
+const Point& Light::getOrigin() const
 {
 	return origin;
 }
 
-Color Light::getTint() const
+const Color& Light::getTint() const
 {
 	return tint;
 }

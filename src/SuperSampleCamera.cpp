@@ -47,5 +47,5 @@ void SuperSampleCamera::getImage(int width, int height, Pixel *image) const
 		}
 	}
 	
-	delete superImage;
+	delete[] superImage;
 }

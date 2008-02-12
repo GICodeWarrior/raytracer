@@ -41,7 +41,7 @@ Color Intersection::getColor(int depth) const
 	//return Color::BLACK;
 }
 
-Point Intersection::getPoint() const
+const Point& Intersection::getPoint() const
 {
 	return point;
 }

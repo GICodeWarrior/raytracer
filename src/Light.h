@@ -12,8 +12,8 @@ public:
 	Light(Point p, Color c, World *w);
 	virtual ~Light();
 	bool intersects(const Point &p) const;
-	Point getOrigin() const;
-	Color getTint() const;
+	const Point& getOrigin() const;
+	const Color& getTint() const;
 private:
 	Point origin;
 	Color tint;

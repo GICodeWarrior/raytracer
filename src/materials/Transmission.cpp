@@ -23,7 +23,7 @@ Color Transmission::colorAt(const Ray &r, const Point &p, int depth) const
 	
 	double n = 1.0 / ior;
 
-	if (normal * r.getVector() > 0)
+	if (normal * -r.getVector() < 0)
 	{
 		normal = -normal;
 		n = ior;
