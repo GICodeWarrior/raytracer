@@ -5,11 +5,14 @@
 <project id="cg2raytracer.cdt.managedbuild.target.gnu.exe.204696423" name="Executable (Gnu)" projectType="cdt.managedbuild.target.gnu.exe">
 <configuration artifactName="cg2raytracer" cleanCommand="rm -rf" description="" errorParsers="org.eclipse.cdt.core.MakeErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser" id="cdt.managedbuild.config.gnu.exe.debug.1912330371" name="Debug" parent="cdt.managedbuild.config.gnu.exe.debug">
 <toolChain id="cdt.managedbuild.toolchain.gnu.exe.debug.1818331769" name="GCC Tool Chain" superClass="cdt.managedbuild.toolchain.gnu.exe.debug">
-<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.1801225379" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug"/>
+<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.1801225379" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug">
+<option id="gnu.cpp.compiler.exe.debug.option.optimization.level.1433157258" superClass="gnu.cpp.compiler.exe.debug.option.optimization.level" value="gnu.cpp.compiler.optimization.level.none" valueType="enumerated"/>
+<option id="gnu.cpp.compiler.exe.debug.option.debugging.level.741300765" superClass="gnu.cpp.compiler.exe.debug.option.debugging.level" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
+</tool>
 <tool id="cdt.managedbuild.tool.gnu.c.compiler.exe.debug.713272356" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.exe.debug"/>
 <tool id="cdt.managedbuild.tool.gnu.c.linker.exe.debug.381443876" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.exe.debug"/>
 <tool id="cdt.managedbuild.tool.gnu.cpp.linker.exe.debug.1088202671" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.exe.debug">
-<option id="gnu.cpp.link.option.libs.679446038" superClass="gnu.cpp.link.option.libs" valueType="libs"/>
+<option id="gnu.cpp.link.option.libs.679446038" superClass="gnu.cpp.link.option.libs"/>
 <option id="gnu.cpp.link.option.flags.991230321" superClass="gnu.cpp.link.option.flags" value="-I/usr/include -pthread -L/usr/lib -L/usr/lib/X11 -L/usr/lib -lMagick++ -lWand -lMagick -llcms -ltiff -lfreetype -ljasper -ljpeg -lpng -lXext -lXt -lSM -lICE -lX11 -lbz2 -lxml2 -lz -lpthread -lm -lpthread" valueType="string"/>
 </tool>
 <tool id="cdt.managedbuild.tool.gnu.assembler.exe.debug.496444624" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.exe.debug"/>
@@ -18,11 +21,16 @@
 </configuration>
 <configuration artifactName="cg2raytracer" cleanCommand="rm -rf" description="" errorParsers="org.eclipse.cdt.core.MakeErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser" id="cdt.managedbuild.config.gnu.exe.release.1658771281" name="Release" parent="cdt.managedbuild.config.gnu.exe.release">
 <toolChain id="cdt.managedbuild.toolchain.gnu.exe.release.1936833703" name="GCC Tool Chain" superClass="cdt.managedbuild.toolchain.gnu.exe.release">
-<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.1176643527" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release"/>
+<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.1176643527" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release">
+<option id="gnu.cpp.compiler.option.optimization.flags.683945156" superClass="gnu.cpp.compiler.option.optimization.flags" value="-march=k8" valueType="string"/>
+</tool>
 <tool id="cdt.managedbuild.tool.gnu.c.compiler.exe.release.1065113158" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.exe.release"/>
 <tool id="cdt.managedbuild.tool.gnu.c.linker.exe.release.378815393" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.exe.release"/>
-<tool id="cdt.managedbuild.tool.gnu.cpp.linker.exe.release.1390365820" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.exe.release"/>
+<tool id="cdt.managedbuild.tool.gnu.cpp.linker.exe.release.1390365820" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.exe.release">
+<option id="gnu.cpp.link.option.flags.257493869" superClass="gnu.cpp.link.option.flags" value="-I/usr/include -pthread -L/usr/lib -L/usr/lib/X11 -L/usr/lib -lMagick++ -lWand -lMagick -llcms -ltiff -lfreetype -ljasper -ljpeg -lpng -lXext -lXt -lSM -lICE -lX11 -lbz2 -lxml2 -lz -lpthread -lm -lpthread" valueType="string"/>
+</tool>
 <tool id="cdt.managedbuild.tool.gnu.assembler.exe.release.1992170043" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.exe.release"/>
+<macros/>
 </toolChain>
 </configuration>
 </project>
