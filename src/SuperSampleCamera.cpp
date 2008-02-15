@@ -1,14 +1,10 @@
 #include "SuperSampleCamera.h"
 
 #include "../third-party/vector.h"
+#include "Color.h"
 
-SuperSampleCamera::SuperSampleCamera(const World *s, Point o, Point lookAt, unsigned int samples)
-: BasicCamera(s, o, lookAt), samples(samples)
-{
-}
-
-SuperSampleCamera::SuperSampleCamera(const World *s, Point o, Vector u, Vector r, Vector d, unsigned int samples)
-: BasicCamera(s, o, u, r, d), samples(samples)
+SuperSampleCamera::SuperSampleCamera(Camera *c, unsigned int samples)
+: CameraDecorator(c), samples(samples)
 {
 }
 
@@ -23,7 +19,7 @@ void SuperSampleCamera::getImage(int width, int height, Pixel *image) const
 	
 	Pixel *superImage = new Pixel[superWidth * superHeight];
 	
-	BasicCamera::getImage(superWidth, superHeight, superImage);
+	CameraDecorator::getImage(superWidth, superHeight, superImage);
 	
 	for (int y = 0; y < height; ++y)
 	{

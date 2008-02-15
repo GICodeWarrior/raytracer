@@ -65,6 +65,11 @@ public:
 	Vector& operator^=( Vector);      // 3D exterior cross product
 
 	//----------------------------------------------------------
+	// Convienience Operations
+	Vector operator/( Vector);        // Vector division
+	Vector& operator/=( Vector);      // Vector division
+
+	//----------------------------------------------------------
 	// Vector Properties
 	double len() const {                    // vector length
 		return sqrt(x*x + y*y + z*z);

@@ -185,6 +185,22 @@ Vector& Vector::operator^=( Vector w ) {        // 3D exterior cross product
 	return *this;
 }
 
+
+//------------------------------------------------------------------
+//  Convienience Operations
+//------------------------------------------------------------------
+Vector Vector::operator/( Vector w) {       // Vector division
+	return Vector(x/w.x, y/w.y, z/w.z);
+}
+
+Vector& Vector::operator/=( Vector w) {     // Vector division
+	x /= w.x;
+	y /= w.y;
+	z /= w.z;
+	dimn = max(dimn, w.dim());
+	return *this;
+}
+
 //------------------------------------------------------------------
 //  Special Operations
 //------------------------------------------------------------------

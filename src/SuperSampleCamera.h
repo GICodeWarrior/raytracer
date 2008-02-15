@@ -1,13 +1,14 @@
 #ifndef SUPERSAMPLECAMERA_H_
 #define SUPERSAMPLECAMERA_H_
 
-#include "BasicCamera.h"
+#include "CameraDecorator.h"
 
-class SuperSampleCamera : public BasicCamera
+class Pixel;
+
+class SuperSampleCamera : public CameraDecorator
 {
 public:
-	SuperSampleCamera(const World *s, Point o, Point lookAt, unsigned int sampless);
-	SuperSampleCamera(const World *s, Point o, Vector u, Vector r, Vector d, unsigned int samples);
+	SuperSampleCamera(Camera *c, unsigned int samples);
 	virtual ~SuperSampleCamera();
 	virtual void getImage(int width, int height, Pixel *image) const;
 private:
