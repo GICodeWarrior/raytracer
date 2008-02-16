@@ -39,7 +39,7 @@
 
 int main()
 {
-	cout << "Rusty's Raytracer Copyright (C) 2008  Rusty Burchfield" << endl;
+	cout << "Rusty's Raytracer  Copyright (C) 2008  Rusty Burchfield" << endl;
     cout << "This program comes with ABSOLUTELY NO WARRANTY." << endl;
     cout << "This is free software, and you are welcome to redistribute it" << endl;
     cout << "under certain conditions; see COPYING for details." << endl << endl;
