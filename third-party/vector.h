@@ -32,10 +32,8 @@ public:
 
 	//----------------------------------------------------------
 	// Scalar Multiplication
-	Vector operator*(int) const;
 	Vector operator*(double) const;
 	// Scalar Division
-	Vector operator/(int) const;
 	Vector operator/(double) const;
 
 	//----------------------------------------------------------

@@ -91,19 +91,9 @@ Point& Point::operator-=(const Vector &v)        // -ve translation
 //        The programmer must enforce this (if they want to).
 //------------------------------------------------------------------
 
-Point Point::operator*(int c) const
-{
-	return Point(c * x, c * y, c * z);
-}
-
 Point Point::operator*(double c) const
 {
 	return Point(c * x, c * y, c * z);
-}
-
-Point Point::operator/(int c) const
-{
-	return Point(x/c, y/c, z/c);
 }
 
 Point Point::operator/(double c) const

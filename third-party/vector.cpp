@@ -29,22 +29,12 @@ Vector Vector::operator-() const
 //------------------------------------------------------------------
 
 // Scalar multiplication
-Vector Vector::operator*(int c) const
-{
-	return Vector(x*c, y*c, z*c);
-}
-
 Vector Vector::operator*(double c) const
 {
 	return Vector(x*c, y*c, z*c);
 }
 
 // Scalar division
-Vector Vector::operator/(int c) const
-{
-	return Vector(x/c, y/c, z/c);
-}
-
 Vector Vector::operator/(double c) const
 {
 	return Vector(x/c, y/c, z/c);

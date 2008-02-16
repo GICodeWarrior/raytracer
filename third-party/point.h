@@ -52,10 +52,8 @@ public:
 	// Point Scalar Operations (convenient but often illegal)
 
 	// Scalar Multiplication
-	Point operator*(int) const;
 	Point operator*(double) const;
 	// Scalar Division
-	Point operator/(int) const;
 	Point operator/(double) const;
 
 	//----------------------------------------------------------
