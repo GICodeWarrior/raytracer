@@ -98,7 +98,7 @@ Intersection Polygon::intersect(const Ray &ray) const
 			continue;
 		}
 		
-		if ((u1 - u2) * v2 / (v2 - v1) + u2 > 0)
+		if ((u2 - u1) * v2 / (v2 - v1) < u2)
 		{
 			++crosses;
 		}
