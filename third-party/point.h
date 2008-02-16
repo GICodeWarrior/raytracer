@@ -35,7 +35,7 @@ public:
 	ostream& operator<<(ostream&) const;
 
 	//----------------------------------------------------------
-	// Comparison (dimension must match, or not)
+	// Comparison
 	int operator==(const Point&) const;
 	int operator!=(const Point&) const;
 	int near(const Point&, double diff = 1e-10) const;
@@ -50,21 +50,17 @@ public:
 
 	//----------------------------------------------------------
 	// Point Scalar Operations (convenient but often illegal)
-
-	// Scalar Multiplication
-	Point operator*(double) const;
-	// Scalar Division
-	Point operator/(double) const;
+	Point operator*(double) const;  // Scalar multiplication
+	Point operator/(double) const;  // Scalar division
 
 	//----------------------------------------------------------
 	// Point Addition (also convenient but often illegal)
-	//    is not valid unless part of an affine sum.
-	//    The programmer must enforce this (if they want to).
-	Point operator+(const Point&) const;  // add points
+	Point operator+(const Point&) const;  // Point addition
 
 	//----------------------------------------------------------
-	// Point Relations
-	double d(const Point&) const;         // Distance
-	double d2(const Point&) const;        // Distance^2
+	// Distances
+	double d(const Point&) const;   // Distance
+	double d2(const Point&) const;  // Distance^2 (more efficient)
 };
+
 #endif // SS_Point_H

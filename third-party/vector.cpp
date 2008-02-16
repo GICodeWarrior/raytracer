@@ -18,8 +18,7 @@
 //  Unary Ops
 //------------------------------------------------------------------
 
-// Unary minus
-Vector Vector::operator-() const
+Vector Vector::operator-() const  // Unary minus
 {
 	return Vector(-x, -y, -z);
 }
@@ -28,16 +27,30 @@ Vector Vector::operator-() const
 //  Scalar Ops
 //------------------------------------------------------------------
 
-// Scalar multiplication
-Vector Vector::operator*(double c) const
+Vector Vector::operator*(double c) const  // Scalar multiplication
 {
 	return Vector(x*c, y*c, z*c);
 }
 
-// Scalar division
-Vector Vector::operator/(double c) const
+Vector Vector::operator/(double c) const  // Scalar division
 {
 	return Vector(x/c, y/c, z/c);
+}
+
+Vector& Vector::operator*=(double c)      // vector scalar mult
+{
+	x *= c;
+	y *= c;
+	z *= c;
+	return *this;
+}
+
+Vector& Vector::operator/=(double c)      // vector scalar div
+{
+	x /= c;
+	y /= c;
+	z /= c;
+	return *this;
 }
 
 //------------------------------------------------------------------
@@ -58,14 +71,12 @@ Vector Vector::operator-(const Vector &w) const
 //  Products
 //------------------------------------------------------------------
 
-// Inner Dot Product
-double Vector::operator*(const Vector &w) const
+double Vector::operator*(const Vector &w) const  // Inner Dot Product
 {
 	return (x * w.x + y * w.y + z * w.z);
 }
 
-// 3D Exterior Cross Product
-Vector Vector::operator^(const Vector &w) const
+Vector Vector::operator^(const Vector &w) const  // 3D Exterior Cross Product
 {
 	return Vector(y*w.z - z*w.y, z*w.x - x*w.z, x*w.y - y*w.x);
 }
@@ -73,22 +84,6 @@ Vector Vector::operator^(const Vector &w) const
 //------------------------------------------------------------------
 //  Shorthand Ops
 //------------------------------------------------------------------
-
-Vector& Vector::operator*=(double c)         // vector scalar mult
-{
-	x *= c;
-	y *= c;
-	z *= c;
-	return *this;
-}
-
-Vector& Vector::operator/=(double c)         // vector scalar div
-{
-	x /= c;
-	y /= c;
-	z /= c;
-	return *this;
-}
 
 Vector& Vector::operator+=(const Vector &w)  // vector increment
 {
@@ -114,7 +109,6 @@ Vector& Vector::operator^=(const Vector &w)  // 3D exterior cross product
 	z = ox * w.y - oy * w.x;
 	return *this;
 }
-
 
 //------------------------------------------------------------------
 //  Convienience Operations

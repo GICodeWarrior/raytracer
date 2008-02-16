@@ -27,7 +27,7 @@ ostream& Point::operator<<(ostream& output) const
 }
 
 //------------------------------------------------------------------
-// Comparison (note: dimension must compare)
+// Comparison
 //------------------------------------------------------------------
 
 int Point::operator==(const Point &Q) const
@@ -51,22 +51,22 @@ int Point::near(const Point &Q, double diff) const
 // Point Vector Operations
 //------------------------------------------------------------------
 
-Vector Point::operator-(const Point &Q) const        // Vector diff of Points
+Vector Point::operator-(const Point &Q) const  // Vector diff of Points
 {
 	return Vector(x-Q.x, y-Q.y, z-Q.z);
 }
 
-Point Point::operator+(const Vector &v) const        // +ve translation
+Point Point::operator+(const Vector &v) const  // +ve translation
 {
 	return Point(x+v.x, y+v.y, z+v.z);
 }
 
-Point Point::operator-(const Vector &v) const        // -ve translation
+Point Point::operator-(const Vector &v) const  // -ve translation
 {
 	return Point(x - v.x, y - v.y, z - v.z);
 }
 
-Point& Point::operator+=(const Vector &v)        // +ve translation
+Point& Point::operator+=(const Vector &v)      // +ve translation
 {
 	x += v.x;
 	y += v.y;
@@ -74,7 +74,7 @@ Point& Point::operator+=(const Vector &v)        // +ve translation
 	return *this;
 }
 
-Point& Point::operator-=(const Vector &v)        // -ve translation
+Point& Point::operator-=(const Vector &v)      // -ve translation
 {
 	x -= v.x;
 	y -= v.y;
@@ -84,30 +84,23 @@ Point& Point::operator-=(const Vector &v)        // -ve translation
 
 //------------------------------------------------------------------
 // Point Scalar Operations (convenient but often illegal)
-//        are not valid for points in general,
-//        unless they are 'affine' as coeffs of 
-//        a sum in which all the coeffs add to 1,
-//        such as: the sum (a*P + b*Q) with (a+b == 1).
-//        The programmer must enforce this (if they want to).
 //------------------------------------------------------------------
 
-Point Point::operator*(double c) const
+Point Point::operator*(double c) const  // Scalar multiplication
 {
 	return Point(c * x, c * y, c * z);
 }
 
-Point Point::operator/(double c) const
+Point Point::operator/(double c) const  // Scalar division
 {
 	return Point(x/c, y/c, z/c);
 }
 
 //------------------------------------------------------------------
 // Point Addition (also convenient but often illegal)
-//    is not valid unless part of an affine sum.
-//    The programmer must enforce this (if they want to).
 //------------------------------------------------------------------
 
-Point Point::operator+(const Point &Q) const
+Point Point::operator+(const Point &Q) const  // Point addition
 {
 	return Point(Q.x+x, Q.y+y, Q.z+z);
 }
@@ -116,7 +109,7 @@ Point Point::operator+(const Point &Q) const
 // Distance between Points
 //------------------------------------------------------------------
 
-double Point::d(const Point &Q) const      // Euclidean distance
+double Point::d(const Point &Q) const   // Euclidean distance
 {
 	double dx = x - Q.x;
 	double dy = y - Q.y;
@@ -124,11 +117,10 @@ double Point::d(const Point &Q) const      // Euclidean distance
 	return sqrt(dx*dx + dy*dy + dz*dz);
 }
 
-double Point::d2(const Point &Q) const     // squared distance (more efficient)
+double Point::d2(const Point &Q) const  // Euclidean distance^2 (more efficient)
 {
 	double dx = x - Q.x;
 	double dy = y - Q.y;
 	double dz = z - Q.z;
 	return (dx*dx + dy*dy + dz*dz);
 }
-

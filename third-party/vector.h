@@ -31,10 +31,12 @@ public:
 	Vector operator-() const;               // unary minus
 
 	//----------------------------------------------------------
-	// Scalar Multiplication
-	Vector operator*(double) const;
-	// Scalar Division
-	Vector operator/(double) const;
+	// Vector Scalar Operations
+	Vector operator*(double) const;  // Scalar multiplication
+	Vector operator/(double) const;  // Scalar division
+	
+	Vector& operator*=(double);      // vector scalar mult
+	Vector& operator/=(double);      // vector scalar div
 
 	//----------------------------------------------------------
 	// Vector Arithmetic Operations
@@ -43,8 +45,6 @@ public:
 	double operator*(const Vector&) const;  // inner dot product
 	Vector operator^(const Vector&) const;  // 3D exterior cross product
 
-	Vector& operator*=(double);             // vector scalar mult
-	Vector& operator/=(double);             // vector scalar div
 	Vector& operator+=(const Vector&);      // vector increment
 	Vector& operator-=(const Vector&);      // vector decrement
 	Vector& operator^=(const Vector&);      // 3D exterior cross product
@@ -61,6 +61,7 @@ public:
 
 	//----------------------------------------------------------
 	// Special Operations
-	void normalize();                       // convert vector to unit length
+	void normalize();  // convert vector to unit length
 };
+
 #endif // SS_Vector_H
