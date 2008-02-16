@@ -106,8 +106,8 @@ public:
 
 	//----------------------------------------------------------
 	// Point Relations
-	double d( Point) const;         // Distance
-	double d2( Point) const;        // Distance^2
+	double d( const Point&) const;         // Distance
+	double d2( const Point&) const;        // Distance^2
 	double isLeft( Point, Point);           // 2D only
 	double Area( Point, Point) const; 		// any dim for triangle PPP
 

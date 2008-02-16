@@ -345,14 +345,14 @@ Point asum( int n, double c[], Point Q[])
 // Distance between Points
 //------------------------------------------------------------------
 
-double Point::d( Point Q) const {      // Euclidean distance
+double Point::d( const Point &Q) const {      // Euclidean distance
 	double dx = x - Q.x;
 	double dy = y - Q.y;
 	double dz = z - Q.z;
 	return sqrt(dx*dx + dy*dy + dz*dz);
 }
 
-double Point::d2( Point Q) const {     // squared distance (more efficient)
+double Point::d2( const Point &Q) const {     // squared distance (more efficient)
 	double dx = x - Q.x;
 	double dy = y - Q.y;
 	double dz = z - Q.z;
