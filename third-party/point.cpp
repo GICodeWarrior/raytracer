@@ -1,11 +1,22 @@
-//==================================================================
-// Copyright 2002, softSurfer (www.softsurfer.com)
-// This code may be freely used and modified for any purpose
-// providing that this copyright notice is included with it.
-// SoftSurfer makes no warranty for this code, and cannot be held
-// liable for any real or imagined damage resulting from it's use.
-// Users of this code must verify correctness for their application.
-//==================================================================
+/*
+  This file is part of Rusty's Raytracer.
+
+  Rusty's Raytracer is free software: you can redistribute it and/or modify it
+  under the terms of the GNU General Public License as published by the Free
+  Software Foundation, either version 3 of the License, or (at your option) any
+  later version.
+
+  Rusty's Raytracer is distributed in the hope that it will be useful, but
+  WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+  FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+  more details.
+
+  You should have received a copy of the GNU General Public License along with
+  Rusty's Raytracer.  If not, see <http://www.gnu.org/licenses/>.
+
+  Copyright 2002 softSurfer (www.softsurfer.com)
+  Copyright 2008 Rusty Burchfield
+*/
 
 #include "point.h"
 #include "vector.h"
