@@ -30,9 +30,9 @@ public:
 	// Lots of Constructors (add more as needed)
 	Point() { dimn=3; x=y=z=0; err=Enot; }
 	// 1D Point
-	Point( int a) {
+	explicit Point( int a) {
 		dimn=1; x=a; y=z=0; err=Enot; }
-	Point( double a) {
+	explicit Point( double a) {
 		dimn=1; x=a; y=z=0; err=Enot; }
 	// 2D Point
 	Point( int a, int b) {

@@ -33,6 +33,7 @@ public:
 	Intersection();
 	Intersection(const PrimitiveModel *m, Ray r, Point p);
 	virtual ~Intersection();
+	void setSource(const PrimitiveModel *m);
 	int compare(const Ray &ray, const Intersection &i) const;
 	Color getColor(int depth) const;
 	const Point& getPoint() const;

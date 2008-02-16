@@ -36,7 +36,7 @@ Transmission::~Transmission()
 Color Transmission::colorAt(const Ray &r, const Point &p, int depth) const
 {
 	Vector color = Material::colorAt(r, p, depth).asVector();
-	if (depth < 0) return color;
+	if (depth < 0) return Color(color);
 	
 	Vector normal = Material::normalAt(p);
 	
@@ -60,7 +60,7 @@ Color Transmission::colorAt(const Ray &r, const Point &p, int depth) const
 	
 		color += reflectColor * transmissiveness;
 	
-		return color;
+		return Color(color);
 	}
 
 	double offsetLength = tan(asin(tir));
@@ -78,5 +78,5 @@ Color Transmission::colorAt(const Ray &r, const Point &p, int depth) const
 	
 	color += transmitColor * transmissiveness;
 	
-	return color;
+	return Color(color);
 }

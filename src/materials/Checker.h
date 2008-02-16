@@ -25,7 +25,7 @@
 class Checker : public Material
 {
 public:
-	Checker(PrimitiveModel *s);
+	explicit Checker(PrimitiveModel *s);
 	Checker(PrimitiveModel *s, double x, double y, double z);
 	virtual ~Checker();
 	virtual Color colorAt(const Ray &r, const Point &p, int depth) const;

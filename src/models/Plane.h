@@ -32,7 +32,7 @@ public:
 	virtual Vector normalAt(const Point &p) const;
 protected:
 	Plane(Color c);
-	void setDimensions(Vector n, double d);
+	void setDimensions(Vector &n, double d);
 private:
 	Vector normal;
 	double distance;

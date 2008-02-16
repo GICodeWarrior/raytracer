@@ -26,9 +26,11 @@ CompositeModel::CompositeModel()
 
 CompositeModel::~CompositeModel()
 {
-	for(unsigned int c = 0; c < models.size(); ++c)
+	for(vector<Model*>::const_iterator c = models.begin();
+		c != models.end();
+		++c)
 	{
-		delete models[c];
+		delete *c;
 	}
 }
 
@@ -41,9 +43,11 @@ Intersection CompositeModel::intersect(const Ray& ray) const
 {
 	Intersection nearest;
 	
-	for(unsigned int c = 0; c < models.size(); ++c)
+	for(vector<Model*>::const_iterator c = models.begin();
+		c != models.end();
+		++c)
 	{
-		Intersection next = models[c]->intersect(ray);
+		Intersection next = (*c)->intersect(ray);
 		if (nearest.compare(ray, next) < 0)
 		{
 			nearest = next;

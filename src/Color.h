@@ -33,8 +33,8 @@ class Color
 public:
 	Color();
 	Color(unsigned char r, unsigned char g, unsigned char b);
-	Color(Vector v);
-	Color(Pixel &p);
+	explicit Color(Vector v);
+	explicit Color(Pixel &p);
 	virtual ~Color();
 	Pixel asPixel() const;
 	Vector asVector() const;

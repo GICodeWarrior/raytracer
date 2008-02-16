@@ -25,7 +25,7 @@
 class Quilt : public Material
 {
 public:
-	Quilt(PrimitiveModel *s);
+	explicit Quilt(PrimitiveModel *s);
 	Quilt(PrimitiveModel *s, double x, double y, double z);
 	virtual ~Quilt();
 	virtual Vector normalAt(const Point &p) const;

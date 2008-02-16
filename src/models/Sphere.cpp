@@ -69,8 +69,7 @@ Intersection Sphere::intersect(const Ray& ray) const
 	if (distance < 0) distance = r2;
 	if (distance < 0) return none;  // No intersection
 	
-	Intersection i(this, ray, ray.getVector() * distance + ray.getOrigin());
-	return i;
+	return Intersection(this, ray, ray.getVector() * distance + ray.getOrigin());
 }
 
 Vector Sphere::normalAt(const Point &p) const

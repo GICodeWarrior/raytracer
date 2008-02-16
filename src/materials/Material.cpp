@@ -35,10 +35,7 @@ Material::~Material()
 Intersection Material::intersect(const Ray& ray) const
 {
 	Intersection i = subModel->intersect(ray);
-	if (i.getModel())
-	{
-		i = Intersection(this, ray, i.getPoint());
-	}
+	if (i.getModel()) i.setSource(this);  // Update source to us
 	return i;
 }
 

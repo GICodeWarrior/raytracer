@@ -80,5 +80,5 @@ Color Phong::colorAt(const Ray &r, const Point &p, int depth) const
 		}
 	}
 	
-	return(ka * c.asVector() + kd * diffuse + ks * specular);
+	return Color(ka * c.asVector() + kd * diffuse + ks * specular);
 }

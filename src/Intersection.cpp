@@ -36,6 +36,11 @@ Intersection::~Intersection()
 {
 }
 
+void Intersection::setSource(const PrimitiveModel *m)
+{
+	model = m;
+}
+	
 int Intersection::compare(const Ray &ray, const Intersection &i) const
 {
 	if (!model) return -1;

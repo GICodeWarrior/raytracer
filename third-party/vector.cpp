@@ -109,12 +109,15 @@ Vector Vector::operator+( Vector w ) const {
 }
 
 Vector Vector::operator-( Vector w ) const {
-	Vector v;
-	v.x = x - w.x;
-	v.y = y - w.y;
-	v.z = z - w.z;
-	v.dimn = max( dimn, w.dim());
-	return v;
+//	Vector v;
+//	v.x = x - w.x;
+//	v.y = y - w.y;
+//	v.z = z - w.z;
+//	v.dimn = max( dimn, w.dim());
+//	return v;
+	
+	// Optimized to reduce time spent in Polygon::intersect ~1.5% 
+	return Vector(x - w.x, y - w.y, z - w.z);
 }
 
 //------------------------------------------------------------------

@@ -36,7 +36,7 @@ Reflection::~Reflection()
 Color Reflection::colorAt(const Ray &r, const Point &p, int depth) const
 {
 	Vector color = Material::colorAt(r, p, depth).asVector();
-	if (depth < 0) return color;
+	if (depth < 0) return Color(color);
 	
 	Vector normal = Material::normalAt(p);
 	
@@ -48,5 +48,5 @@ Color Reflection::colorAt(const Ray &r, const Point &p, int depth) const
 	
 	color += reflectColor * reflectivity;
 	
-	return color;
+	return Color(color);
 }

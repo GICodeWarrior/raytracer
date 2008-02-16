@@ -25,7 +25,7 @@
 class Material : public PrimitiveModel
 {
 public:
-	Material(PrimitiveModel *s);
+	explicit Material(PrimitiveModel *s);
 	virtual ~Material();
 	virtual Intersection intersect(const Ray& ray) const;
 	virtual Color colorAt(const Ray &r, const Point &p, int depth) const;

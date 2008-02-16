@@ -25,7 +25,7 @@
 class CameraDecorator : public Camera
 {
 public:
-	CameraDecorator(Camera *c);
+	explicit CameraDecorator(Camera *c);
 	virtual ~CameraDecorator();
 	virtual void getImage(int width, int height, Pixel *image) const;
 private:

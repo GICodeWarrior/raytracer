@@ -22,8 +22,8 @@ class Vector : public Point {
 public:
 	// Constructors same as Point class
 	Vector() : Point() {};
-	Vector( int a) : Point(a) {};
-	Vector( double a) : Point(a) {};
+	explicit Vector( int a) : Point(a) {};
+	explicit Vector( double a) : Point(a) {};
 	Vector( int a, int b) : Point(a,b) {};
 	Vector( double a, double b) : Point(a,b) {};
 	Vector( int a, int b, int c) : Point(a,b,c) {};
