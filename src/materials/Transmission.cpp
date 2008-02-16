@@ -24,6 +24,8 @@
 #include "../World.h"
 #include "../Intersection.h"
 
+#include <math.h>
+
 Transmission::Transmission(PrimitiveModel *s, World *w, double t, double i)
 : Material(s), world(w), transmissiveness(t), ior(i)
 {
@@ -52,7 +54,7 @@ Color Transmission::colorAt(const Ray &r, const Point &p, int depth) const
 	
 	if (tir > 1)
 	{
-		Vector reflection = r.getVector() - 2 * normal * (r.getVector() * normal);
+		Vector reflection = r.getVector() - normal * 2 * (r.getVector() * normal);
 		reflection.normalize();
 	
 		Point origin = p + (reflection * 1e-5);
@@ -65,7 +67,7 @@ Color Transmission::colorAt(const Ray &r, const Point &p, int depth) const
 
 	double offsetLength = tan(asin(tir));
 	
-	Vector subNormal = normal * -r.getVector() * normal;
+	Vector subNormal = normal * (normal * -r.getVector());
 	Vector offset = p + subNormal - (p - r.getVector());
 	offset.normalize();
 	offset *= offsetLength;

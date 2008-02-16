@@ -7,8 +7,8 @@
 // Users of this code must verify correctness for their application.
 //==================================================================
 
-#include "point.h"
 #include "vector.h"
+#include <math.h>
 
 //==================================================================
 // Vector Class Methods
@@ -20,19 +20,7 @@
 
 // Unary minus
 Vector Vector::operator-() const {
-	Vector v;
-	v.x = -x; v.y = -y; v.z = -z;
-	v.dimn = dimn;
-	return v;
-}
-
-// Unary 2D perp operator
-Vector Vector::operator~() {
-	if (dimn != 2) err = Edim;   // and continue anyway
-	Vector v;
-	v.x = -y; v.y = x; v.z = z;
-	v.dimn = dimn;
-	return v;
+	return Vector(-x, -y, -z);
 }
 
 //------------------------------------------------------------------
@@ -40,83 +28,37 @@ Vector Vector::operator~() {
 //------------------------------------------------------------------
 
 // Scalar multiplication
-Vector operator*( int c, Vector w ) {
-	Vector v;
-	v.x = c * w.x;
-	v.y = c * w.y;
-	v.z = c * w.z;
-	v.dimn = w.dim();
-	return v;
+Vector Vector::operator*(int c) const
+{
+	return Vector(x*c, y*c, z*c);
 }
 
-Vector operator*( double c, Vector w ) {
-	Vector v;
-	v.x = c * w.x;
-	v.y = c * w.y;
-	v.z = c * w.z;
-	v.dimn = w.dim();
-	return v;
-}
-
-Vector operator*( Vector w, int c ) {
-	Vector v;
-	v.x = c * w.x;
-	v.y = c * w.y;
-	v.z = c * w.z;
-	v.dimn = w.dim();
-	return v;
-}
-
-Vector operator*( Vector w, double c ) {
-	Vector v;
-	v.x = c * w.x;
-	v.y = c * w.y;
-	v.z = c * w.z;
-	v.dimn = w.dim();
-	return v;
+Vector Vector::operator*(double c) const
+{
+	return Vector(x*c, y*c, z*c);
 }
 
 // Scalar division
-Vector operator/( Vector w, int c ) {
-	Vector v;
-	v.x = w.x / c;
-	v.y = w.y / c;
-	v.z = w.z / c;
-	v.dimn = w.dim();
-	return v;
+Vector Vector::operator/(int c) const
+{
+	return Vector(x/c, y/c, z/c);
 }
 
-Vector operator/( Vector w, double c ) {
-	Vector v;
-	v.x = w.x / c;
-	v.y = w.y / c;
-	v.z = w.z / c;
-	v.dimn = w.dim();
-	return v;
+Vector Vector::operator/(double c) const
+{
+	return Vector(x/c, y/c, z/c);
 }
 
 //------------------------------------------------------------------
 //  Arithmetic Ops
 //------------------------------------------------------------------
 
-Vector Vector::operator+( Vector w ) const {
-	Vector v;
-	v.x = x + w.x;
-	v.y = y + w.y;
-	v.z = z + w.z;
-	v.dimn = max( dimn, w.dim());
-	return v;
+Vector Vector::operator+( const Vector &w ) const {
+	return Vector(x+w.x, y+w.y, z+w.z);
 }
 
-Vector Vector::operator-( Vector w ) const {
-//	Vector v;
-//	v.x = x - w.x;
-//	v.y = y - w.y;
-//	v.z = z - w.z;
-//	v.dimn = max( dimn, w.dim());
-//	return v;
-	
-	// Optimized to reduce time spent in Polygon::intersect ~1.5% 
+Vector Vector::operator-( const Vector &w ) const
+{
 	return Vector(x - w.x, y - w.y, z - w.z);
 }
 
@@ -125,24 +67,15 @@ Vector Vector::operator-( Vector w ) const {
 //------------------------------------------------------------------
 
 // Inner Dot Product
-double Vector::operator*( Vector w ) const {
+double Vector::operator*( const Vector &w ) const
+{
 	return (x * w.x + y * w.y + z * w.z);
 }
 
-// 2D Exterior Perp Product
-double Vector::operator|( Vector w ) {
-	if (dimn != 2) err = Edim;    // and continue anyway
-	return (x * w.y - y * w.x);
-}
-
 // 3D Exterior Cross Product
-Vector Vector::operator^( Vector w ) const {
-	Vector v;
-	v.x = y * w.z - z * w.y;
-	v.y = z * w.x - x * w.z;
-	v.z = x * w.y - y * w.x;
-	v.dimn = 3;
-	return v;
+Vector Vector::operator^( const Vector &w ) const
+{
+	return Vector(y*w.z - z*w.y, z*w.x - x*w.z, x*w.y - y*w.x);
 }
 
 //------------------------------------------------------------------
@@ -163,28 +96,25 @@ Vector& Vector::operator/=( double c ) {        // vector scalar div
 	return *this;
 }
 
-Vector& Vector::operator+=( Vector w ) {        // vector increment
+Vector& Vector::operator+=( const Vector &w ) {        // vector increment
 	x += w.x;
 	y += w.y;
 	z += w.z;
-	dimn = max(dimn, w.dim());
 	return *this;
 }
 
-Vector& Vector::operator-=( Vector w ) {        // vector decrement
+Vector& Vector::operator-=( const Vector &w ) {        // vector decrement
 	x -= w.x;
 	y -= w.y;
 	z -= w.z;
-	dimn = max(dimn, w.dim());
 	return *this;
 }
 
-Vector& Vector::operator^=( Vector w ) {        // 3D exterior cross product
+Vector& Vector::operator^=( const Vector &w ) {        // 3D exterior cross product
 	double ox=x, oy=y, oz=z;
 	x = oy * w.z - oz * w.y;
 	y = oz * w.x - ox * w.z;
 	z = ox * w.y - oy * w.x;
-	dimn = 3;
 	return *this;
 }
 
@@ -192,16 +122,26 @@ Vector& Vector::operator^=( Vector w ) {        // 3D exterior cross product
 //------------------------------------------------------------------
 //  Convienience Operations
 //------------------------------------------------------------------
-Vector Vector::operator/( Vector w) {       // Vector division
+Vector Vector::operator/( const Vector &w) const {       // Vector division
 	return Vector(x/w.x, y/w.y, z/w.z);
 }
 
-Vector& Vector::operator/=( Vector w) {     // Vector division
+Vector& Vector::operator/=( const Vector &w) {     // Vector division
 	x /= w.x;
 	y /= w.y;
 	z /= w.z;
-	dimn = max(dimn, w.dim());
 	return *this;
+}
+
+//------------------------------------------------------------------
+// Vector Properties
+//------------------------------------------------------------------
+
+double Vector::len() const {               // vector length
+	return sqrt(x*x + y*y + z*z);
+}
+double Vector::len2() const {              // vector length squared (faster)
+	return (x*x + y*y + z*z);
 }
 
 //------------------------------------------------------------------
@@ -214,40 +154,4 @@ void Vector::normalize() {                      // convert to unit length
 	x /= ln;
 	y /= ln;
 	z /= ln;
-}
-
-Vector sum( int n, int c[], Vector w[] ) {     // vector sum
-	int     maxd = 0;
-	Vector  v;
-
-	for (int i=0; i<n; i++) {
-		if (w[i].dim() > maxd)
-			maxd = w[i].dim();
-	}
-	v.dimn = maxd;
-
-	for (int i=0; i<n; i++) {
-		v.x += c[i] * w[i].x;
-		v.y += c[i] * w[i].y;
-		v.z += c[i] * w[i].z;
-	}
-	return v;
-}
-
-Vector sum( int n, double c[], Vector w[] ) {  // vector sum
-	int     maxd = 0;
-	Vector  v;
-
-	for (int i=0; i<n; i++) {
-		if (w[i].dim() > maxd)
-			maxd = w[i].dim();
-	}
-	v.dimn = maxd;
-
-	for (int i=0; i<n; i++) {
-		v.x += c[i] * w[i].x;
-		v.y += c[i] * w[i].y;
-		v.z += c[i] * w[i].z;
-	}
-	return v;
 }

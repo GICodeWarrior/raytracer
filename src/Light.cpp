@@ -34,10 +34,9 @@ Light::~Light()
 
 bool Light::intersects(const Point &p) const
 {
-	Ray r(origin, p - origin);
-	Intersection i = world->intersect(r);
+	Intersection i = world->intersect(Ray(origin, p - origin));
 	const PrimitiveModel *model = i.getModel();
-	if ((model) && (origin.d2(p + model->normalAt(p)) > origin.d2(p)))
+	if ((model) && (model->normalAt(p) * (origin - p) < 0))
 	{
 		return false;
 	}

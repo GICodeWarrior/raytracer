@@ -18,8 +18,8 @@
 */
 
 #include "Quilt.h"
-
 #include "../../third-party/vector.h"
+#include <math.h>
 
 Quilt::Quilt(PrimitiveModel *s)
 : Material(s), x(1), y(1), z(1), c0(0.1), c1(0.0)
@@ -44,9 +44,9 @@ Vector Quilt::normalAt(const Point &p) const
 	
 	Vector normal = Material::normalAt(p);
 	
-	double Nx = abs(normal.x);
-	double Ny = abs(normal.y);
-	double Nz = abs(normal.z);
+	double Nx = fabs(normal.x);
+	double Ny = fabs(normal.y);
+	double Nz = fabs(normal.z);
 	
 	int ignore;
 	if ((Nx > Ny) && (Nx > Nz)) ignore = 1;

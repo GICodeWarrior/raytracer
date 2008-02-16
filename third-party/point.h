@@ -10,7 +10,8 @@
 #ifndef SS_Point_H
 #define SS_Point_H
 
-#include "common.h"
+#include <iostream>
+using namespace std;
 
 class Vector;
 
@@ -19,46 +20,19 @@ class Vector;
 //==================================================================
 
 class Point {
-friend class Vector;
-protected:
-	int dimn;            // # coords (1, 2, or 3 max here)
-	Error err;           // error indicator
 public:
 	double x, y, z;      // z=0 for 2D, y=z=0 for 1D
 
 	//----------------------------------------------------------
 	// Lots of Constructors (add more as needed)
-	Point() { dimn=3; x=y=z=0; err=Enot; }
-	// 1D Point
-	explicit Point( int a) {
-		dimn=1; x=a; y=z=0; err=Enot; }
-	explicit Point( double a) {
-		dimn=1; x=a; y=z=0; err=Enot; }
-	// 2D Point
-	Point( int a, int b) {
-		dimn=2; x=a; y=b; z=0; err=Enot; }
-	Point( double a, double b) {
-		dimn=2; x=a; y=b; z=0; err=Enot; }
-	// 3D Point
-	Point( int a, int b, int c) {
-		dimn=3; x=a; y=b; z=c; err=Enot; }
-	Point( double a, double b, double c) {
-		dimn=3; x=a; y=b; z=c; err=Enot; }
-	// n-dim Point
-	Point( int n, int a[]);
-	Point( int n, double a[]);
+	Point() { x=y=z=0; }
+	Point( double a, double b, double c) { x=a; y=b; z=c; }
 	// Destructor
-	~Point() {};
+	virtual ~Point() {};
 
 	//----------------------------------------------------------
-	// Input/Output streams
-	friend istream& operator>>( istream&, Point&);
+	// Output stream
 	friend ostream& operator<<( ostream&, Point);
-
-	//----------------------------------------------------------
-	// Assignment "=": use the default to copy all members
-	int dim() const { return dimn; }      // get dimension
-	int setdim( int);               // set new dimension
 
 	//----------------------------------------------------------
 	// Comparison (dimension must match, or not)
@@ -84,13 +58,11 @@ public:
 	//    The programmer must enforce this (if they want to).
 
 	// Scalar Multiplication
-	friend Point operator*( int, Point);
-	friend Point operator*( double, Point);
-	friend Point operator*( Point, int);
-	friend Point operator*( Point, double);
+	Point operator*(int);
+	Point operator*(double);
 	// Scalar Division
-	friend Point operator/( Point, int);
-	friend Point operator/( Point, double);
+	Point operator/(int);
+	Point operator/(double);
 
 	//----------------------------------------------------------
 	// Point Addition (also convenient but often illegal)
@@ -98,31 +70,9 @@ public:
 	//    The programmer must enforce this (if they want to).
 	friend Point operator+( Point, Point);     // add points
 
-	// Affine Sum
-	// Returns weighted sum, even when not affine, but...
-	// Tests if coeffs add to 1.  If not, sets: err = Esum.
-	friend Point asum( int, int[], Point[]);
-	friend Point asum( int, double[], Point[]);
-
 	//----------------------------------------------------------
 	// Point Relations
 	double d( const Point&) const;         // Distance
 	double d2( const Point&) const;        // Distance^2
-	double isLeft( Point, Point);           // 2D only
-	double Area( Point, Point) const; 		// any dim for triangle PPP
-
-	// Collinearity Conditions (any dim n)
-	boolean isOnLine( Point, Point, char) const;  // is On line (char= flag)
-	boolean isOnLine( Point, Point) const;        // is On line (flag= all)
-	boolean isBefore( Point, Point) const;        // is On line (flag= before)
-	boolean isBetween( Point, Point) const;       // is On line (flag= between)
-	boolean isAfter( Point, Point) const;         // is On line (flag= after)
-	boolean isOnRay( Point, Point) const;         // is On line (flag= between|after)
-
-	//----------------------------------------------------------
-	// Error Handling
-	void  clerr() { err = Enot;}            // clear error
-	int   geterr() { return err;}           // get error
-	char* errstr();                         // return error string
 };
 #endif // SS_Point_H

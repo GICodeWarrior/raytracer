@@ -22,6 +22,8 @@
 #include "../third-party/vector.h"
 #include "Color.h"
 
+#include <math.h>
+
 ReinhardToneCamera::ReinhardToneCamera(Camera *c, double m)
 : CameraDecorator(c), ldmax(m)
 {

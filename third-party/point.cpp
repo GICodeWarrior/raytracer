@@ -9,102 +9,21 @@
 
 #include "point.h"
 #include "vector.h"
+#include <math.h>
 
 //==================================================================
 // Point Class Methods
 //==================================================================
 
 //------------------------------------------------------------------
-// Constructors (add more as needed)
+// IO stream
 //------------------------------------------------------------------
-
-// n-dim Point
-Point::Point( int n, int a[]) {
-	x = y = z = 0;
-	err = Enot;
-	switch (dimn = n) {
-	case 3: z = a[2];
-	case 2: y = a[1];
-	case 1: x = a[0];
-		break;
-	default:
-		err=Edim;
-	}
-}
-
-Point::Point( int n, double a[]) {
-	x = y = z = 0.0;
-	err = Enot;
-	switch (dimn = n) {
-	case 3: z = a[2];
-	case 2: y = a[1];
-	case 1: x = a[0];
-		break;
-	default:
-		err=Edim;
-	}
-}
-
-//------------------------------------------------------------------
-// IO streams
-//------------------------------------------------------------------
-
-// Read input Point format: "(%f)", "(%f, %f)", or "(%f, %f, %f)"
-istream& operator>>( istream& input, Point& P) {
-	char c;
-	input >> c;                // skip '('
-	input >> P.x;
-	input >> c;                
-	if (c == ')') {
-		P.setdim(1);       // 1D coord
-		return input;
-	}
-	// else                    // skip ','
-	input >> P.y;
-	input >> c;
-	if (c == ')') {
-		P.setdim(2);       // 2D coord
-		return input;
-	}
-	// else                    // skip ','
-	input >> P.z;
-	P.setdim(3);               // 3D coord
-	input >> c;                // skip ')'
-	return input;
-}
 
 // Write output Point in format: "(%f)", "(%f, %f)", or "(%f, %f, %f)"
-ostream& operator<<( ostream& output, Point P) {
-	switch (P.dim()) {
-	case 1:
-		output << "(" << P.x << ")";
-		break;
-	case 2:
-		output << "(" << P.x << ", " << P.y << ")";
-		break;
-	case 3:
-		output << "(" << P.x << ", " << P.y << ", " << P.z << ")";
-		break;
-	default:
-		output << "Error: P.dim = " << P.dim();
-	}
+ostream& operator<<( ostream& output, const Point &P)
+{
+	output << "(" << P.x << ", " << P.y << ", " << P.z << ")";
 	return output;
-}
-
-//------------------------------------------------------------------
-// Assign (set) dimension
-//------------------------------------------------------------------
-
-int Point::setdim( int n) {
-	switch (n) {
-	case 1: y = 0;
-	case 2: z = 0;
-	case 3:
-		return dimn = n;
-	default:                      // out of range value
-		err = Edim;           // just flag the error
-		return ERROR;
-	}
 }
 
 //------------------------------------------------------------------
@@ -113,49 +32,19 @@ int Point::setdim( int n) {
 
 int Point::operator==( Point Q) const
 {
-	if (dimn != Q.dim()) return FALSE;
-	switch (dimn) {
-	case 1:
-		return (x==Q.x);
-	case 2:
-		return (x==Q.x && y==Q.y);
-	case 3:
-	default:
-		return (x==Q.x && y==Q.y && z==Q.z);
-	}
+	return (x==Q.x && y==Q.y && z==Q.z);
 }
 
 int Point::operator!=( Point Q) const
 {
-	if (dimn != Q.dim()) return TRUE;
-	switch (dimn) {
-	case 1:
-		return (x!=Q.x);
-	case 2:
-		return (x!=Q.x || y!=Q.y);
-	case 3:
-	default:
-		return (x!=Q.x || y!=Q.y || z!=Q.z);
-	}
+	return (x!=Q.x || y!=Q.y || z!=Q.z);
 }
 
 int Point::near(Point Q, double diff) const
 {
-	if (dimn != Q.dim()) return FALSE;
-	
-	double diffX = abs(x - Q.x);
-	double diffY = abs(y - Q.y);
-	double diffZ = abs(z - Q.z);
-	
-	switch (dimn) {
-	case 1:
-		return diffX < diff;
-	case 2:
-		return (diffX < diff &&	diffY < diff);
-	case 3:
-	default:
-		return (diffX < diff &&	diffY < diff &&	diffZ < diff);
-	}
+	return (fabs(x - Q.x) < diff &&
+			fabs(y - Q.y) < diff &&
+			fabs(z - Q.z) < diff);
 }
 
 //------------------------------------------------------------------
@@ -164,32 +53,17 @@ int Point::near(Point Q, double diff) const
 
 Vector Point::operator-( Point Q) const        // Vector diff of Points
 {
-	Vector v;
-	v.x = x - Q.x;
-	v.y = y - Q.y;
-	v.z = z - Q.z;
-	v.dimn = max( dimn, Q.dim());
-	return v;
+	return Vector(x-Q.x, y-Q.y, z-Q.z);
 }
 
 Point Point::operator+( Vector v) const        // +ve translation
 {
-	Point P;
-	P.x = x + v.x;
-	P.y = y + v.y;
-	P.z = z + v.z;
-	P.dimn = max( dimn, v.dim());
-	return P;
+	return Point(x+v.x, y+v.y, z+v.z);
 }
 
 Point Point::operator-( Vector v) const        // -ve translation
 {
-	Point P;
-	P.x = x - v.x;
-	P.y = y - v.y;
-	P.z = z - v.z;
-	P.dimn = max( dimn, v.dim());
-	return P;
+	return Point(x - v.x, y - v.y, z - v.z);
 }
 
 Point& Point::operator+=( Vector v)        // +ve translation
@@ -197,7 +71,6 @@ Point& Point::operator+=( Vector v)        // +ve translation
 	x += v.x;
 	y += v.y;
 	z += v.z;
-	dimn = max( dimn, v.dim());
 	return *this;
 }
 
@@ -206,7 +79,6 @@ Point& Point::operator-=( Vector v)        // -ve translation
 	x -= v.x;
 	y -= v.y;
 	z -= v.z;
-	dimn = max( dimn, v.dim());
 	return *this;
 }
 
@@ -219,58 +91,24 @@ Point& Point::operator-=( Vector v)        // -ve translation
 //        The programmer must enforce this (if they want to).
 //------------------------------------------------------------------
 
-Point operator*( int c, Point Q) {
-	Point P;
-	P.x = c * Q.x;
-	P.y = c * Q.y;
-	P.z = c * Q.z;
-	P.dimn = Q.dim();
-	return P;
+Point Point::operator*( int c)
+{
+	return Point(c * x, c * y, c * z);
 }
 
-Point operator*( double c, Point Q) {
-	Point P;
-	P.x = c * Q.x;
-	P.y = c * Q.y;
-	P.z = c * Q.z;
-	P.dimn = Q.dim();
-	return P;
+Point Point::operator*( double c)
+{
+	return Point(c * x, c * y, c * z);
 }
 
-Point operator*( Point Q, int c) {
-	Point P;
-	P.x = c * Q.x;
-	P.y = c * Q.y;
-	P.z = c * Q.z;
-	P.dimn = Q.dim();
-	return P;
+Point Point::operator/( int c)
+{
+	return Point(x/c, y/c, z/c);
 }
 
-Point operator*( Point Q, double c) {
-	Point P;
-	P.x = c * Q.x;
-	P.y = c * Q.y;
-	P.z = c * Q.z;
-	P.dimn = Q.dim();
-	return P;
-}
-
-Point operator/( Point Q, int c) {
-	Point P;
-	P.x = Q.x / c;
-	P.y = Q.y / c;
-	P.z = Q.z / c;
-	P.dimn = Q.dim();
-	return P;
-}
-
-Point operator/( Point Q, double c) {
-	Point P;
-	P.x = Q.x / c;
-	P.y = Q.y / c;
-	P.z = Q.z / c;
-	P.dimn = Q.dim();
-	return P;
+Point Point::operator/( double c)
+{
+	return Point(x/c, y/c, z/c);
 }
 
 //------------------------------------------------------------------
@@ -281,64 +119,7 @@ Point operator/( Point Q, double c) {
 
 Point operator+( Point Q, Point R)
 {
-	Point P;
-	P.x = Q.x + R.x;
-	P.y = Q.y + R.y;
-	P.z = Q.z + R.z;
-	P.dimn = max( Q.dim(), R.dim());
-	return P;
-}
-
-//------------------------------------------------------------------
-// Affine Sums
-// Returns weighted sum, even when not affine, but...
-// Tests if coeffs add to 1.  If not, sets: err = Esum.
-//------------------------------------------------------------------
-
-Point asum( int n, int c[], Point Q[])
-{
-	int        maxd = 0;
-	int        cs = 0;
-	Point      P;
-
-	for (int i=0; i<n; i++) {
-		cs += c[i];
-		if (Q[i].dim() > maxd)
-			maxd = Q[i].dim();
-	}
-	if (cs != 1)                 // not an affine sum
-		P.err = Esum;        // flag error, but compute sum anyway
-
-	for (int i=0; i<n; i++) {
-		P.x += c[i] * Q[i].x;
-		P.y += c[i] * Q[i].y;
-		P.z += c[i] * Q[i].z;
-	}
-	P.dimn = maxd;
-	return P;
-}
-
-Point asum( int n, double c[], Point Q[])
-{
-	int        maxd = 0;
-	double     cs = 0.0;
-	Point      P;
-
-	for (int i=0; i<n; i++) {
-		cs += c[i];
-		if (Q[i].dim() > maxd)
-			maxd = Q[i].dim();
-	}
-	if (cs != 1)                 // not an affine sum
-		P.err = Esum;        // flag error, but compute sum anyway
-
-	for (int i=0; i<n; i++) {
-		P.x += c[i] * Q[i].x;
-		P.y += c[i] * Q[i].y;
-		P.z += c[i] * Q[i].z;
-	}
-	P.dimn = maxd;
-	return P;
+	return Point(Q.x+R.x, Q.y+R.y, Q.z+R.z);
 }
 
 //------------------------------------------------------------------
@@ -359,31 +140,3 @@ double Point::d2( const Point &Q) const {     // squared distance (more efficien
 	return (dx*dx + dy*dy + dz*dz);
 }
 
-//------------------------------------------------------------------
-// Sidedness of a Point wrt a directed line P1->P2
-//        - makes sense in 2D only
-//------------------------------------------------------------------
-
-double Point::isLeft( Point P1, Point P2) {
-	if (dimn != 2 || P1.dim() != 2 || P2.dim() != 2) {
-		err = Edim;        // flag error, but compute anyway
-	}
-	return ((P1.x - x) * (P2.y - y) - (P2.x - x) * (P1.y - y));
-}
-
-//------------------------------------------------------------------
-// Error Routines
-//------------------------------------------------------------------
-
-char* Point::errstr() {            // return error string
-	switch (err) {
-	case Enot:
-		return "no error";
-	case Edim:
-		return "error: invalid dimension for operation";
-	case Esum:
-		return "error: Point sum is not affine";
-	default:
-		return "error: unknown err value";
-	}
-}

@@ -36,7 +36,7 @@ Intersection Sphere::intersect(const Ray& ray) const
 {	
 	Vector deltap = ray.getOrigin() - origin;
 	double a = ray.getVector() * ray.getVector();
-	double b = 2 * deltap * ray.getVector();
+	double b = deltap * 2 * ray.getVector();
 	double c = deltap * deltap - radius * radius;
 	
 	double disc = b * b - 4 * a * c;

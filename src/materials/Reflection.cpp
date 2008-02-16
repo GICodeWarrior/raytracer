@@ -40,7 +40,7 @@ Color Reflection::colorAt(const Ray &r, const Point &p, int depth) const
 	
 	Vector normal = Material::normalAt(p);
 	
-	Vector reflection = r.getVector() - 2 * normal * (r.getVector() * normal);
+	Vector reflection = r.getVector() - normal * 2 * (r.getVector() * normal);
 	reflection.normalize();
 	
 	Point origin = p + (reflection * 1e-5);

@@ -10,9 +10,7 @@
 #ifndef SS_Vector_H
 #define SS_Vector_H
 
-#include "common.h"
 #include "point.h"
-#include <math.h>
 
 //==================================================================
 //  Vector Class Definition
@@ -22,15 +20,8 @@ class Vector : public Point {
 public:
 	// Constructors same as Point class
 	Vector() : Point() {};
-	explicit Vector( int a) : Point(a) {};
-	explicit Vector( double a) : Point(a) {};
-	Vector( int a, int b) : Point(a,b) {};
-	Vector( double a, double b) : Point(a,b) {};
-	Vector( int a, int b, int c) : Point(a,b,c) {};
 	Vector( double a, double b, double c) : Point(a,b,c) {};
-	Vector( int n, int a[]) : Point(n,a) {};
-	Vector( int n, double a[]) : Point(n,a) {};
-	~Vector() {};
+	virtual ~Vector() {};
 
 	//----------------------------------------------------------
 	// IO streams and Comparisons: inherit from Point class
@@ -38,50 +29,40 @@ public:
 	//----------------------------------------------------------
 	// Vector Unary Operations
 	Vector operator-() const;                // unary minus
-	Vector operator~();                // unary 2D perp operator
 
 	//----------------------------------------------------------
 	// Scalar Multiplication
-	friend Vector operator*( int, Vector);
-	friend Vector operator*( double, Vector);
-	friend Vector operator*( Vector, int);
-	friend Vector operator*( Vector, double);
+	Vector operator*(int) const;
+	Vector operator*(double) const;
 	// Scalar Division
-	friend Vector operator/( Vector, int);
-	friend Vector operator/( Vector, double);
+	Vector operator/(int) const;
+	Vector operator/(double) const;
 
 	//----------------------------------------------------------
 	// Vector Arithmetic Operations
-	Vector operator+( Vector) const;        // vector add
-	Vector operator-( Vector) const;        // vector subtract
-	double operator*( Vector) const;        // inner dot product
-	double operator|( Vector);        // 2D exterior perp product
-	Vector operator^( Vector) const;        // 3D exterior cross product
+	Vector operator+(const Vector&) const;        // vector add
+	Vector operator-(const Vector&) const;        // vector subtract
+	double operator*(const Vector&) const;        // inner dot product
+	Vector operator^(const Vector&) const;        // 3D exterior cross product
 
-	Vector& operator*=( double);      // vector scalar mult
-	Vector& operator/=( double);      // vector scalar div
-	Vector& operator+=( Vector);      // vector increment
-	Vector& operator-=( Vector);      // vector decrement
-	Vector& operator^=( Vector);      // 3D exterior cross product
+	Vector& operator*=(double);      // vector scalar mult
+	Vector& operator/=(double);      // vector scalar div
+	Vector& operator+=(const Vector&);      // vector increment
+	Vector& operator-=(const Vector&);      // vector decrement
+	Vector& operator^=(const Vector&);      // 3D exterior cross product
 
 	//----------------------------------------------------------
 	// Convienience Operations
-	Vector operator/( Vector);        // Vector division
-	Vector& operator/=( Vector);      // Vector division
+	Vector operator/(const Vector&) const;        // Vector division
+	Vector& operator/=(const Vector&);      // Vector division
 
 	//----------------------------------------------------------
 	// Vector Properties
-	double len() const {                    // vector length
-		return sqrt(x*x + y*y + z*z);
-	}
-	double len2() const {                   // vector length squared (faster)
-		return (x*x + y*y + z*z);
-	}
+	double len() const;
+	double len2() const;
 
 	//----------------------------------------------------------
 	// Special Operations
 	void normalize();                 // convert vector to unit length
-	friend Vector sum( int, int[], Vector[]);     // vector sum
-	friend Vector sum( int, double[], Vector[]);  // vector sum
 };
 #endif // SS_Vector_H

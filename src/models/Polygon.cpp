@@ -22,6 +22,8 @@
 #include "../Intersection.h"
 #include "../Ray.h"
 
+#include <math.h>
+
 Polygon::Polygon(vector<Point> v, Color c)
 : Plane(c), verticies(v)
 {
@@ -47,9 +49,9 @@ Intersection Polygon::intersect(const Ray &ray) const
 	if (!plane.getModel()) return Intersection();
 	
 	Vector normal = normalAt(Point());
-	double x = abs(normal.x);
-	double y = abs(normal.y);
-	double z = abs(normal.z);
+	double x = fabs(normal.x);
+	double y = fabs(normal.y);
+	double z = fabs(normal.z);
 	
 	int ignore;
 	if ((x > y) && (x > z)) ignore = 1;

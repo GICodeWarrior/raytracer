@@ -19,10 +19,12 @@
 
 #include "Phong.h"
 
-#include <vector>
 #include "../../third-party/vector.h"
 #include "../Light.h"
 #include "../World.h"
+
+#include <vector>
+#include <math.h>
 
 Phong::Phong(PrimitiveModel *s, World *w)
 : Material(s), world(w), ka(0.2), kd(0.6), ks(1.0), ke(40)
@@ -69,7 +71,7 @@ Color Phong::colorAt(const Ray &r, const Point &p, int depth) const
 			Vector incoming = p - light->getOrigin();
 			incoming.normalize();
 			
-			Vector reflection = incoming - 2 * normal * (incoming * normal);
+			Vector reflection = incoming - normal * 2 * (incoming * normal);
 			reflection.normalize();
 			
 			Vector view = Point(0.0, 3.0, -6.0) - p;
@@ -80,5 +82,5 @@ Color Phong::colorAt(const Ray &r, const Point &p, int depth) const
 		}
 	}
 	
-	return Color(ka * c.asVector() + kd * diffuse + ks * specular);
+	return Color(c.asVector() * ka + diffuse * kd + specular * ks);
 }
