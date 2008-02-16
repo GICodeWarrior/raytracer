@@ -132,7 +132,7 @@ int main()
 	Point lookAt(0.0, 3.0, 5.0);
 	Camera *camera = new BasicCamera(&scene, origin, lookAt);
 	//camera = new WardToneCamera(camera, 1);
-	//camera = new ReinhardToneCamera(camera, 100);
+	camera = new ReinhardToneCamera(camera, 100);
 	camera = new SuperSampleCamera(camera, 2);
 	
 	cout << "Complete" << endl;
@@ -144,8 +144,6 @@ int main()
 	// Output size
 	int width = 1024;
 	int height = 768;
-	width = 320;
-	height = 240;
 	Pixel* buffer = new Pixel[width * height];
 	
 	// Actual rendering
