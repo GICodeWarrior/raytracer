@@ -21,32 +21,32 @@ class Vector;
 
 class Point {
 public:
-	double x, y, z;      // z=0 for 2D, y=z=0 for 1D
+	double x, y, z;
 
 	//----------------------------------------------------------
-	// Lots of Constructors (add more as needed)
+	// Constructors
 	Point() { x=y=z=0; }
-	Point( double a, double b, double c) { x=a; y=b; z=c; }
+	Point(double a, double b, double c) { x=a; y=b; z=c; }
 	// Destructor
 	virtual ~Point() {};
 
 	//----------------------------------------------------------
 	// Output stream
-	friend ostream& operator<<( ostream&, Point);
+	friend ostream& operator<<(ostream&, Point);
 
 	//----------------------------------------------------------
 	// Comparison (dimension must match, or not)
-	int operator==( Point) const;
-	int operator!=( Point) const;
-	int near(Point Q, double diff = 1e-10) const;
+	int operator==(const Point&) const;
+	int operator!=(const Point&) const;
+	int near(const Point&, double diff = 1e-10) const;
 
 	//----------------------------------------------------------
 	// Point and Vector Operations (always valid) 
-	Vector operator-( Point) const;       // Vector difference
-	Point  operator+( Vector) const;      // +translate
-	Point  operator-( Vector) const;      // -translate
-	Point& operator+=( Vector);     // inc translate
-	Point& operator-=( Vector);     // dec translate
+	Vector operator-(const Point&) const;       // Vector difference
+	Point  operator+(const Vector&) const;      // +translate
+	Point  operator-(const Vector&) const;      // -translate
+	Point& operator+=(const Vector&);     // inc translate
+	Point& operator-=(const Vector&);     // dec translate
 
 	//----------------------------------------------------------
 	// Point Scalar Operations (convenient but often illegal)
@@ -68,11 +68,11 @@ public:
 	// Point Addition (also convenient but often illegal)
 	//    is not valid unless part of an affine sum.
 	//    The programmer must enforce this (if they want to).
-	friend Point operator+( Point, Point);     // add points
+	Point operator+(const Point&) const;     // add points
 
 	//----------------------------------------------------------
 	// Point Relations
-	double d( const Point&) const;         // Distance
-	double d2( const Point&) const;        // Distance^2
+	double d(const Point&) const;         // Distance
+	double d2(const Point&) const;        // Distance^2
 };
 #endif // SS_Point_H

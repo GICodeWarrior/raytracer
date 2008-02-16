@@ -19,7 +19,8 @@
 //------------------------------------------------------------------
 
 // Unary minus
-Vector Vector::operator-() const {
+Vector Vector::operator-() const
+{
 	return Vector(-x, -y, -z);
 }
 
@@ -53,11 +54,12 @@ Vector Vector::operator/(double c) const
 //  Arithmetic Ops
 //------------------------------------------------------------------
 
-Vector Vector::operator+( const Vector &w ) const {
+Vector Vector::operator+(const Vector &w) const
+{
 	return Vector(x+w.x, y+w.y, z+w.z);
 }
 
-Vector Vector::operator-( const Vector &w ) const
+Vector Vector::operator-(const Vector &w) const
 {
 	return Vector(x - w.x, y - w.y, z - w.z);
 }
@@ -67,13 +69,13 @@ Vector Vector::operator-( const Vector &w ) const
 //------------------------------------------------------------------
 
 // Inner Dot Product
-double Vector::operator*( const Vector &w ) const
+double Vector::operator*(const Vector &w) const
 {
 	return (x * w.x + y * w.y + z * w.z);
 }
 
 // 3D Exterior Cross Product
-Vector Vector::operator^( const Vector &w ) const
+Vector Vector::operator^(const Vector &w) const
 {
 	return Vector(y*w.z - z*w.y, z*w.x - x*w.z, x*w.y - y*w.x);
 }
@@ -82,35 +84,40 @@ Vector Vector::operator^( const Vector &w ) const
 //  Shorthand Ops
 //------------------------------------------------------------------
 
-Vector& Vector::operator*=( double c ) {        // vector scalar mult
+Vector& Vector::operator*=(double c)         // vector scalar mult
+{
 	x *= c;
 	y *= c;
 	z *= c;
 	return *this;
 }
 
-Vector& Vector::operator/=( double c ) {        // vector scalar div
+Vector& Vector::operator/=(double c)         // vector scalar div
+{
 	x /= c;
 	y /= c;
 	z /= c;
 	return *this;
 }
 
-Vector& Vector::operator+=( const Vector &w ) {        // vector increment
+Vector& Vector::operator+=(const Vector &w)         // vector increment
+{
 	x += w.x;
 	y += w.y;
 	z += w.z;
 	return *this;
 }
 
-Vector& Vector::operator-=( const Vector &w ) {        // vector decrement
+Vector& Vector::operator-=(const Vector &w)         // vector decrement
+{
 	x -= w.x;
 	y -= w.y;
 	z -= w.z;
 	return *this;
 }
 
-Vector& Vector::operator^=( const Vector &w ) {        // 3D exterior cross product
+Vector& Vector::operator^=(const Vector &w)         // 3D exterior cross product
+{
 	double ox=x, oy=y, oz=z;
 	x = oy * w.z - oz * w.y;
 	y = oz * w.x - ox * w.z;
@@ -122,11 +129,13 @@ Vector& Vector::operator^=( const Vector &w ) {        // 3D exterior cross prod
 //------------------------------------------------------------------
 //  Convienience Operations
 //------------------------------------------------------------------
-Vector Vector::operator/( const Vector &w) const {       // Vector division
+Vector Vector::operator/( const Vector &w) const       // Vector division
+{
 	return Vector(x/w.x, y/w.y, z/w.z);
 }
 
-Vector& Vector::operator/=( const Vector &w) {     // Vector division
+Vector& Vector::operator/=( const Vector &w)     // Vector division
+{
 	x /= w.x;
 	y /= w.y;
 	z /= w.z;
@@ -137,10 +146,12 @@ Vector& Vector::operator/=( const Vector &w) {     // Vector division
 // Vector Properties
 //------------------------------------------------------------------
 
-double Vector::len() const {               // vector length
+double Vector::len() const                // vector length
+{
 	return sqrt(x*x + y*y + z*z);
 }
-double Vector::len2() const {              // vector length squared (faster)
+double Vector::len2() const              // vector length squared (faster)
+{
 	return (x*x + y*y + z*z);
 }
 
@@ -148,7 +159,8 @@ double Vector::len2() const {              // vector length squared (faster)
 //  Special Operations
 //------------------------------------------------------------------
 
-void Vector::normalize() {                      // convert to unit length
+void Vector::normalize()                       // convert to unit length
+{
 	double ln = sqrt( x*x + y*y + z*z );
 	if (ln == 0) return;                    // do nothing for nothing
 	x /= ln;

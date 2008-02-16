@@ -55,7 +55,7 @@ Intersection Plane::intersect(const Ray &ray) const
 	double t = VO/Vd;
 	if (t < 0) return Intersection();  // Intersection behind origin
 	
-	return Intersection(this, ray, ray.getVector() * t + ray.getOrigin());
+	return Intersection(this, ray, ray.getOrigin() + ray.getVector() * t);
 }
 
 Vector Plane::normalAt(const Point &p) const

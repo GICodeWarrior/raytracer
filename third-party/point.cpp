@@ -20,7 +20,7 @@
 //------------------------------------------------------------------
 
 // Write output Point in format: "(%f)", "(%f, %f)", or "(%f, %f, %f)"
-ostream& operator<<( ostream& output, const Point &P)
+ostream& operator<<(ostream& output, const Point &P)
 {
 	output << "(" << P.x << ", " << P.y << ", " << P.z << ")";
 	return output;
@@ -30,17 +30,17 @@ ostream& operator<<( ostream& output, const Point &P)
 // Comparison (note: dimension must compare)
 //------------------------------------------------------------------
 
-int Point::operator==( Point Q) const
+int Point::operator==(const Point &Q) const
 {
 	return (x==Q.x && y==Q.y && z==Q.z);
 }
 
-int Point::operator!=( Point Q) const
+int Point::operator!=(const Point &Q) const
 {
 	return (x!=Q.x || y!=Q.y || z!=Q.z);
 }
 
-int Point::near(Point Q, double diff) const
+int Point::near(const Point &Q, double diff) const
 {
 	return (fabs(x - Q.x) < diff &&
 			fabs(y - Q.y) < diff &&
@@ -51,22 +51,22 @@ int Point::near(Point Q, double diff) const
 // Point Vector Operations
 //------------------------------------------------------------------
 
-Vector Point::operator-( Point Q) const        // Vector diff of Points
+Vector Point::operator-(const Point &Q) const        // Vector diff of Points
 {
 	return Vector(x-Q.x, y-Q.y, z-Q.z);
 }
 
-Point Point::operator+( Vector v) const        // +ve translation
+Point Point::operator+(const Vector &v) const        // +ve translation
 {
 	return Point(x+v.x, y+v.y, z+v.z);
 }
 
-Point Point::operator-( Vector v) const        // -ve translation
+Point Point::operator-(const Vector &v) const        // -ve translation
 {
 	return Point(x - v.x, y - v.y, z - v.z);
 }
 
-Point& Point::operator+=( Vector v)        // +ve translation
+Point& Point::operator+=(const Vector &v)        // +ve translation
 {
 	x += v.x;
 	y += v.y;
@@ -74,7 +74,7 @@ Point& Point::operator+=( Vector v)        // +ve translation
 	return *this;
 }
 
-Point& Point::operator-=( Vector v)        // -ve translation
+Point& Point::operator-=(const Vector &v)        // -ve translation
 {
 	x -= v.x;
 	y -= v.y;
@@ -91,22 +91,22 @@ Point& Point::operator-=( Vector v)        // -ve translation
 //        The programmer must enforce this (if they want to).
 //------------------------------------------------------------------
 
-Point Point::operator*( int c)
+Point Point::operator*(int c)
 {
 	return Point(c * x, c * y, c * z);
 }
 
-Point Point::operator*( double c)
+Point Point::operator*(double c)
 {
 	return Point(c * x, c * y, c * z);
 }
 
-Point Point::operator/( int c)
+Point Point::operator/(int c)
 {
 	return Point(x/c, y/c, z/c);
 }
 
-Point Point::operator/( double c)
+Point Point::operator/(double c)
 {
 	return Point(x/c, y/c, z/c);
 }
@@ -117,23 +117,25 @@ Point Point::operator/( double c)
 //    The programmer must enforce this (if they want to).
 //------------------------------------------------------------------
 
-Point operator+( Point Q, Point R)
+Point Point::operator+(const Point &Q) const
 {
-	return Point(Q.x+R.x, Q.y+R.y, Q.z+R.z);
+	return Point(Q.x+x, Q.y+y, Q.z+z);
 }
 
 //------------------------------------------------------------------
 // Distance between Points
 //------------------------------------------------------------------
 
-double Point::d( const Point &Q) const {      // Euclidean distance
+double Point::d(const Point &Q) const      // Euclidean distance
+{
 	double dx = x - Q.x;
 	double dy = y - Q.y;
 	double dz = z - Q.z;
 	return sqrt(dx*dx + dy*dy + dz*dz);
 }
 
-double Point::d2( const Point &Q) const {     // squared distance (more efficient)
+double Point::d2(const Point &Q) const     // squared distance (more efficient)
+{
 	double dx = x - Q.x;
 	double dy = y - Q.y;
 	double dz = z - Q.z;
