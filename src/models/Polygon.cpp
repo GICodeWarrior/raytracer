@@ -47,15 +47,14 @@ Intersection Polygon::intersect(const Ray &ray) const
 	Intersection plane = Plane::intersect(ray);
 	if (plane.compare(ray, none) < 0) return none;
 	
-	Point origin = plane.getPoint();
-	Vector Vt = origin - Point(0,0,0);
+	Vector Vt = plane.getPoint() - Point(0,0,0);
 	
-	int p1 = verticies.size() - 1;
 	int ignore;
 	
-	double x = abs(normalAt(Point()).x);
-	double y = abs(normalAt(Point()).y);
-	double z = abs(normalAt(Point()).z);
+	Vector normal = normalAt(Point());
+	double x = abs(normal.x);
+	double y = abs(normal.y);
+	double z = abs(normal.z);
 	
 	if ((x > y) && (x > z)) ignore = 1;
 	else if ((y > x) && (y > z)) ignore = 2;
@@ -63,12 +62,22 @@ Intersection Polygon::intersect(const Ray &ray) const
 	
 	int crosses = 0;
 	
-	for (unsigned int p2 = 0; p2 < verticies.size(); p2++)
+	bool done = false;
+	vector<Point>::const_iterator p1 = verticies.begin();
+	Point P1;
+	Point P2 = *p1 - Vt;
+	
+	while (!done)
 	{
-		Point P1 = verticies[p1] - Vt;
-		Point P2 = verticies[p2] - Vt;
+		++p1;
+		if (p1 == verticies.end())
+		{
+			p1 = verticies.begin();
+			done = true;
+		}
 		
-		p1 = p2;
+		P1 = P2;
+		P2 = *p1 - Vt;
 		
 		double u1 = P1.x;
 		double u2 = P2.x;
