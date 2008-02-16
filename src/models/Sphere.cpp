@@ -34,29 +34,23 @@ Sphere::~Sphere()
 
 Intersection Sphere::intersect(const Ray& ray) const
 {	
-	Intersection none;
-	Vector deltap;
-	double a, b, c;
-	double disc, q;
-	double r1, r2;
-	double distance;
+	Vector deltap = ray.getOrigin() - origin;
+	double a = ray.getVector() * ray.getVector();
+	double b = 2 * deltap * ray.getVector();
+	double c = deltap * deltap - radius * radius;
 	
-	deltap = ray.getOrigin() - origin;
-	a = ray.getVector() * ray.getVector();
-	b = 2 * deltap * ray.getVector();
-	c = deltap * deltap - radius * radius;
-	
-	disc = b * b - 4 * a * c;
-	if (disc < 0) return none;  // No intersection
+	double disc = b * b - 4 * a * c;
+	if (disc < 0) return Intersection();  // No intersection
 	disc = sqrt(disc);
 	
+	double q;
 	if (b < 0)
-        q = (-b - disc) / 2.0;
+        q = (-b - disc) * 0.5;
     else
-        q = (-b + disc) / 2.0;
+        q = (-b + disc) * 0.5;
 	
-	r1 = q / a;
-	r2 = c / q;
+	double r1 = q / a;
+	double r2 = c / q;
 	
 	if (r1 > r2)
 	{
@@ -65,9 +59,9 @@ Intersection Sphere::intersect(const Ray& ray) const
 		r2 = tmp;
 	}
 	
-	distance = r1;
+	double distance = r1;
 	if (distance < 0) distance = r2;
-	if (distance < 0) return none;  // No intersection
+	if (distance < 0) return Intersection();  // No intersection
 	
 	return Intersection(this, ray, ray.getVector() * distance + ray.getOrigin());
 }
