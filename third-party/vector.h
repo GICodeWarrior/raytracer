@@ -28,7 +28,7 @@ public:
 
 	//----------------------------------------------------------
 	// Vector Unary Operations
-	Vector operator-() const;                // unary minus
+	Vector operator-() const;               // unary minus
 
 	//----------------------------------------------------------
 	// Scalar Multiplication
@@ -40,20 +40,20 @@ public:
 
 	//----------------------------------------------------------
 	// Vector Arithmetic Operations
-	Vector operator+(const Vector&) const;        // vector add
-	Vector operator-(const Vector&) const;        // vector subtract
-	double operator*(const Vector&) const;        // inner dot product
-	Vector operator^(const Vector&) const;        // 3D exterior cross product
+	Vector operator+(const Vector&) const;  // vector add
+	Vector operator-(const Vector&) const;  // vector subtract
+	double operator*(const Vector&) const;  // inner dot product
+	Vector operator^(const Vector&) const;  // 3D exterior cross product
 
-	Vector& operator*=(double);      // vector scalar mult
-	Vector& operator/=(double);      // vector scalar div
+	Vector& operator*=(double);             // vector scalar mult
+	Vector& operator/=(double);             // vector scalar div
 	Vector& operator+=(const Vector&);      // vector increment
 	Vector& operator-=(const Vector&);      // vector decrement
 	Vector& operator^=(const Vector&);      // 3D exterior cross product
 
 	//----------------------------------------------------------
 	// Convienience Operations
-	Vector operator/(const Vector&) const;        // Vector division
+	Vector operator/(const Vector&) const;  // Vector division
 	Vector& operator/=(const Vector&);      // Vector division
 
 	//----------------------------------------------------------
@@ -63,6 +63,6 @@ public:
 
 	//----------------------------------------------------------
 	// Special Operations
-	void normalize();                 // convert vector to unit length
+	void normalize();                       // convert vector to unit length
 };
 #endif // SS_Vector_H

@@ -20,9 +20,9 @@
 //------------------------------------------------------------------
 
 // Write output Point in format: "(%f)", "(%f, %f)", or "(%f, %f, %f)"
-ostream& operator<<(ostream& output, const Point &P)
+ostream& Point::operator<<(ostream& output) const
 {
-	output << "(" << P.x << ", " << P.y << ", " << P.z << ")";
+	output << "(" << x << ", " << y << ", " << z << ")";
 	return output;
 }
 
@@ -91,22 +91,22 @@ Point& Point::operator-=(const Vector &v)        // -ve translation
 //        The programmer must enforce this (if they want to).
 //------------------------------------------------------------------
 
-Point Point::operator*(int c)
+Point Point::operator*(int c) const
 {
 	return Point(c * x, c * y, c * z);
 }
 
-Point Point::operator*(double c)
+Point Point::operator*(double c) const
 {
 	return Point(c * x, c * y, c * z);
 }
 
-Point Point::operator/(int c)
+Point Point::operator/(int c) const
 {
 	return Point(x/c, y/c, z/c);
 }
 
-Point Point::operator/(double c)
+Point Point::operator/(double c) const
 {
 	return Point(x/c, y/c, z/c);
 }

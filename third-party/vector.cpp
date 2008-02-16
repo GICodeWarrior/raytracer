@@ -100,7 +100,7 @@ Vector& Vector::operator/=(double c)         // vector scalar div
 	return *this;
 }
 
-Vector& Vector::operator+=(const Vector &w)         // vector increment
+Vector& Vector::operator+=(const Vector &w)  // vector increment
 {
 	x += w.x;
 	y += w.y;
@@ -108,7 +108,7 @@ Vector& Vector::operator+=(const Vector &w)         // vector increment
 	return *this;
 }
 
-Vector& Vector::operator-=(const Vector &w)         // vector decrement
+Vector& Vector::operator-=(const Vector &w)  // vector decrement
 {
 	x -= w.x;
 	y -= w.y;
@@ -116,7 +116,7 @@ Vector& Vector::operator-=(const Vector &w)         // vector decrement
 	return *this;
 }
 
-Vector& Vector::operator^=(const Vector &w)         // 3D exterior cross product
+Vector& Vector::operator^=(const Vector &w)  // 3D exterior cross product
 {
 	double ox=x, oy=y, oz=z;
 	x = oy * w.z - oz * w.y;
@@ -129,12 +129,12 @@ Vector& Vector::operator^=(const Vector &w)         // 3D exterior cross product
 //------------------------------------------------------------------
 //  Convienience Operations
 //------------------------------------------------------------------
-Vector Vector::operator/( const Vector &w) const       // Vector division
+Vector Vector::operator/(const Vector &w) const // Vector division
 {
 	return Vector(x/w.x, y/w.y, z/w.z);
 }
 
-Vector& Vector::operator/=( const Vector &w)     // Vector division
+Vector& Vector::operator/=(const Vector &w)     // Vector division
 {
 	x /= w.x;
 	y /= w.y;
@@ -146,11 +146,11 @@ Vector& Vector::operator/=( const Vector &w)     // Vector division
 // Vector Properties
 //------------------------------------------------------------------
 
-double Vector::len() const                // vector length
+double Vector::len() const        // vector length
 {
 	return sqrt(x*x + y*y + z*z);
 }
-double Vector::len2() const              // vector length squared (faster)
+double Vector::len2() const       // vector length squared (faster)
 {
 	return (x*x + y*y + z*z);
 }
@@ -159,10 +159,10 @@ double Vector::len2() const              // vector length squared (faster)
 //  Special Operations
 //------------------------------------------------------------------
 
-void Vector::normalize()                       // convert to unit length
+void Vector::normalize()  // convert to unit length
 {
-	double ln = sqrt( x*x + y*y + z*z );
-	if (ln == 0) return;                    // do nothing for nothing
+	double ln = sqrt(x*x + y*y + z*z);
+	if (ln == 0) return;  // do nothing for nothing
 	x /= ln;
 	y /= ln;
 	z /= ln;

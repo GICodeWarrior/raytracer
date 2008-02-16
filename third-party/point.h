@@ -32,7 +32,7 @@ public:
 
 	//----------------------------------------------------------
 	// Output stream
-	friend ostream& operator<<(ostream&, Point);
+	ostream& operator<<(ostream&) const;
 
 	//----------------------------------------------------------
 	// Comparison (dimension must match, or not)
@@ -42,33 +42,27 @@ public:
 
 	//----------------------------------------------------------
 	// Point and Vector Operations (always valid) 
-	Vector operator-(const Point&) const;       // Vector difference
-	Point  operator+(const Vector&) const;      // +translate
-	Point  operator-(const Vector&) const;      // -translate
-	Point& operator+=(const Vector&);     // inc translate
-	Point& operator-=(const Vector&);     // dec translate
+	Vector operator-(const Point&) const;   // Vector difference
+	Point  operator+(const Vector&) const;  // +translate
+	Point  operator-(const Vector&) const;  // -translate
+	Point& operator+=(const Vector&);       // inc translate
+	Point& operator-=(const Vector&);       // dec translate
 
 	//----------------------------------------------------------
 	// Point Scalar Operations (convenient but often illegal)
-	// using any type of scalar (int, float, or double)
-	//    are not valid for points in general,
-	//    unless they are 'affine' as coeffs of 
-	//    a sum in which all the coeffs add to 1,
-	//    such as: the sum (a*P + b*Q) with (a+b == 1).
-	//    The programmer must enforce this (if they want to).
 
 	// Scalar Multiplication
-	Point operator*(int);
-	Point operator*(double);
+	Point operator*(int) const;
+	Point operator*(double) const;
 	// Scalar Division
-	Point operator/(int);
-	Point operator/(double);
+	Point operator/(int) const;
+	Point operator/(double) const;
 
 	//----------------------------------------------------------
 	// Point Addition (also convenient but often illegal)
 	//    is not valid unless part of an affine sum.
 	//    The programmer must enforce this (if they want to).
-	Point operator+(const Point&) const;     // add points
+	Point operator+(const Point&) const;  // add points
 
 	//----------------------------------------------------------
 	// Point Relations
