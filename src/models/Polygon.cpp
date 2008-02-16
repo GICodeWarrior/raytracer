@@ -43,26 +43,23 @@ Polygon::~Polygon()
 
 Intersection Polygon::intersect(const Ray &ray) const
 {
-	Intersection none;
 	Intersection plane = Plane::intersect(ray);
-	if (plane.compare(ray, none) < 0) return none;
-	
-	Vector Vt = plane.getPoint() - Point(0,0,0);
-	
-	int ignore;
+	if (!plane.getModel()) return Intersection();
 	
 	Vector normal = normalAt(Point());
 	double x = abs(normal.x);
 	double y = abs(normal.y);
 	double z = abs(normal.z);
 	
+	int ignore;
 	if ((x > y) && (x > z)) ignore = 1;
 	else if ((y > x) && (y > z)) ignore = 2;
 	else ignore = 3;
 	
 	int crosses = 0;
-	
 	bool done = false;
+	
+	Vector Vt = plane.getPoint() - Point(0,0,0);
 	vector<Point>::const_iterator p1 = verticies.begin();
 	Point P1;
 	Point P2 = *p1 - Vt;
@@ -79,15 +76,14 @@ Intersection Polygon::intersect(const Ray &ray) const
 		P1 = P2;
 		P2 = *p1 - Vt;
 		
-		double u1 = P1.x;
-		double u2 = P2.x;
-		double v1 = P1.y;
-		double v2 = P2.y;
+		double u1, u2, v1, v2;
 		
 		switch (ignore)
 		{
-			case 1: u1 = P1.z; u2 = P2.z; break;
-			case 2: v1 = P1.z; v2 = P2.z; break;
+			default: // Prevents compiler warning
+			case 1: u1 = P1.z; u2 = P2.z; v1 = P1.y; v2 = P2.y; break;
+			case 2: u1 = P1.x; u2 = P2.x; v1 = P1.z; v2 = P2.z; break;
+			case 3: u1 = P1.x; u2 = P2.x; v1 = P1.y; v2 = P2.y; break;
 		}
 		
 		if ((u1 <= 0) && (u2 <= 0)) continue;
@@ -108,5 +104,5 @@ Intersection Polygon::intersect(const Ray &ray) const
 	
 	if (crosses % 2 == 1) return plane;
 	
-	return none;
+	return Intersection();
 }
