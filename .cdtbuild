@@ -26,8 +26,8 @@
 <option id="gnu.cpp.compiler.option.optimization.flags.683945156" superClass="gnu.cpp.compiler.option.optimization.flags" value="-march=k8" valueType="string"/>
 <option id="gnu.cpp.compiler.option.other.other.631047220" superClass="gnu.cpp.compiler.option.other.other" value="-c -fmessage-length=0 `Magick++-config --cppflags --cxxflags` -Wextra -Wno-unused -Wunsafe-loop-optimizations -Wshadow -Wredundant-decls -Wdisabled-optimization" valueType="string"/>
 <option id="gnu.cpp.compiler.option.warnings.pedantic.532217576" superClass="gnu.cpp.compiler.option.warnings.pedantic" value="true" valueType="boolean"/>
-<option id="gnu.cpp.compiler.option.warnings.pedantic.error.1916578516" superClass="gnu.cpp.compiler.option.warnings.pedantic.error" value="true" valueType="boolean"/>
-<option id="gnu.cpp.compiler.option.warnings.toerrors.1216821081" superClass="gnu.cpp.compiler.option.warnings.toerrors" value="true" valueType="boolean"/>
+<option id="gnu.cpp.compiler.option.warnings.pedantic.error.1916578516" superClass="gnu.cpp.compiler.option.warnings.pedantic.error" value="false" valueType="boolean"/>
+<option id="gnu.cpp.compiler.option.warnings.toerrors.1216821081" superClass="gnu.cpp.compiler.option.warnings.toerrors" value="false" valueType="boolean"/>
 </tool>
 <tool id="cdt.managedbuild.tool.gnu.c.compiler.exe.release.1065113158" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.exe.release"/>
 <tool id="cdt.managedbuild.tool.gnu.c.linker.exe.release.378815393" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.exe.release"/>
