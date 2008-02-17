@@ -20,6 +20,8 @@
 #ifndef COLOR_H_
 #define COLOR_H_
 
+#include "common.h"
+
 struct Pixel {
 	unsigned char red;
 	unsigned char green;

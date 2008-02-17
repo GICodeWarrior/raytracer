@@ -20,6 +20,7 @@
 #ifndef RAY_H_
 #define RAY_H_
 
+#include "common.h"
 #include "../third-party/point.h"
 #include "../third-party/vector.h"
 

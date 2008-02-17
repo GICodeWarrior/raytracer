@@ -25,14 +25,20 @@ World::World()
 
 World::~World()
 {
+	for(vector<const Light*>::const_iterator c = lights.begin();
+		c != lights.end();
+		++c)
+	{
+		delete *c;
+	}
 }
 
-void World::addLight(Light l)
+void World::addLight(const Light *l)
 {
 	lights.push_back(l);
 }
 
-const vector<Light>* World::getLights() const
+const vector<const Light*>* World::getLights() const
 {
 	return &lights;
 }

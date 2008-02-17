@@ -17,21 +17,8 @@
   Copyright 2008 Rusty Burchfield
 */
 
-#ifndef WARDTONECAMERA_H_
-#define WARDTONECAMERA_H_
-
-#include "CameraDecorator.h"
-#include "common.h"
-
-class WardToneCamera : public CameraDecorator
-{
-public:
-	WardToneCamera(Camera *c, double ldmax);
-	virtual ~WardToneCamera();
-	virtual void getImage(int width, int height, Pixel *image) const;
-private:
-	double ldmax;
-	DISALLOW_EVIL_CONSTRUCTORS(WardToneCamera);
-};
-
-#endif /*WARDTONECAMERA_H_*/
+// A macro to disallow the evil copy constructor and operator= functions
+// This should be used in the private: declarations for a class
+#define DISALLOW_EVIL_CONSTRUCTORS(TypeName) \
+	TypeName(const TypeName&); \
+	void operator=(const TypeName&)

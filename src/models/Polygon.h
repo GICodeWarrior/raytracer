@@ -21,6 +21,7 @@
 #define POLYGON_H_
 
 #include "Plane.h"
+#include "../common.h"
 #include "../../third-party/point.h"
 #include <vector>
 
@@ -32,6 +33,7 @@ public:
 	virtual Intersection intersect(const Ray &ray) const;
 private:
 	vector<Point> verticies;
+	DISALLOW_EVIL_CONSTRUCTORS(Polygon);
 };
 
 #endif /*POLYGON_H_*/

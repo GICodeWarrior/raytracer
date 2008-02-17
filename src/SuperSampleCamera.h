@@ -21,6 +21,7 @@
 #define SUPERSAMPLECAMERA_H_
 
 #include "CameraDecorator.h"
+#include "common.h"
 
 class Pixel;
 
@@ -32,6 +33,7 @@ public:
 	virtual void getImage(int width, int height, Pixel *image) const;
 private:
 	unsigned int samples;
+	DISALLOW_EVIL_CONSTRUCTORS(SuperSampleCamera);
 };
 
 #endif /*SUPERSAMPLECAMERA_H_*/

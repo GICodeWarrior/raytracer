@@ -21,6 +21,7 @@
 #define CAMERADECORATOR_H_
 
 #include "Camera.h"
+#include "common.h"
 
 class CameraDecorator : public Camera
 {
@@ -30,6 +31,7 @@ public:
 	virtual void getImage(int width, int height, Pixel *image) const;
 private:
 	Camera *camera;
+	DISALLOW_EVIL_CONSTRUCTORS(CameraDecorator);
 };
 
 #endif /*CAMERADECORATOR_H_*/

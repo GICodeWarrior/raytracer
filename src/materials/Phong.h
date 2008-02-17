@@ -20,6 +20,7 @@
 #ifndef PHONG_H_
 #define PHONG_H_
 
+#include "../common.h"
 #include "Material.h"
 
 class World;
@@ -35,6 +36,7 @@ public:
 private:
 	World *world;
 	double ka, kd, ks, ke;
+	DISALLOW_EVIL_CONSTRUCTORS(Phong);
 };
 
 #endif /*PHONG_H_*/

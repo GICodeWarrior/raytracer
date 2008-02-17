@@ -20,6 +20,7 @@
 #ifndef QUILT_H_
 #define QUILT_H_
 
+#include "../common.h"
 #include "Material.h"
 
 class Quilt : public Material
@@ -32,6 +33,7 @@ public:
 private:
 	double x, y, z;
 	double c0, c1;
+	DISALLOW_EVIL_CONSTRUCTORS(Quilt);
 };
 
 #endif /*QUILT_H_*/

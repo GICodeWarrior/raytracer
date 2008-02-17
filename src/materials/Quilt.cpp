@@ -26,8 +26,8 @@ Quilt::Quilt(PrimitiveModel *s)
 {
 }
 
-Quilt::Quilt(PrimitiveModel *s, double x, double y, double z)
-: Material(s), x(x), y(y), z(z), c0(0.1), c1(0.0)
+Quilt::Quilt(PrimitiveModel *s, double sx, double sy, double sz)
+: Material(s), x(sx), y(sy), z(sz), c0(0.1), c1(0.0)
 {
 }
 

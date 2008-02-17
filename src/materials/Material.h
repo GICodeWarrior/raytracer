@@ -20,6 +20,7 @@
 #ifndef MATERIAL_H_
 #define MATERIAL_H_
 
+#include "../common.h"
 #include "../models/PrimitiveModel.h"
 
 class Material : public PrimitiveModel
@@ -34,6 +35,7 @@ protected:
 	PrimitiveModel* getModel() const;
 private:
 	PrimitiveModel *subModel;
+	DISALLOW_EVIL_CONSTRUCTORS(Material);
 };
 
 #endif /*MATERIAL_H_*/

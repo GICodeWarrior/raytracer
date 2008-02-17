@@ -20,8 +20,10 @@
 #ifndef COMPOSITEMODEL_H_
 #define COMPOSITEMODEL_H_
 
-#include <vector>
 #include "Model.h"
+#include "../common.h"
+
+#include <vector>
 
 class CompositeModel : public Model
 {
@@ -34,6 +36,7 @@ public:
 	
 private:
 	std::vector<Model*> models;
+	DISALLOW_EVIL_CONSTRUCTORS(CompositeModel);
 };
 
 #endif /*COMPOSITEMODEL_H_*/

@@ -20,6 +20,7 @@
 #ifndef REFLECTION_H_
 #define REFLECTION_H_
 
+#include "../common.h"
 #include "Material.h"
 
 class World;
@@ -33,6 +34,7 @@ public:
 private:
 	World *world;
 	double reflectivity;
+	DISALLOW_EVIL_CONSTRUCTORS(Reflection);
 };
 
 #endif /*REFLECTION_H_*/

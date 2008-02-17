@@ -21,6 +21,7 @@
 #define PLANE_H_
 
 #include "PrimitiveModel.h"
+#include "../common.h"
 #include "../../third-party/vector.h"
 
 class Plane : public PrimitiveModel
@@ -36,6 +37,7 @@ protected:
 private:
 	Vector normal;
 	double distance;
+	DISALLOW_EVIL_CONSTRUCTORS(Plane);
 };
 
 #endif /*PLANE_H_*/

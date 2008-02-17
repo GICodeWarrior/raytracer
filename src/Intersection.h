@@ -20,11 +20,14 @@
 #ifndef INTERSECTION_H_
 #define INTERSECTION_H_
 
-#include "../third-party/point.h"
-#include "models/PrimitiveModel.h"
+#include "common.h"
 #include "Ray.h"
 
+#include "models/PrimitiveModel.h"
+#include "../third-party/point.h"
+
 class Ray;
+class Point;
 class Color;
 
 class Intersection

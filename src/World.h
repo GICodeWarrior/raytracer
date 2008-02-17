@@ -21,6 +21,7 @@
 #define WORLD_H_
 
 #include "models/CompositeModel.h"
+#include "common.h"
 
 #include "Light.h"
 
@@ -29,10 +30,11 @@ class World : public CompositeModel
 public:
 	World();
 	virtual ~World();
-	void addLight(Light l);
-	const vector<Light>* getLights() const;
+	void addLight(const Light *l);
+	const vector<const Light*>* getLights() const;
 private:
-	vector<Light> lights;
+	vector<const Light*> lights;
+	DISALLOW_EVIL_CONSTRUCTORS(World);
 };
 
 #endif /*WORLD_H_*/

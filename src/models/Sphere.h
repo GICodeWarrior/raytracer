@@ -21,6 +21,7 @@
 #define SPHERE_H_
 
 #include "PrimitiveModel.h"
+#include "../common.h"
 #include "../../third-party/point.h"
 
 class Sphere : public PrimitiveModel
@@ -33,6 +34,7 @@ public:
 private:
 	Point origin;
 	double radius;
+	DISALLOW_EVIL_CONSTRUCTORS(Sphere);
 };
 
 #endif /*SPHERE_H_*/

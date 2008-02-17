@@ -32,13 +32,15 @@ Color Shadow::colorAt(const Ray &r, const Point &p, int depth) const
 {	
 	Color c = Material::colorAt(r, p, depth);
 	
-	const vector<Light> *lights = world->getLights();
+	const vector<const Light*> *lights = world->getLights();
 	
 	bool visible = false;
 	
-	for (unsigned int i = 0; i < lights->size(); ++i)
+	for(vector<const Light*>::const_iterator light = lights->begin();
+		light != lights->end();
+		++light)
 	{
-		visible |= lights->at(i).intersects(p);
+		visible |= (*light)->intersects(p);
 	}
 	
 	return visible ? c : Color(0,0,0);

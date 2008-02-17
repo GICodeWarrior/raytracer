@@ -20,8 +20,9 @@
 #ifndef LIGHT_H_
 #define LIGHT_H_
 
-#include "../third-party/point.h"
+#include "common.h"
 #include "Color.h"
+#include "../third-party/point.h"
 
 class World;
 
@@ -37,6 +38,7 @@ private:
 	Point origin;
 	Color tint;
 	World *world;
+	DISALLOW_EVIL_CONSTRUCTORS(Light);
 };
 
 #endif /*LIGHT_H_*/

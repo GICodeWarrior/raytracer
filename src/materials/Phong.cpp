@@ -48,27 +48,27 @@ Color Phong::colorAt(const Ray &r, const Point &p, int depth) const
 	Vector diffuse(0,0,0);
 	Vector specular(0,0,0);
 	
-	const vector<Light> *lights = world->getLights();
-	const Light *light;
-	
-	for (unsigned int i = 0; i < lights->size(); ++i)
+	const vector<const Light*> *lights = world->getLights();
+
+	for(vector<const Light*>::const_iterator light = lights->begin();
+		light != lights->end();
+		++light)
 	{
-		light = &lights->at(i);
-		if (light->intersects(p))
+		if ((*light)->intersects(p))
 		{
 			Vector mc = c.asVector();
 			Vector sc = Color::WHITE.asVector();
-			Vector lc = light->getTint().asVector();
+			Vector lc = (*light)->getTint().asVector();
 			Vector diffuseColor(mc.x * lc.x, mc.y * lc.y, mc.z * lc.z);
 			Vector specularColor(sc.x * lc.x, sc.y * lc.y, sc.z * lc.z);
 			
-			Vector source = light->getOrigin() - p;
+			Vector source = (*light)->getOrigin() - p;
 			source.normalize();
 			
 			Vector normal = getModel()->normalAt(p);
 			normal.normalize();
 			
-			Vector incoming = p - light->getOrigin();
+			Vector incoming = p - (*light)->getOrigin();
 			incoming.normalize();
 			
 			Vector reflection = incoming - normal * 2 * (incoming * normal);

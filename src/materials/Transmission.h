@@ -20,6 +20,7 @@
 #ifndef TRANSMISSION_H_
 #define TRANSMISSION_H_
 
+#include "../common.h"
 #include "Material.h"
 
 class World;
@@ -34,6 +35,7 @@ private:
 	World *world;
 	double transmissiveness;
 	double ior;
+	DISALLOW_EVIL_CONSTRUCTORS(Transmission);
 };
 
 #endif /*TRANSMISSION_H_*/

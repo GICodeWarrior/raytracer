@@ -20,6 +20,8 @@
 #ifndef CAMERA_H_
 #define CAMERA_H_
 
+#include "common.h"
+
 struct Pixel;
 
 class Camera
@@ -28,6 +30,8 @@ public:
 	Camera();
 	virtual ~Camera();
 	virtual void getImage(int width, int height, Pixel *image) const = 0;
+private:
+	DISALLOW_EVIL_CONSTRUCTORS(Camera);
 };
 
 #endif /*CAMERA_H_*/

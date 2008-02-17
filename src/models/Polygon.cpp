@@ -33,10 +33,7 @@ Polygon::Polygon(vector<Point> v, Color c)
 	Vn.normalize();
 	
 	Vector vertex(verticies[0].x, verticies[0].y, verticies[0].z);
-	
-	double distance = Vn * vertex;
-	
-	this->setDimensions(Vn, distance);
+	this->setDimensions(Vn, Vn * vertex);
 }
 
 Polygon::~Polygon()
@@ -48,10 +45,10 @@ Intersection Polygon::intersect(const Ray &ray) const
 	Intersection plane = Plane::intersect(ray);
 	if (!plane.getModel()) return Intersection();
 	
-	Vector normal = normalAt(Point());
-	double x = fabs(normal.x);
-	double y = fabs(normal.y);
-	double z = fabs(normal.z);
+	Vector n = normalAt(Point());
+	double x = fabs(n.x);
+	double y = fabs(n.y);
+	double z = fabs(n.z);
 	
 	int ignore;
 	if ((x > y) && (x > z)) ignore = 1;

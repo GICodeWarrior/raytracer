@@ -31,7 +31,8 @@ class Vector : public Point {
 public:
 	// Constructors same as Point class
 	Vector() : Point() {};
-	Vector( double a, double b, double c) : Point(a,b,c) {};
+	explicit Vector(Point p) : Point(p.x, p.y, p.z) {};
+	Vector(double a, double b, double c) : Point(a,b,c) {};
 	virtual ~Vector() {};
 
 	//----------------------------------------------------------

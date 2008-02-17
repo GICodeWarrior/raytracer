@@ -19,9 +19,7 @@
 
 #include "BasicCamera.h"
 
-#include "../third-party/point.h"
-#include "../third-party/vector.h"
-
+#include "World.h"
 #include "Intersection.h"
 #include "Color.h"
 #include "Ray.h"

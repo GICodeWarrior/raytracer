@@ -20,6 +20,7 @@
 #ifndef CHECKER_H_
 #define CHECKER_H_
 
+#include "../common.h"
 #include "Material.h"
 
 class Checker : public Material
@@ -31,6 +32,7 @@ public:
 	virtual Color colorAt(const Ray &r, const Point &p, int depth) const;
 private:
 	double x, y, z;
+	DISALLOW_EVIL_CONSTRUCTORS(Checker);
 };
 
 #endif /*CHECKER_H_*/

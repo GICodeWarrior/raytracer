@@ -22,8 +22,8 @@
 #include "../third-party/vector.h"
 #include "Color.h"
 
-SuperSampleCamera::SuperSampleCamera(Camera *c, unsigned int samples)
-: CameraDecorator(c), samples(samples)
+SuperSampleCamera::SuperSampleCamera(Camera *c, unsigned int s)
+: CameraDecorator(c), samples(s)
 {
 }
 

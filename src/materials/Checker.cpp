@@ -28,8 +28,8 @@ Checker::Checker(PrimitiveModel *s)
 {
 }
 
-Checker::Checker(PrimitiveModel *s, double x, double y, double z)
-: Material(s), x(x), y(y), z(z)
+Checker::Checker(PrimitiveModel *s, double sx, double sy, double sz)
+: Material(s), x(sx), y(sy), z(sz)
 {
 }
 
@@ -44,7 +44,5 @@ Color Checker::colorAt(const Ray &r, const Point &p, int depth) const
 	int Py = (int)floor(p.y / y + diff);
 	int Pz = (int)floor(p.z / z + diff);
 	
-	int color = (Px + Py + Pz) % 2;
-	
-	return color ? Color(255,255,0) : Color::RED;
+	return (Px + Py + Pz) % 2 ? Color(255,255,0) : Color::RED;
 }

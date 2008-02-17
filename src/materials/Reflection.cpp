@@ -35,8 +35,8 @@ Reflection::~Reflection()
 
 Color Reflection::colorAt(const Ray &r, const Point &p, int depth) const
 {
-	Vector color = Material::colorAt(r, p, depth).asVector();
-	if (depth < 0) return Color(color);
+	Vector c = Material::colorAt(r, p, depth).asVector();
+	if (depth < 0) return Color(c);
 	
 	Vector normal = Material::normalAt(p);
 	
@@ -46,7 +46,7 @@ Color Reflection::colorAt(const Ray &r, const Point &p, int depth) const
 	Point origin = p + (reflection * 1e-5);
 	Vector reflectColor = world->intersect(Ray(origin, reflection)).getColor(depth).asVector();
 	
-	color += reflectColor * reflectivity;
+	c += reflectColor * reflectivity;
 	
-	return Color(color);
+	return Color(c);
 }

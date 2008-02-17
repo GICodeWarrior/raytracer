@@ -21,6 +21,7 @@
 #define REINHARDTONECAMERA_H_
 
 #include "CameraDecorator.h"
+#include "common.h"
 
 class ReinhardToneCamera : public CameraDecorator
 {
@@ -30,6 +31,7 @@ public:
 	virtual void getImage(int width, int height, Pixel *image) const;
 private:
 	double ldmax;
+	DISALLOW_EVIL_CONSTRUCTORS(ReinhardToneCamera);
 };
 
 #endif /*REINHARDTONECAMERA_H_*/

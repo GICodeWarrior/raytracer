@@ -55,11 +55,11 @@ int main()
 	
 	// This is the bubble
 	Sphere *sphere1 = new Sphere(Point(0,3,-2), 1, Color::BLACK);
-	material = new Phong(sphere1, &scene);
+	//material = new Phong(sphere1, &scene);
 	//material = new Onion(sphere1);
 	//material = new Quilt(sphere1);
-	//material = new Reflection(sphere1, &scene, 0.2);
-	//material = new Phong(material, &scene);
+	material = new Reflection(sphere1, &scene, 0.2);
+	material = new Phong(material, &scene);
 	material = new Transmission(material, &scene, 1.0, 1.01);
 	scene.add(material);
 	
@@ -105,21 +105,23 @@ int main()
 	
 	//---------- Lighting definition
 	
+	Light *light;
+	
 	// This is the light that matches the Turner-Whitted scene
-	Light light1(Point(1, 45, 0), Color(255,255,255), &scene);
-	//scene.addLight(light1);
+	light = new Light(Point(1, 45, 0), Color(255,255,255), &scene);
+	//scene.addLight(light);
 	
 	// A reddish light in the upper left behind the view plane
-	Light light2(Point(-2, 10, -6), Color(255,64,64), &scene);
-	scene.addLight(light2);
+	light = new Light(Point(-2, 10, -6), Color(255,64,64), &scene);
+	scene.addLight(light);
 	
 	// A greenish light in the upper right just out of view
-	Light light3(Point(5, 5, 0), Color(64,255,64), &scene);
-	scene.addLight(light3);
+	light = new Light(Point(5, 5, 0), Color(64,255,64), &scene);
+	scene.addLight(light);
 	
 	// a blueish light in the lower left
-	Light light4(Point(-5, 2, 5), Color(64,64,255), &scene);
-	scene.addLight(light4);
+	light = new Light(Point(-5, 2, 5), Color(64,64,255), &scene);
+	scene.addLight(light);
 	
 	cout << "Complete" << endl;
 	cout << "Creating camera...";
@@ -133,7 +135,7 @@ int main()
 	Camera *camera = new BasicCamera(&scene, origin, lookAt);
 	//camera = new WardToneCamera(camera, 1);
 	camera = new ReinhardToneCamera(camera, 100);
-	camera = new SuperSampleCamera(camera, 2);
+	camera = new SuperSampleCamera(camera, 4);
 	
 	cout << "Complete" << endl;
 	cout << "Rendering image...";

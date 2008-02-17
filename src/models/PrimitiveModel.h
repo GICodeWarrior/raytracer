@@ -21,6 +21,7 @@
 #define PRIMITIVEMODEL_H_
 
 #include "Model.h"
+#include "../common.h"
 #include "../Color.h"
 
 class Point;
@@ -35,6 +36,7 @@ public:
 	virtual Vector normalAt(const Point &p) const = 0;
 private:
 	Color color;
+	DISALLOW_EVIL_CONSTRUCTORS(PrimitiveModel);
 };
 
 #endif /*PRIMITIVEMODEL_H_*/

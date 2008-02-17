@@ -20,6 +20,7 @@
 #ifndef SHADOW_H_
 #define SHADOW_H_
 
+#include "../common.h"
 #include "Material.h"
 #include "../World.h"
 
@@ -31,6 +32,7 @@ public:
 	virtual Color colorAt(const Ray &r, const Point &p, int depth) const;
 private:
 	World *world;
+	DISALLOW_EVIL_CONSTRUCTORS(Shadow);
 };
 
 #endif /*SHADOW_H_*/

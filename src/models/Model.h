@@ -20,6 +20,8 @@
 #ifndef MODEL_H_
 #define MODEL_H_
 
+#include "../common.h"
+
 class Intersection;
 class Ray;
 
@@ -29,6 +31,8 @@ public:
 	Model();
 	virtual ~Model();
 	virtual Intersection intersect(const Ray& ray) const = 0;
+private:
+	DISALLOW_EVIL_CONSTRUCTORS(Model);
 };
 
 #endif /*MODEL_H_*/

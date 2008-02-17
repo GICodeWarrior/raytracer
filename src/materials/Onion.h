@@ -20,6 +20,7 @@
 #ifndef ONION_H_
 #define ONION_H_
 
+#include "../common.h"
 #include "Material.h"
 
 class Onion : public Material
@@ -28,6 +29,8 @@ public:
 	explicit Onion(PrimitiveModel *s);
 	virtual ~Onion();
 	virtual Color colorAt(const Ray &r, const Point &p, int depth) const;
+private:
+	DISALLOW_EVIL_CONSTRUCTORS(Onion);
 };
 
 #endif /*ONION_H_*/

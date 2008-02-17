@@ -20,12 +20,14 @@
 #ifndef BASICCAMERA_H_
 #define BASICCAMERA_H_
 
+#include "Camera.h"
+#include "common.h"
+
 #include "../third-party/point.h"
 #include "../third-party/vector.h"
-#include "World.h"
-#include "Camera.h"
 
 struct Pixel;
+class World;
 
 class BasicCamera : public Camera
 {
@@ -42,6 +44,8 @@ private:
 	Vector up;
 	Vector right;
 	Vector direction;
+	
+	DISALLOW_EVIL_CONSTRUCTORS(BasicCamera);
 };
 
 #endif /*BASICCAMERA_H_*/
