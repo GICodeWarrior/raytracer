@@ -9,54 +9,62 @@ options {
   buildAST = true;
 }
 
-scene: (camera | object | background | light)+;
+tokens {
+  SCENE;
+  OBJECT;
+  OBJECT_MOD;
+  POINT;
+  NUMBER;
+}
+
+////////// Scene:
+scene: SCENE^ (camera | object | background | light)+;
 
 ////////// Camera:
-camera: CAMERA LBRACE! (camera_item)+ RBRACE!;
+camera: CAMERA^ LBRACE! (camera_item)+ RBRACE!;
 
 camera_item:
-  LOCATION point |
-  RIGHT vector |
-  UP vector |
-  DIRECTION vector |
-  LOOK_AT vector;
+  LOCATION^ point |
+  RIGHT^ vector |
+  UP^ vector |
+  DIRECTION^ vector |
+  LOOK_AT^ vector;
 
 ////////// Atmospheric effects:
-background: BACKGROUND LBRACE! color RBRACE!;
+background: BACKGROUND^ LBRACE! color RBRACE!;
 
 ////////// Lights:
-light: LIGHT LBRACE! point COMMA! color RBRACE!;
+light: LIGHT^ LBRACE! point COMMA! color RBRACE!;
 
 ////////// Objects:
-object: sphere | polygon | plane;
+object: OBJECT^ (sphere | polygon | plane);
 
-sphere: SPHERE LBRACE! point COMMA! number (object_modifier)* RBRACE!;
-polygon: POLYGON LBRACE! INTEGER (COMMA! point)+ (object_modifier)* RBRACE!;
-plane: PLANE LBRACE! vector COMMA! number (object_modifier)* RBRACE!;
+sphere: SPHERE^ LBRACE! point COMMA! number (object_modifier)* RBRACE!;
+polygon: POLYGON^ LBRACE! INTEGER (COMMA! point)+ (object_modifier)* RBRACE!;
+plane: PLANE^ LBRACE! vector COMMA! number (object_modifier)* RBRACE!;
 
 ////////// Object modifiers:
-object_modifier: interior | pigment | finish;
+object_modifier: OBJECT_MOD^ (interior | pigment | finish);
 
-interior: INTERIOR LBRACE! IOR number RBRACE!;
-pigment: PIGMENT LBRACE! color RBRACE!;
-finish: FINISH LBRACE! (finish_item)* RBRACE!;
+interior: INTERIOR^ LBRACE! IOR number RBRACE!;
+pigment: PIGMENT^ LBRACE! color RBRACE!;
+finish: FINISH^ LBRACE! (finish_item)* RBRACE!;
 
 finish_item:
-  AMBIENT color |
-  DIFFUSE number |
-  PHONG number |
-  PHONG_SIZE number |
-  REFLECTION color;
+  AMBIENT^ color |
+  DIFFUSE^ number |
+  PHONG^ number |
+  PHONG_SIZE^ number |
+  REFLECTION^ color;
 
 ////////// Color:
 color: color_body | COLOR! color_body;
-color_body: RGB! vector;
+color_body: RGB^ vector;
 
-//////////
-
-point: LT! number COMMA! number COMMA! number GT!;
-vector: point;
-number: INTEGER (DOT INTEGER)?;
+////////// Misc:
+point: POINT^ LT! number COMMA! number COMMA! number GT!;
+vector: VECTOR^ point;
+number: NUMBER^ INTEGER (DOT INTEGER)?;
 
 ////////// Lexer:
 class SceneLexer extends Lexer;
@@ -111,104 +119,112 @@ TRANSMIT: "transmit";
 ////////// TreeParser:
 class SceneTreeParser extends TreeParser;
 
-plane returns [PrimitiveModel *m] {
+////////// Scene:
+scene returns [World *w] {
+    w = new World();
+    Camera *cam;
+    Color color;
+    Light *l;
+    Model *m;
+  }
+  : #(SCENE (cam=camera {w->setCamera(cam);})+
+            (color=background {w->setBackground(color);})+
+            (l=light {w->addLight(l);})+
+            (model=object {w->add(model);}));
+
+////////// Camera:
+camera returns [Camera *c] {
+    c = new Camera();
+    Point p;
+    Vector v;
+  }
+  : #(CAMERA (LOCATION p=point {c->setLocation(p);})+
+             (RIGHT v=vector {c->setRight(v);})+
+             (UP v=vector {c->setUp(v);})+
+             (DIRECTION v=vector {c->setDirection(v);})+
+             (LOOK_AT v=vector {c->setLookAt(v);})+);
+
+////////// Atmospheric effects:
+background returns [Color c] : #(BACKGROUND c=color);
+
+////////// Lights:
+light returns [Light *l] {
+    l = new Light();
+    Point p;
+    Color c;
+  }
+  : #(LIGHT p=point c=color) {
+    l->setLocation(p);
+    l->setTint(c);
+  };
+
+////////// Objects:
+object returns [Model *m] : #(OBJECT (m=sphere | m=polygon | m=plane));
+
+sphere returns [Model *model] {
+    Material *m;
+    Point center;
+    double radius;
+  }
+  : #(SPHERE center=point radius=number {
+        model = new Sphere(center, radius);
+      } (m=object_modifier {m->attach(model); model = m;} )+);
+
+polygon returns [Polygon *poly] {
+    poly = new Polygon();
+    Point p;
+  }
+  : #(POLYGON (p=point {poly->addVertex(p);})+);
+
+plane returns [Plane *p] {
     Vector n;
     double d;
   }
-  : #(PLANE n=normal d=distance) {
-    m = new Plane(n, d);
+  : #(PLANE n=vector d=number) {
+    p = new Plane(n, d);
   };
-
-normal returns [Vector v]
-  : #(NORMAL v=vector);
-distance returns [double d]
-  : #(DISTANCE d=number);
 
 ////////// Object modifiers:
+object_modifier returns [Material *m]
+  : #(OBJECT_MOD (m=interior | m=pigment | m=finish));
 
-/*
-object_modifier returns [Material m]
-  : #(OBJECT_MODIFIER m=interior) |
-    #(OBJECT_MODIFIER m=pigment) |
-    #(OBJECT_MODIFIER m=finish);
-*/
+interior returns [Trasmission *t] {
+    double ior;
+  }
+  : #(INTERIOR ior=number) {
+    t = new Transmission(ior);
+  };
 
-//interior: (interior_item)*
-
-//interior_item
-//  IOR number;
-
-pigment returns [Material *m] {
+pigment returns [ColorMaterial *c] {
     Color c;
   }
-  : #(PIGMENT c=pigment_type) {
-    m = new ColorMaterial(c);
+  : #(PIGMENT c=color) {
+    c = new ColorMaterial(c);
   };
 
-pigment_type returns [Color c]
-  : #(PIGMENT_TYPE c=color);
-
-//finish: (finish_item)*
-
-//finish_item:
-//  AMBIENT color |
-//  DIFFUSE number |
-//  PHONG number |
-//  PHONG_SIZE number |
-//  REFLECTION color;
-
-/*
-finish_item returns [vector <Material*> m] {
-    m[0] = new Phong();
-    m[1] = new Reflection();
-    double value;
-  }
-  : #(FINISH_ITEM AMBIENT value=number) {
-    m[0]->setAmbient(value);
-  }
-  | #(FINISH_ITEM DIFFUSE value=number) {
-    m[0]->setDiffuse(value);
-  }
-  | #(FINISH_ITEM PHONG value=number) {
-    m[0]->setPhong(value);
-  }
-  | #(FINISH_ITEM PHONG_SIZE value=number) {
-    m[0]->setPhongSize(value);
-  }
-  | #(FINISH_ITEM REFLECTION value=number) {
-    m[1]->setReflectivity(value);
-  };
-*/
-
-////////// Lights:
-
-light_source returns [Light l] {
-    Point l;
+finish returns [Phong *p] {
+    p = new Phong();
     Color c;
+    double d;
   }
-  : #(LIGHT_SOURCE l=location c=color) {
-    l = Light(l, c);
-  };
-
-location returns [Point p]
-  : #(LOCATION p=point);
+  : #(FINISH (AMBIENT d=number {p->setAmbient(d);})+
+             (DIFFUSE d=number {p->setDiffuse(d);})+
+             (PHONG d=number {p->setPhong(d);})+
+             (PHONG_SIZE d=number {p->setPhongSize(d);})+);
 
 ////////// Color:
 
-color returns [Color c]
-  : #(COLOR c=color_body);
-
-color_body returns [Color c]
-  : #(COLOR_BODY c=color_vector);
-
-color_vector returns [Color c] {
+color returns [Color c] {
     Vector v;
   }
-  : #(COLOR_VECTOR v=vector) {
+  : #(COLOR v=color_body) {
     c = Color(v);
   };
 
-//////////
+color_body returns [Vector v]
+  : #(RGB v=vector);
+
+////////// Misc:
 
 point returns [Point p] {
     double x,y,z;
@@ -225,7 +241,7 @@ vector returns [Vector v] {
   };
 
 number returns [double d]
-  : i1:INTEGER i2:INTEGER {
+  : #(NUMBER i1:INTEGER i2:INTEGER) {
     d = atod(i1->getText().c_str() + "." + i2->getText().c_str());
   };
 
