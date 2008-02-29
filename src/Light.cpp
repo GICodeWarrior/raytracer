@@ -23,6 +23,11 @@
 #include "Ray.h"
 #include "Intersection.h"
 
+Light::Light()
+: origin(0,0,0), tint(Color::WHITE), world(NULL)
+{
+}
+
 Light::Light(Point p, Color c, World *w)
 : origin(p), tint(c), world(w)
 {

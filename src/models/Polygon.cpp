@@ -24,16 +24,15 @@
 
 #include <math.h>
 
+Polygon::Polygon()
+: Plane(Color::WHITE)
+{
+}
+
 Polygon::Polygon(vector<Point> v, Color c)
 : Plane(c), verticies(v)
 {
-	Vector V1 = verticies[1] - verticies[0];
-	Vector V2 = verticies[2] - verticies[1];
-	Vector Vn = V1 ^ V2;
-	Vn.normalize();
-	
-	Vector vertex(verticies[0].x, verticies[0].y, verticies[0].z);
-	this->setDimensions(Vn, Vn * vertex);
+	updateDimensions();
 }
 
 Polygon::~Polygon()
@@ -104,4 +103,23 @@ Intersection Polygon::intersect(const Ray &ray) const
 	if (crosses % 2 == 1) return plane;
 	
 	return Intersection();
+}
+
+void Polygon::addVertex(Point p)
+{
+	verticies.push_back(p);
+	updateDimensions();
+}
+
+void Polygon::updateDimensions()
+{
+	if (verticies.size() < 3) return;
+	
+	Vector V1 = verticies[1] - verticies[0];
+	Vector V2 = verticies[2] - verticies[1];
+	Vector Vn = V1 ^ V2;
+	Vn.normalize();
+	
+	Vector vertex(verticies[0].x, verticies[0].y, verticies[0].z);
+	this->setDimensions(Vn, Vn * vertex);
 }

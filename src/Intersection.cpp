@@ -22,12 +22,12 @@
 #include "models/PrimitiveModel.h"
 
 Intersection::Intersection()
-: model(NULL), ray(Point(), Vector())
+: model(NULL), ray(Point(), Vector()), background(Color::BLACK)
 {
 }
 
 Intersection::Intersection(const PrimitiveModel *m, Ray r, Point p)
-: model(m), ray(r), point(p)
+: model(m), ray(r), point(p), background(Color::BLACK)
 {
 }
 
@@ -38,6 +38,11 @@ Intersection::~Intersection()
 void Intersection::setSource(const PrimitiveModel *m)
 {
 	model = m;
+}
+
+void Intersection::setBackground(Color c)
+{
+	background = c;
 }
 	
 int Intersection::compare(const Ray &r, const Intersection &i) const

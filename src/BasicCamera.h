@@ -32,11 +32,20 @@ class World;
 class BasicCamera : public Camera
 {
 public:
+	BasicCamera();
 	BasicCamera(const World *s, Point o, Point lookAt);
 	BasicCamera(const World *s, Point o, Vector up, Vector right, Vector direction);
 	virtual ~BasicCamera();
 	virtual void getImage(int width, int height, Pixel *image) const;
+	virtual void setScene(const World *s);
+	void setLook(Point lookAt);
+	void setOrigin(Point p) {origin = p;};
+	void setUp(Vector v) {up = v;};
+	void setRight(Vector v) {right = v;};
+	void setDirection(Vector v) {direction = v;};
 private:
+	void updateVectors(Point lookAt);
+
 	const World *scene;
 	
 	Point origin;

@@ -13,12 +13,15 @@
 <tool id="cdt.managedbuild.tool.gnu.c.compiler.exe.debug.713272356" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.exe.debug"/>
 <tool id="cdt.managedbuild.tool.gnu.c.linker.exe.debug.381443876" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.exe.debug"/>
 <tool id="cdt.managedbuild.tool.gnu.cpp.linker.exe.debug.1088202671" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.exe.debug">
-<option id="gnu.cpp.link.option.libs.679446038" superClass="gnu.cpp.link.option.libs"/>
+<option id="gnu.cpp.link.option.libs.679446038" superClass="gnu.cpp.link.option.libs" valueType="libs">
+<listOptionValue builtIn="false" value="antlr"/>
+</option>
 <option id="gnu.cpp.link.option.flags.991230321" superClass="gnu.cpp.link.option.flags" value="`Magick++-config --ldflags --libs`" valueType="string"/>
 </tool>
 <tool id="cdt.managedbuild.tool.gnu.assembler.exe.debug.496444624" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.exe.debug"/>
 <macros/>
 </toolChain>
+<resourceConfiguration exclude="true" id="cdt.managedbuild.config.gnu.exe.debug.1912330371./cg2raytracer/pov.g" name="pov.g" rcbsApplicability="disable" resourcePath="/cg2raytracer/parser/pov.g" toolsToInvoke=""/>
 </configuration>
 <configuration artifactName="cg2raytracer" cleanCommand="rm -rf" description="" errorParsers="org.eclipse.cdt.core.MakeErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser" id="cdt.managedbuild.config.gnu.exe.release.1658771281" name="Release" parent="cdt.managedbuild.config.gnu.exe.release">
 <toolChain id="cdt.managedbuild.toolchain.gnu.exe.release.1936833703" name="GCC Tool Chain" superClass="cdt.managedbuild.toolchain.gnu.exe.release">
@@ -33,10 +36,14 @@
 <tool id="cdt.managedbuild.tool.gnu.c.linker.exe.release.378815393" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.exe.release"/>
 <tool id="cdt.managedbuild.tool.gnu.cpp.linker.exe.release.1390365820" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.exe.release">
 <option id="gnu.cpp.link.option.flags.257493869" superClass="gnu.cpp.link.option.flags" value="`Magick++-config --ldflags --libs`" valueType="string"/>
+<option id="gnu.cpp.link.option.libs.929536825" superClass="gnu.cpp.link.option.libs" valueType="libs">
+<listOptionValue builtIn="false" value="antlr"/>
+</option>
 </tool>
 <tool id="cdt.managedbuild.tool.gnu.assembler.exe.release.1992170043" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.exe.release"/>
 <macros/>
 </toolChain>
 </configuration>
+<macros/>
 </project>
 </ManagedProjectBuildInfo>

@@ -23,6 +23,7 @@
 #include "common.h"
 
 struct Pixel;
+class World;
 
 class Camera
 {
@@ -30,6 +31,7 @@ public:
 	Camera();
 	virtual ~Camera();
 	virtual void getImage(int width, int height, Pixel *image) const = 0;
+	virtual void setScene(const World *s) = 0;
 private:
 	DISALLOW_EVIL_CONSTRUCTORS(Camera);
 };

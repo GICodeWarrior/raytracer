@@ -26,6 +26,11 @@
 #include <vector>
 #include <math.h>
 
+Phong::Phong()
+: world(NULL), ka(0.1), kd(0.6), ks(1.0), ke(40)
+{
+}
+
 Phong::Phong(PrimitiveModel *s, World *w)
 : Material(s), world(w), ka(0.2), kd(0.6), ks(1.0), ke(40)
 {
@@ -48,7 +53,12 @@ Color Phong::colorAt(const Ray &r, const Point &p, int depth) const
 	Vector diffuse(0,0,0);
 	Vector specular(0,0,0);
 	
+	cout << "world:" << world << endl;
+	
 	const vector<const Light*> *lights = world->getLights();
+
+	cout << "address:" << lights << endl;
+	cout << "size:" << lights->size() << endl;
 
 	for(vector<const Light*>::const_iterator light = lights->begin();
 		light != lights->end();

@@ -18,6 +18,9 @@
 */
 
 #include "World.h"
+#include "Camera.h"
+
+#include "Intersection.h"
 
 World::World()
 {
@@ -33,12 +36,32 @@ World::~World()
 	}
 }
 
-void World::addLight(const Light *l)
+Intersection World::intersect(const Ray& ray) const
 {
+	Intersection i = CompositeModel::intersect(ray);
+	i.setBackground(background);
+	return i;
+}
+
+void World::addLight(Light *l)
+{
+	l->setScene(this);
 	lights.push_back(l);
 }
 
 const vector<const Light*>* World::getLights() const
 {
+	cout << "lights:" << lights.size() << endl;
 	return &lights;
+}
+
+void World::setBackground(Color c)
+{
+	background = c;	
+}
+
+void World::setCamera(Camera *c)
+{
+	camera = c;
+	camera->setScene(this);
 }

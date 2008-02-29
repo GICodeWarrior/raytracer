@@ -22,17 +22,24 @@
 
 #include "models/CompositeModel.h"
 #include "common.h"
-
 #include "Light.h"
+
+class Camera;
 
 class World : public CompositeModel
 {
 public:
 	World();
 	virtual ~World();
-	void addLight(const Light *l);
+	virtual Intersection intersect(const Ray& ray) const;
+	void addLight(Light *l);
 	const vector<const Light*>* getLights() const;
+	void setBackground(Color c);
+	void setCamera(Camera *c);
+	const Camera& getCamera() const {return *camera;};
 private:
+	Color background;
+	Camera *camera;
 	vector<const Light*> lights;
 	DISALLOW_EVIL_CONSTRUCTORS(World);
 };

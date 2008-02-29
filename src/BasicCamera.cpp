@@ -24,24 +24,15 @@
 #include "Color.h"
 #include "Ray.h"
 
+BasicCamera::BasicCamera()
+: scene(NULL), origin(0,0,0), up(0,1,0), right(1.33,0,0), direction(0,0,1)
+{
+}
+
 BasicCamera::BasicCamera(const World *s, Point o, Point lookAt)
 : scene(s), origin(o)
 {
-	double width = 1.33;
-	double height = 1.0;
-	double distance = 1.0;
-	
-	direction = lookAt - origin;
-	direction.normalize();
-	direction *= distance;
-	
-	right = Vector(0.0, 1.0, 0.0) ^ direction;
-	right.normalize();
-	right *= width;
-	
-	up = right ^ direction;
-	up.normalize();
-	up *= -height;
+	updateVectors(lookAt);
 }
 
 BasicCamera::BasicCamera(const World *s, Point o, Vector u, Vector r, Vector d)
@@ -57,7 +48,7 @@ void BasicCamera::getImage(int imageWidth, int imageHeight, Pixel *image) const
 {	
 	Point viewOrigin(origin + direction - (right / 2) + (up / 2));
 	
-	int MAX_DEPTH = 20;
+	int MAX_DEPTH = 5;
 	int progress = 0;
 	
 	for (int y = 0; y < imageHeight; ++y)
@@ -83,4 +74,33 @@ void BasicCamera::getImage(int imageWidth, int imageHeight, Pixel *image) const
 			++progress;
 		}
 	}
+}
+
+void BasicCamera::setScene(const World *s)
+{
+	scene = s;
+}
+
+void BasicCamera::setLook(Point lookAt)
+{
+	updateVectors(lookAt);
+}
+
+void BasicCamera::updateVectors(Point lookAt)
+{
+	double width = 1.33;
+	double height = 1.0;
+	double distance = 1.0;
+	
+	direction = lookAt - origin;
+	direction.normalize();
+	direction *= distance;
+	
+	right = Vector(0.0, 1.0, 0.0) ^ direction;
+	right.normalize();
+	right *= width;
+	
+	up = right ^ direction;
+	up.normalize();
+	up *= -height;
 }

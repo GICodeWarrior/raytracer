@@ -22,6 +22,11 @@
 #include "../../third-party/vector.h"
 #include "../Intersection.h"
 
+Material::Material()
+: subModel(NULL)
+{
+}
+
 Material::Material(PrimitiveModel *s)
 : subModel(s)
 {
@@ -47,6 +52,11 @@ Color Material::colorAt(const Ray &r, const Point &p, int depth) const
 Vector Material::normalAt(const Point &p) const
 {
 	return subModel->normalAt(p);
+}
+
+void Material::bind(PrimitiveModel *s)
+{
+	subModel = s;
 }
 
 PrimitiveModel* Material::getModel() const

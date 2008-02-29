@@ -28,6 +28,7 @@ class World;
 class Transmission : public Material
 {
 public:
+	Transmission(double transmissiveness, double ior);
 	Transmission(PrimitiveModel *s, World *w, double transmissiveness, double ior);
 	virtual ~Transmission();
 	virtual Color colorAt(const Ray &r, const Point &p, int depth) const;

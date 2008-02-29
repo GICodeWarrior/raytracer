@@ -26,6 +26,11 @@
 
 #include <math.h>
 
+Transmission::Transmission(double t, double d)
+: world(NULL), transmissiveness(t), ior(d)
+{
+}
+
 Transmission::Transmission(PrimitiveModel *s, World *w, double t, double i)
 : Material(s), world(w), transmissiveness(t), ior(i)
 {

@@ -33,3 +33,8 @@ void CameraDecorator::getImage(int width, int height, Pixel *image) const
 {
 	camera->getImage(width, height, image);
 }
+
+void CameraDecorator::setScene(const World *s)
+{
+	camera->setScene(s);
+}

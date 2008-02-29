@@ -32,7 +32,7 @@ public:
 	virtual ~CompositeModel();
 	
 	void add(Model* model);
-	Intersection intersect(const Ray& ray) const;
+	virtual Intersection intersect(const Ray& ray) const;
 	
 private:
 	std::vector<Model*> models;

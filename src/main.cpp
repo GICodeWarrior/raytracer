@@ -16,7 +16,7 @@
 
   Copyright 2008 Rusty Burchfield
 */
-
+/*
 #include "materials/Checker.h"
 #include "materials/Onion.h"
 #include "materials/Phong.h"
@@ -100,11 +100,10 @@ int main()
 	Polygon *star = new Polygon(points, Color(255, 255, 0));
 	material = new Reflection(star, &scene, 1.0);
 	material = new Phong(material, &scene);
-	material = new Phong(star, &scene);
+	//material = new Phong(star, &scene);
 	scene.add(material);
 	
 	//---------- Lighting definition
-	
 	Light *light;
 	
 	// This is the light that matches the Turner-Whitted scene
@@ -128,21 +127,18 @@ int main()
 	flush(cout);
 	
 	//---------- Camera definition
-	
-	// Camera
 	Point origin(0.0, 3.0, -6.0);
 	Point lookAt(0.0, 3.0, 5.0);
 	Camera *camera = new BasicCamera(&scene, origin, lookAt);
 	//camera = new WardToneCamera(camera, 1);
 	camera = new ReinhardToneCamera(camera, 100);
-	camera = new SuperSampleCamera(camera, 4);
+	camera = new SuperSampleCamera(camera, 2);
 	
 	cout << "Complete" << endl;
 	cout << "Rendering image...";
 	flush(cout);
 
 	//---------- Rendering parameters
-	
 	// Output size
 	int width = 1024;
 	int height = 768;
@@ -171,4 +167,4 @@ int main()
 	cout << "Complete!!!" << endl;
 	
 	return 0;	
-}
+}*/

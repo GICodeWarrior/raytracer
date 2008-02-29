@@ -23,12 +23,15 @@
 #include "Camera.h"
 #include "common.h"
 
+class World;
+
 class CameraDecorator : public Camera
 {
 public:
 	explicit CameraDecorator(Camera *c);
 	virtual ~CameraDecorator();
 	virtual void getImage(int width, int height, Pixel *image) const;
+	virtual void setScene(const World *s);
 private:
 	Camera *camera;
 	DISALLOW_EVIL_CONSTRUCTORS(CameraDecorator);

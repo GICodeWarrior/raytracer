@@ -28,10 +28,14 @@
 class Polygon : public Plane
 {
 public:
+	Polygon();
 	Polygon(vector<Point> v, Color c);
 	virtual ~Polygon();
 	virtual Intersection intersect(const Ray &ray) const;
+	void addVertex(Point p);
 private:
+	void updateDimensions();
+	
 	vector<Point> verticies;
 	DISALLOW_EVIL_CONSTRUCTORS(Polygon);
 };

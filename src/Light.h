@@ -29,9 +29,13 @@ class World;
 class Light
 {
 public:
+	Light();
 	Light(Point p, Color c, World *w);
 	virtual ~Light();
 	bool intersects(const Point &p) const;
+	void setOrigin(Point p) {origin = p;};
+	void setTint(Color t) {tint = t;};
+	void setScene(World *s) {world = s;};
 	const Point& getOrigin() const;
 	const Color& getTint() const;
 private:

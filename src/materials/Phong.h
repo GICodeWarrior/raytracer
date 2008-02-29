@@ -28,11 +28,16 @@ class World;
 class Phong : public Material
 {
 public:
+	Phong();
 	Phong(PrimitiveModel *s, World *w);
 	Phong(PrimitiveModel *s, World *w, double ambient,
 		  double diffuse, double specular, double exponent);
 	virtual ~Phong();
 	virtual Color colorAt(const Ray &r, const Point &p, int depth) const;
+	void setAmbient(double d) {ka = d;};
+	void setDiffuse(double d) {kd = d;};
+	void setPhong(double d) {ks = d;};
+	void setPhongSize(double d) {ke = d;};
 private:
 	World *world;
 	double ka, kd, ks, ke;
